@@ -1,0 +1,2980 @@
+{
+  "schemaVersion": 1,
+  "seedVersion": "2026-08-28.1",
+  "categories": [
+    {
+      "id": "food",
+      "name": "Food",
+      "order": 10
+    },
+    {
+      "id": "gear",
+      "name": "Gear",
+      "order": 20
+    },
+    {
+      "id": "clothes",
+      "name": "Clothes",
+      "order": 30
+    },
+    {
+      "id": "hygiene-first-aid",
+      "name": "Hygiene & First Aid",
+      "order": 40
+    },
+    {
+      "id": "extras",
+      "name": "Extras",
+      "order": 50
+    }
+  ],
+  "items": [
+    {
+      "id": "food-eggs",
+      "name": "Eggs",
+      "category": "food",
+      "section": "Breakfast",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-bacon",
+      "name": "Bacon",
+      "category": "food",
+      "section": "Breakfast",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-sausage",
+      "name": "Sausage",
+      "category": "food",
+      "section": "Breakfast",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-pancake-mix",
+      "name": "Pancake Mix",
+      "category": "food",
+      "section": "Breakfast",
+      "defaultQuantity": 1,
+      "unit": "box",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-syrup",
+      "name": "Syrup",
+      "category": "food",
+      "section": "Breakfast",
+      "defaultQuantity": 1,
+      "unit": "bottle",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-oatmeal",
+      "name": "Oatmeal",
+      "category": "food",
+      "section": "Breakfast",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-breakfast-bars",
+      "name": "Breakfast Bars",
+      "category": "food",
+      "section": "Breakfast",
+      "defaultQuantity": 1,
+      "unit": "box",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-bread",
+      "name": "Bread",
+      "category": "food",
+      "section": "Lunch",
+      "defaultQuantity": 1,
+      "unit": "loaf",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-deli-meat",
+      "name": "Deli Meat",
+      "category": "food",
+      "section": "Lunch",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-cheese",
+      "name": "Cheese",
+      "category": "food",
+      "section": "Lunch",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-wraps",
+      "name": "Wraps / Tortillas",
+      "category": "food",
+      "section": "Lunch",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-burgers",
+      "name": "Burgers",
+      "category": "food",
+      "section": "Dinner",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-hot-dogs",
+      "name": "Hot Dogs",
+      "category": "food",
+      "section": "Dinner",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-buns",
+      "name": "Buns",
+      "category": "food",
+      "section": "Dinner",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-camp-meal",
+      "name": "Camp Meal",
+      "category": "food",
+      "section": "Dinner",
+      "defaultQuantity": 1,
+      "unit": "meal",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-chips",
+      "name": "Chips",
+      "category": "food",
+      "section": "Snacks",
+      "defaultQuantity": 1,
+      "unit": "bag",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-trail-mix",
+      "name": "Trail Mix",
+      "category": "food",
+      "section": "Snacks",
+      "defaultQuantity": 1,
+      "unit": "bag",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-jerky",
+      "name": "Jerky",
+      "category": "food",
+      "section": "Snacks",
+      "defaultQuantity": 1,
+      "unit": "bag",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-granola-bars",
+      "name": "Granola Bars",
+      "category": "food",
+      "section": "Snacks",
+      "defaultQuantity": 1,
+      "unit": "box",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-marshmallows",
+      "name": "Marshmallows",
+      "category": "food",
+      "section": "Snacks",
+      "defaultQuantity": 1,
+      "unit": "bag",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-water",
+      "name": "Drinking Water",
+      "category": "food",
+      "section": "Drinks",
+      "defaultQuantity": 1,
+      "unit": "gallon",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-coffee",
+      "name": "Coffee",
+      "category": "food",
+      "section": "Drinks",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-tea",
+      "name": "Tea",
+      "category": "food",
+      "section": "Drinks",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-drink-mix",
+      "name": "Drink Mix",
+      "category": "food",
+      "section": "Drinks",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-mayo",
+      "name": "Mayonnaise",
+      "category": "food",
+      "section": "Condiments",
+      "defaultQuantity": 1,
+      "unit": "bottle",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-ketchup",
+      "name": "Ketchup",
+      "category": "food",
+      "section": "Condiments",
+      "defaultQuantity": 1,
+      "unit": "bottle",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-bbq-sauce",
+      "name": "BBQ Sauce",
+      "category": "food",
+      "section": "Condiments",
+      "defaultQuantity": 1,
+      "unit": "bottle",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-hot-sauce",
+      "name": "Hot Sauce",
+      "category": "food",
+      "section": "Condiments",
+      "defaultQuantity": 1,
+      "unit": "bottle",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-mustard",
+      "name": "Mustard",
+      "category": "food",
+      "section": "Condiments",
+      "defaultQuantity": 1,
+      "unit": "bottle",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-salt",
+      "name": "Salt",
+      "category": "food",
+      "section": "Condiments",
+      "defaultQuantity": 1,
+      "unit": "container",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-pepper",
+      "name": "Pepper",
+      "category": "food",
+      "section": "Condiments",
+      "defaultQuantity": 1,
+      "unit": "container",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-cooking-oil",
+      "name": "Cooking Oil",
+      "category": "food",
+      "section": "Staples / Ingredients",
+      "defaultQuantity": 1,
+      "unit": "bottle",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "food-butter",
+      "name": "Butter",
+      "category": "food",
+      "section": "Staples / Ingredients",
+      "defaultQuantity": 1,
+      "unit": "pack",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "food"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-tent",
+      "name": "Tent",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-footprint",
+      "name": "Tent Footprint",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-stakes",
+      "name": "Tent Stakes",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-rainfly",
+      "name": "Rainfly",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-sleeping-bag",
+      "name": "Sleeping Bag",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-sleeping-pad",
+      "name": "Sleeping Pad / Air Mattress",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-blanket",
+      "name": "Blanket",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-pillow",
+      "name": "Pillow",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-tarp",
+      "name": "Tarp / Sunshade",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-chair",
+      "name": "Camp Chair",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-table",
+      "name": "Camp Table",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-lantern",
+      "name": "Lantern",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-headlamp",
+      "name": "Headlamp",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-flashlight",
+      "name": "Flashlight",
+      "category": "gear",
+      "section": "Shelter & Sleep",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "camp",
+        "shelter"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-stove",
+      "name": "Camp Stove",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-stove-fuel",
+      "name": "Stove Fuel",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-propane-torch",
+      "name": "Propane Torch",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-cooking-grate",
+      "name": "Cooking / Grill Grate",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-coffee-maker",
+      "name": "Coffee Maker",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-kettle",
+      "name": "Kettle",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-pot",
+      "name": "Pot",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-pan",
+      "name": "Pan / Skillet",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-cooking-utensils",
+      "name": "Cooking Utensils",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-eating-utensils",
+      "name": "Eating Utensils",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-plates",
+      "name": "Plates",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-bowls",
+      "name": "Bowls",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-cups",
+      "name": "Cups / Mugs",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-cutting-board",
+      "name": "Cutting Board",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-knife-kitchen",
+      "name": "Kitchen Knife",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-can-opener",
+      "name": "Can Opener",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-bottle-opener",
+      "name": "Bottle Opener",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-cooler",
+      "name": "Cooler",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-ice",
+      "name": "Ice / Ice Packs",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-water-jug",
+      "name": "Water Jug",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-water-tub",
+      "name": "Water Tub / Wash Basin",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-dish-soap",
+      "name": "Biodegradable Dish Soap",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-sponge",
+      "name": "Sponge / Scrubber",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-dish-towel",
+      "name": "Dish Towel",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-paper-towels",
+      "name": "Paper Towels",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-foil",
+      "name": "Aluminum Foil",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-food-storage",
+      "name": "Food Storage Bags / Containers",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-trash-bags",
+      "name": "Trash Bags",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-roasting-sticks",
+      "name": "Roasting Sticks",
+      "category": "gear",
+      "section": "Camp Kitchen",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "kitchen"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-hatchet",
+      "name": "Hatchet",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-shovel",
+      "name": "Shovel",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-fire-starter",
+      "name": "Fire Starter",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-lighter",
+      "name": "Lighter",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-waterproof-matches",
+      "name": "Waterproof Matches",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-multitool",
+      "name": "Knife / Multitool",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-duct-tape",
+      "name": "Duct Tape",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-paracord",
+      "name": "Cord / Paracord",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-tent-repair",
+      "name": "Tent Repair Kit",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-pad-repair",
+      "name": "Pad / Mattress Repair Kit",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-mallet",
+      "name": "Mallet / Hammer",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-whistle",
+      "name": "Whistle",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-map",
+      "name": "Map",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-compass",
+      "name": "Compass",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-emergency-blanket",
+      "name": "Emergency Blanket",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-fire-extinguisher",
+      "name": "Fire Extinguisher",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-jumper-pack",
+      "name": "Vehicle Jump Pack",
+      "category": "gear",
+      "section": "Survival / Tools",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "tools",
+        "safety"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-battery-bank",
+      "name": "Battery Bank",
+      "category": "gear",
+      "section": "Power & Electronics",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "electronics"
+      ],
+      "aliases": [
+        "battery",
+        "power bank"
+      ],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-charging-cables",
+      "name": "Charging Cables",
+      "category": "gear",
+      "section": "Power & Electronics",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "electronics"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-usb-charger",
+      "name": "USB Charger",
+      "category": "gear",
+      "section": "Power & Electronics",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "electronics"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-power-station",
+      "name": "Portable Power Station",
+      "category": "gear",
+      "section": "Power & Electronics",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "electronics"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-extension-cord",
+      "name": "Extension Cord",
+      "category": "gear",
+      "section": "Power & Electronics",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "electronics"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-handheld-game",
+      "name": "Handheld Gaming Device",
+      "category": "gear",
+      "section": "Power & Electronics",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "electronics"
+      ],
+      "aliases": [
+        "ally",
+        "rog ally"
+      ],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-headphones",
+      "name": "Headphones",
+      "category": "gear",
+      "section": "Power & Electronics",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "electronics"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-camera",
+      "name": "Camera",
+      "category": "gear",
+      "section": "Power & Electronics",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "electronics"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-gasoline",
+      "name": "Gasoline",
+      "category": "gear",
+      "section": "Fuel / Vehicle",
+      "defaultQuantity": 1,
+      "unit": "gallon",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "fuel",
+        "vehicle"
+      ],
+      "aliases": [
+        "gas"
+      ],
+      "archived": false,
+      "source": "seed",
+      "notes": "Gas means gasoline. Keep distinct from propane/stove fuel."
+    },
+    {
+      "id": "gear-fuel-can",
+      "name": "Approved Fuel Container",
+      "category": "gear",
+      "section": "Fuel / Vehicle",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "fuel",
+        "vehicle"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-camp-rug",
+      "name": "Camp Rug",
+      "category": "gear",
+      "section": "Camp Comfort / Recreation",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "comfort",
+        "recreation"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-tablecloth",
+      "name": "Tablecloth / Clips",
+      "category": "gear",
+      "section": "Camp Comfort / Recreation",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "comfort",
+        "recreation"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-clothesline",
+      "name": "Clothesline",
+      "category": "gear",
+      "section": "Camp Comfort / Recreation",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "comfort",
+        "recreation"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-binoculars",
+      "name": "Binoculars",
+      "category": "gear",
+      "section": "Camp Comfort / Recreation",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "comfort",
+        "recreation"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-book",
+      "name": "Book / Reading Material",
+      "category": "gear",
+      "section": "Camp Comfort / Recreation",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "comfort",
+        "recreation"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "gear-cards",
+      "name": "Cards / Games",
+      "category": "gear",
+      "section": "Camp Comfort / Recreation",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "comfort",
+        "recreation"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-underwear",
+      "name": "Underwear",
+      "category": "clothes",
+      "section": "Base Clothing",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-socks",
+      "name": "Socks",
+      "category": "clothes",
+      "section": "Base Clothing",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-shirts",
+      "name": "Shirts",
+      "category": "clothes",
+      "section": "Base Clothing",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-pants-shorts",
+      "name": "Pants / Shorts",
+      "category": "clothes",
+      "section": "Base Clothing",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-sleepwear",
+      "name": "Sleepwear",
+      "category": "clothes",
+      "section": "Base Clothing",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-fleece",
+      "name": "Hoodie / Fleece",
+      "category": "clothes",
+      "section": "Warm Layers",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-jacket",
+      "name": "Jacket",
+      "category": "clothes",
+      "section": "Warm Layers",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-thermal",
+      "name": "Thermal Base Layer",
+      "category": "clothes",
+      "section": "Warm Layers",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-beanie",
+      "name": "Beanie",
+      "category": "clothes",
+      "section": "Warm Layers",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-rain-jacket",
+      "name": "Rain Jacket",
+      "category": "clothes",
+      "section": "Rain / Weather",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-rain-pants",
+      "name": "Rain Pants",
+      "category": "clothes",
+      "section": "Rain / Weather",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-poncho",
+      "name": "Poncho",
+      "category": "clothes",
+      "section": "Rain / Weather",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-camp-shoes",
+      "name": "Camp Shoes",
+      "category": "clothes",
+      "section": "Footwear",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-hiking-shoes",
+      "name": "Hiking Shoes / Boots",
+      "category": "clothes",
+      "section": "Footwear",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-water-shoes",
+      "name": "Water Shoes",
+      "category": "clothes",
+      "section": "Footwear",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-hat",
+      "name": "Hat",
+      "category": "clothes",
+      "section": "Accessories",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-sunglasses",
+      "name": "Sunglasses",
+      "category": "clothes",
+      "section": "Accessories",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "clothes-gloves",
+      "name": "Gloves",
+      "category": "clothes",
+      "section": "Accessories",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "clothing"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-toilet-paper",
+      "name": "Toilet Paper",
+      "category": "hygiene-first-aid",
+      "section": "Hygiene",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-toothbrush",
+      "name": "Toothbrush",
+      "category": "hygiene-first-aid",
+      "section": "Hygiene",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-toothpaste",
+      "name": "Toothpaste",
+      "category": "hygiene-first-aid",
+      "section": "Hygiene",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-soap",
+      "name": "Soap",
+      "category": "hygiene-first-aid",
+      "section": "Hygiene",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-hand-sanitizer",
+      "name": "Hand Sanitizer",
+      "category": "hygiene-first-aid",
+      "section": "Hygiene",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-wet-wipes",
+      "name": "Wet Wipes",
+      "category": "hygiene-first-aid",
+      "section": "Hygiene",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-towel",
+      "name": "Towel",
+      "category": "hygiene-first-aid",
+      "section": "Hygiene",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-deodorant",
+      "name": "Deodorant",
+      "category": "hygiene-first-aid",
+      "section": "Hygiene",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-comb",
+      "name": "Comb / Brush",
+      "category": "hygiene-first-aid",
+      "section": "Hygiene",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-sunscreen",
+      "name": "Sunscreen",
+      "category": "hygiene-first-aid",
+      "section": "Sun & Bugs",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-lip-balm",
+      "name": "Lip Balm",
+      "category": "hygiene-first-aid",
+      "section": "Sun & Bugs",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-bug-spray",
+      "name": "Insect Repellent",
+      "category": "hygiene-first-aid",
+      "section": "Sun & Bugs",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "hygiene-after-bite",
+      "name": "After-Bite Treatment",
+      "category": "hygiene-first-aid",
+      "section": "Sun & Bugs",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "hygiene"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "aid-first-aid-kit",
+      "name": "First-Aid Kit",
+      "category": "hygiene-first-aid",
+      "section": "First Aid",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "first-aid"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "aid-bandages",
+      "name": "Bandages",
+      "category": "hygiene-first-aid",
+      "section": "First Aid",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "first-aid"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "aid-gauze",
+      "name": "Gauze",
+      "category": "hygiene-first-aid",
+      "section": "First Aid",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "first-aid"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "aid-antiseptic",
+      "name": "Antiseptic",
+      "category": "hygiene-first-aid",
+      "section": "First Aid",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "first-aid"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "aid-blister-care",
+      "name": "Blister Care",
+      "category": "hygiene-first-aid",
+      "section": "First Aid",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "first-aid"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "aid-pain-reliever",
+      "name": "Pain Reliever",
+      "category": "hygiene-first-aid",
+      "section": "First Aid",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "first-aid"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "aid-tweezers",
+      "name": "Tweezers",
+      "category": "hygiene-first-aid",
+      "section": "First Aid",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "first-aid"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "aid-personal-medications",
+      "name": "Personal Medications",
+      "category": "hygiene-first-aid",
+      "section": "First Aid",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "light-backpacking",
+        "custom"
+      ],
+      "tags": [
+        "first-aid"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "seed"
+    },
+    {
+      "id": "extra-hammock",
+      "name": "Hammock",
+      "category": "extras",
+      "section": "Possible Additions",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "comfort",
+        "conditional"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "research"
+    },
+    {
+      "id": "extra-portable-shower",
+      "name": "Portable Camp Shower",
+      "category": "extras",
+      "section": "Possible Additions",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "hygiene",
+        "conditional"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "research"
+    },
+    {
+      "id": "extra-field-guide",
+      "name": "Field Guide",
+      "category": "extras",
+      "section": "Possible Additions",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "recreation",
+        "conditional"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "research"
+    },
+    {
+      "id": "extra-pet-gear",
+      "name": "Pet Gear",
+      "category": "extras",
+      "section": "Possible Additions",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "pet",
+        "conditional"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "research"
+    },
+    {
+      "id": "extra-outdoor-games",
+      "name": "Outdoor Games / Toys",
+      "category": "extras",
+      "section": "Possible Additions",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "recreation",
+        "conditional"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "research"
+    },
+    {
+      "id": "extra-dry-bags",
+      "name": "Dry Bags / Stuff Sacks",
+      "category": "extras",
+      "section": "Possible Additions",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "storage",
+        "conditional"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "research"
+    },
+    {
+      "id": "extra-campsite-adapter",
+      "name": "Campsite Electrical Adapter",
+      "category": "extras",
+      "section": "Possible Additions",
+      "defaultQuantity": 1,
+      "unit": "item",
+      "tripStyles": [
+        "car",
+        "custom"
+      ],
+      "tags": [
+        "power",
+        "conditional"
+      ],
+      "aliases": [],
+      "archived": false,
+      "source": "research"
+    }
+  ]
+}

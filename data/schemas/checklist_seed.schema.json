@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Camping Checklist Seed",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "seedVersion",
+    "categories",
+    "items"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "seedVersion": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "array"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "category",
+          "section",
+          "defaultQuantity",
+          "unit",
+          "tripStyles",
+          "tags",
+          "archived",
+          "source"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "enum": [
+              "food",
+              "gear",
+              "clothes",
+              "hygiene-first-aid",
+              "extras"
+            ]
+          },
+          "section": {
+            "type": "string",
+            "minLength": 1
+          },
+          "defaultQuantity": {
+            "type": "number",
+            "minimum": 0
+          },
+          "unit": {
+            "type": "string"
+          },
+          "tripStyles": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "car",
+                "light-backpacking",
+                "custom"
+              ]
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "string"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "source": {
+            "enum": [
+              "seed",
+              "user",
+              "research"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

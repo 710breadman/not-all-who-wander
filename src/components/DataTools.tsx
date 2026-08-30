@@ -1,0 +1,9 @@
+import { ChangeEvent, useState } from "react";
+import { createBackup, downloadText, parseBackup, restoreBackup } from "../application/backupService";
+
+export function DataTools({ onBack, onRestored }: { onBack: () => void; onRestored: () => void }) {
+  const [message, setMessage] = useState("");
+  async function exportBackup() { const backup = await createBackup(); downloadText(`camping-checklist-backup-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(backup, null, 2), "application/json"); setMessage("Backup downloaded."); }
+  async function importBackup(event: ChangeEvent<HTMLInputElement>) { const file = event.target.files?.[0]; if (!file) return; try { const backup = parseBackup(await file.text()); if (!window.confirm(`Replace all local checklist data with the ${backup.exportedAt.slice(0, 10)} backup? This cannot be undone.`)) return; await restoreBackup(backup); setMessage("Backup restored. Returning to your trips…"); onRestored(); } catch (error) { setMessage(error instanceof Error ? error.message : "Couldn’t restore that backup."); } finally { event.target.value = ""; } }
+  return <main className="app-shell"><header className="trip-header"><button className="text-button" type="button" onClick={onBack}>← All trips</button><p className="eyebrow">LOCAL DATA</p><h1>Keep your lists safe.</h1></header><section className="inventory-card"><h2>Backup & restore</h2><p className="empty-state">Your data stays on this device. Download a complete JSON backup before moving or resetting it.</p><div className="data-actions"><button className="primary-action" type="button" onClick={() => void exportBackup()}>Download backup</button><label className="secondary-action">Restore backup<input type="file" accept="application/json,.json" onChange={(event) => void importBackup(event)} /></label></div>{message && <p className="error-message" role="status">{message}</p>}</section></main>;
+}

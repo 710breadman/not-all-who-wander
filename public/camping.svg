@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Camping tent">
+  <rect width="512" height="512" rx="104" fill="#173c2b"/>
+  <path d="M84 394 253 102l176 292h-84l-94-154-88 154H84Z" fill="#f4c96b"/>
+  <path d="M251 240v154h94l-94-154Z" fill="#f5f1e8"/>
+  <path d="M62 412h388" stroke="#f5f1e8" stroke-width="24" stroke-linecap="round"/>
+</svg>

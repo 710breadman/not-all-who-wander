@@ -1,0 +1,104 @@
+{
+  "project": "Camping",
+  "package": "Codex Handoff",
+  "version": "1.0",
+  "created": "2026-08-28",
+  "fileCount": 19,
+  "files": [
+    {
+      "path": "ACCEPTANCE_TESTS.md",
+      "bytes": 2719,
+      "sha256": "beb182adf37a52a2195d3f183e855a768fb052ec8f6fe56ec9b396d8fd4aee17"
+    },
+    {
+      "path": "CHECKLIST_TAXONOMY.md",
+      "bytes": 4107,
+      "sha256": "92c44b496fc74b07adc46085ac7eed5e8428b31bcf8db16f6ca23ecab54dc61e"
+    },
+    {
+      "path": "CODEX_START_HERE.md",
+      "bytes": 1839,
+      "sha256": "2d4f41fb0a4bf23120e389275ebdc97a2d805bbd25fa4844c0f46c85e76e926b"
+    },
+    {
+      "path": "DATA_MODEL.md",
+      "bytes": 2474,
+      "sha256": "9dccee2da2ff7c9ae73c1236285e21170c48bff6d7ddde1f35e3e4d5a7596684"
+    },
+    {
+      "path": "DECISIONS.md",
+      "bytes": 2160,
+      "sha256": "ae76503b8466ca67205f9d5f27f33410126222ed8389238088fa8aea671fbcea"
+    },
+    {
+      "path": "IMPLEMENTATION_NOTES.md",
+      "bytes": 1499,
+      "sha256": "911243a0214fccc88f127737a87a7859d0551ceb8cae494921cebb148ff8de1b"
+    },
+    {
+      "path": "POSSIBLE_ADDITIONS.md",
+      "bytes": 1777,
+      "sha256": "dc959e1a6cdda98c330b6a3839a9f10071c177bd5fd0939cd376546ff8d77b74"
+    },
+    {
+      "path": "PROJECT_SPEC.md",
+      "bytes": 3810,
+      "sha256": "4016cbbc7d824ea0d1fad6eee02e1ca2bc18ab158add9129a42e48abcad984c6"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1806,
+      "sha256": "36871eead5195de304a7c9bba69a14f6461f35f251ebf20ed9eaf063014b9f5d"
+    },
+    {
+      "path": "RESEARCH_FINDINGS.md",
+      "bytes": 3072,
+      "sha256": "78c20f2fcc12e0dc13390eafacbeb661109e6f2cd3323bebfdc9820ceb2f4552"
+    },
+    {
+      "path": "ROADMAP.md",
+      "bytes": 1055,
+      "sha256": "538e197d54ce7bedf97f5c0201430b548742eb5aa7d9e4cc9ec5950020440185"
+    },
+    {
+      "path": "SPRINTS.md",
+      "bytes": 4686,
+      "sha256": "0f6808eb6fd740e69548296c729277d9d7e83c53ee55c87e4f0396e49ddf8140"
+    },
+    {
+      "path": "UI_UX_SPEC.md",
+      "bytes": 2694,
+      "sha256": "f8db110b4523cac67ffa36cc2392ccb5505dcc79f97cb1c2aea9f0bc6df3bb70"
+    },
+    {
+      "path": "codex/MASTER_PROMPT.md",
+      "bytes": 1772,
+      "sha256": "818a7f6a210a6f3a8410166f028edb589914f7d303aa3403cc384c246903cc2c"
+    },
+    {
+      "path": "codex/TASK_ORDER.md",
+      "bytes": 888,
+      "sha256": "465e5c4e75323ae7ec3674827896ed9c69f435243e6998dcc7226c50ea4e73b4"
+    },
+    {
+      "path": "data/checklist_seed.json",
+      "bytes": 60166,
+      "sha256": "2ee8424c2b85bc897a4b5010aa8ebb4ccb89c22bb1e58e38ebaa361a45bcecb8"
+    },
+    {
+      "path": "data/schemas/checklist_seed.schema.json",
+      "bytes": 2242,
+      "sha256": "460a7df7219431de7c7bf1132e3568e25e0e25a02632efdc0ef1a35365065948"
+    },
+    {
+      "path": "scripts/Open-Codex-Prompt.ps1",
+      "bytes": 460,
+      "sha256": "7d7569f871445e688ab2b9aae6b15d0fc9b696bcae37ecf977b2c9bbd31e8697"
+    },
+    {
+      "path": "scripts/Validate-Handoff.ps1",
+      "bytes": 1935,
+      "sha256": "aad2a2f1eee0e7aa485d9c8053e2e8677da3b3bbf39e50ff46366b980848ef1c"
+    }
+  ]
+}
