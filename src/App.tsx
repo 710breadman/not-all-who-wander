@@ -31,7 +31,7 @@ import { WeatherDialog } from "./components/WeatherDialog";
 import { DiscoveryDialog } from "./components/DiscoveryDialog";
 import { ContextLayersDialog } from "./components/ContextLayersDialog";
 import { GpxDialog } from "./components/GpxDialog";
-import { TrackRecordingDialog } from "./components/TrackRecordingDialog";
+import { AutomaticTrackRecordingDialog as TrackRecordingDialog } from "./components/AutomaticTrackRecordingDialog";
 import { loadChecklistSeed } from "./data/seedLoader";
 import type {
   CampingLevel,
