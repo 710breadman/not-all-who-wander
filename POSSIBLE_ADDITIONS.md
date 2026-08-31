@@ -1,60 +1,41 @@
 # Possible Additions
 
-This is the backlog for ideas that should not expand v1 scope.
+This file now contains ideas that are **not yet committed implementation work**. Features promoted into the ordered sprint plan belong in `SPRINTS.md`, not here.
 
-## High-value candidates
+## Promoted into the roadmap
 
-### Item dependencies
-Examples:
-- flashlight -> batteries / charger
-- stove -> fuel
-- tarp -> cord / stakes
-- coffee -> coffee maker + water + mug
-- canned food -> can opener
+The following were previously optional ideas and are now committed future work:
+- item dependency warnings
+- campsite amenities / Site Ideas
+- weather-aware suggestions
+- GPS / saved waypoints
+- maps
+- official campsite discovery
+- fire/public-land/access layers
+- GPX/routes/tracks
+- true offline map regions
+- offline trip packs
+- shared trips / cloud sync
+- community campsite condition reports
 
-A trip preflight could show missing dependencies.
+See `ROADMAP.md` and `SPRINTS.md` for order and acceptance criteria.
 
-### Trip retrospective
+---
+
+## High-value candidates after the ordered roadmap
+
+### Trip retrospective learning
 After a trip:
 - What did you forget?
 - What did you bring but never use?
+- What ran out?
+- What broke?
+- Which campsite/site notes changed?
 - Add forgotten item to master list?
-- Lower default priority of unused item?
+- lower default priority of unused item?
+- update Site `last verified`?
 
-This creates a checklist that improves over time.
-
-### Campsite amenities
-Trip setup can capture:
-- potable water
-- toilets
-- showers
-- electrical hookup
-- picnic table
-- fire ring
-- bear locker
-
-Amenities could conditionally reduce or add suggestions.
-
-### Weather-aware suggestions
-Examples:
-- low temperature -> warmer layer
-- rain -> rain gear / tarp
-- heat -> extra water / shade
-
-Should be advisory, not automatic destructive editing.
-
-### Shared trip
-Multiple people can claim/pack items.
-
-Requires a sync model and accounts or invite tokens, so defer.
-
-### Profiles
-Reusable party profiles and presets:
-- solo
-- couple
-- family
-- dog
-- backpacking
+Keep the learning explainable and user-controlled.
 
 ### Loadout / bin tracking
 Mark an item as permanently stored in:
@@ -62,24 +43,137 @@ Mark an item as permanently stored in:
 - vehicle kit
 - first-aid kit
 - sleep tote
+- backpack
 
-Then the app can say "verify bin is loaded" instead of checking every sub-item.
+The app can then say `verify kitchen bin is loaded` while still allowing the user to inspect sub-items.
 
 ### Weight tracking
-Useful for backpacking:
+Useful mainly for backpacking:
 - item weight
-- worn/carried/consumable
+- worn / carried / consumable
 - total base weight
+- per-person distribution
 
 Do not clutter car-camping UI unless backpacking mode is active.
 
-## Lower priority
+### Campsite comparison
+Compare saved Site Ideas on explainable factors:
+- drive time/distance
+- cost
+- amenities
+- privacy/noise
+- access difficulty
+- vehicle/trailer suitability
+- forecast
+- fire/access/closure context
+- recent verification
+- user rating
 
-- barcode scan
-- grocery integrations
-- campsite reservation integrations
-- AI packing assistant
-- printable label generation
-- QR code on storage bins
-- photo attached to gear item
-- gear maintenance reminders
+Never hide the raw factors behind a single unexplained score.
+
+### Reservation / permit integrations
+Potential:
+- deep links first
+- saved reservation numbers/docs
+- availability lookup where API/terms permit
+- permit reminders
+
+Avoid brittle scraping of reservation websites.
+
+### Cell-coverage intelligence
+Potential progression:
+1. personal carrier/service notes on Site
+2. community carrier reports
+3. licensed/official coverage overlays if a suitable provider exists
+
+### Water-source intelligence
+Potential:
+- saved local water waypoints
+- source type
+- treatment required
+- seasonal/reliability notes
+- last verified
+- community reports later
+
+Never label natural water as safe to drink solely from a crowdsourced report.
+
+### Road-condition intelligence
+Potential:
+- user notes
+- recent community condition reports
+- closures
+- seasonal access
+- snow/mud/washout notes
+
+Keep road **legal status** separate from **physical passability**.
+
+### Gear maintenance reminders
+Examples:
+- recharge battery banks
+- inspect first-aid expiration dates
+- refill propane
+- waterproof tent/rainfly
+- inspect tires/spare
+- service stove
+
+### Photo attached to gear item
+Useful for:
+- identifying which item/version to pack
+- bin/storage location
+- replacement shopping
+
+### QR codes for storage bins
+Could open a bin/loadout record or mark the bin loaded.
+
+### Barcode scanning
+Possible for food/consumables or inventory entry, but not valuable enough to precede camping/navigation features.
+
+---
+
+## Advanced device/platform integrations
+
+Only pursue after a separate feasibility review:
+- Garmin / satellite messenger integration
+- smartwatch trip status
+- CarPlay / Android Auto companion
+- native mobile wrapper
+- background geofenced reminders
+- camera-based campsite/gear capture
+
+These may require native APIs, platform approvals, vendor APIs, or ongoing service costs.
+
+---
+
+## AI candidates
+
+AI should remain optional and advisory.
+
+Potential uses:
+- checklist omission review
+- summarize recent campsite reports
+- compare Site Ideas using user-selected priorities
+- turn natural-language trip plans into draft trip fields
+- summarize weather/hazard data already fetched from authoritative sources
+- suggest post-trip checklist improvements
+
+Do **not** use AI as the source of truth for:
+- weather
+- fire status
+- legal access
+- road closures
+- permits
+- emergency guidance
+- navigation position
+
+---
+
+## Ideas intentionally kept low priority
+
+- grocery ordering integrations
+- social feed / follower system
+- gamification / badges
+- public popularity leaderboards for hidden sites
+- automatic public sharing of exact campsite coordinates
+- ad-driven recommendation feeds
+
+These add complexity or work against the local-first, low-friction camping goal.
