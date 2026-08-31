@@ -11,7 +11,8 @@ Brand work should stay separate from technical architecture, Firebase configurat
 - **Stage 1 — Brand direction:** APPROVED
 - **Stage 2 — Naming:** SELECTED / NOT YET CLEARED
 - **Stage 3 — Mission, tagline, positioning:** APPROVED
-- **Stage 4 — Brand voice:** NEXT
+- **Stage 4 — Brand voice:** APPROVED
+- **Stage 5 — Core color system:** NEXT
 - **Android package identifier:** `com.notallwhowander.camping` for now; do not change solely because the working brand name changed
 
 The product is a local-first camping planning app for Android and the web. It helps people plan trips, manage packing and gear, check weather and safety context, save campsites and waypoints, use offline maps and trip packs, and eventually share trips.
@@ -257,15 +258,6 @@ The product promise should remain concrete. It should not imply that Over Yonder
 
 > **Less guesswork before you leave. More outside when you get there.**
 
-### Why this works
-
-- combines the practical benefit of preparation with the emotional benefit of being outdoors
-- explicitly connects the planning phase with the trip itself
-- avoids repeating or explaining **Over Yonder**
-- fits packing, maps, weather, sites, gear, safety context, and offline preparation
-- sounds warm and human without becoming cute or faux-rustic
-- supports the brand’s clean modern utility while leaving the retro character to the visual identity
-
 ### Short-form supporting line
 
 When space is too limited for the full tagline, **Less guesswork. More outside.** may be used as a secondary campaign or graphic line, but it is not the canonical primary tagline.
@@ -276,33 +268,241 @@ When space is too limited for the full tagline, **Less guesswork. More outside.*
 
 ---
 
-# 7. Stage 4 — Brand voice — NEXT
+# 7. Stage 4 — Brand voice — APPROVED
 
-Create:
+## Voice character
 
-- 5 voice principles
-- 5 things the brand never sounds like
-- preferred vocabulary
-- words and phrases to avoid
-- examples for planning, weather, safety, empty states, offline mode, and trip completion
+**Over Yonder sounds like a calm field guide written by a knowledgeable camping friend.**
 
-Target voice:
+The field-guide side provides clarity, restraint, useful detail, and trust. The knowledgeable-friend side adds warmth and humanity without turning the interface into a conversation.
 
-- plain
-- warm
-- capable
-- calm
-- concise
-- lightly literary when appropriate
-- never macho
-- never alarmist
-- never corporate
-- never faux-rustic
-- never folksy for the sake of sounding old-fashioned
+A useful working balance is:
+
+- **70% calm field guide**
+- **30% knowledgeable camping friend**
+
+The voice should feel experienced, never superior. It helps the user prepare and make decisions; it does not perform expertise.
+
+## Five voice principles
+
+### 1. Useful first
+Lead with the thing the user needs to know or do. Personality comes after clarity.
+
+Prefer:
+- **6 things left to pack.**
+
+Over:
+- **Looks like your adventure kit still needs a little love!**
+
+### 2. Calm confidence
+State conditions and next steps plainly. Do not create urgency unless the situation actually warrants it.
+
+Prefer:
+- **Rain is likely after 4 PM. Consider setting camp before then.**
+
+Over:
+- **Stormy weather could ruin your evening — hurry and get set up!**
+
+### 3. Warm, not chatty
+Write like someone helpful sitting across the table while the trip is being planned. Avoid filler, banter, excessive exclamation points, or conversational UI that slows the user down.
+
+### 4. Plain language over outdoor jargon
+Use familiar words unless a technical term is genuinely useful. When a specialized map, weather, or safety term is necessary, explain it briefly rather than showing off vocabulary.
+
+### 5. Light character, used sparingly
+Literary texture and dry outdoor humor are allowed in low-stakes moments, completion states, and occasional supporting copy. They must never obscure instructions or become a gimmick.
+
+## Safety and weather override
+
+For weather alerts, hazards, navigation problems, fire restrictions, closures, emergency information, or other consequential situations:
+
+**clarity > warmth > personality > humor**
+
+Safety tone is **calm but firm**.
+
+Use:
+- the condition
+- when or where it applies
+- the practical consequence
+- the clearest useful action available
+
+Do not dramatize and do not soften a real risk to preserve the friendly voice.
+
+Example:
+
+> **High wind warning from 2–8 PM. Exposed campsites may be difficult to secure. Check conditions before setting up and secure loose gear.**
+
+Not:
+
+> **It’s going to get pretty wild out there, so hang onto your hat!**
+
+## Humor rule
+
+Humor is **very light** and optional.
+
+Good places for it:
+
+- low-stakes packing reminders
+- successful trip setup
+- trip completion
+- harmless empty states
+- occasional secondary labels or illustrations
+
+Never use humor for:
+
+- safety warnings
+- severe weather
+- wildfire or evacuation information
+- getting lost or navigation failures
+- medical information
+- failed offline downloads when the user may depend on them
+- privacy/security warnings
+
+Humor should sound dry and natural, not branded or scripted.
+
+Example acceptable secondary copy:
+
+> **Tent packed. Stakes too, hopefully.**
+
+Use rarely enough that it remains pleasant when it appears.
+
+## Preferred vocabulary
+
+Favor words such as:
+
+- plan
+- prepare
+- pack
+- ready
+- trip
+- campsite
+- site
+- route
+- map
+- waypoint
+- save
+- download
+- offline
+- conditions
+- weather
+- check
+- before you go
+- before you leave
+- nearby
+- notes
+- gear
+- field
+- ahead
+- home
+
+Use outdoors-specific terms when they add precision, not atmosphere.
+
+## Words and styles to avoid
+
+Avoid generic adventure marketing such as:
+
+- adventure awaits
+- epic
+- conquer
+- crush it
+- dominate
+- unleash
+- escape the ordinary
+- answer the call of the wild
+- rugged lifestyle
+- wilderness warrior
+- survival mode
+- ultimate adventure
+- all-in-one
+- explore like never before
+
+Also avoid faux-rustic language such as:
+
+- reckon
+- howdy
+- partner
+- mosey
+- out yonder
+- neck of the woods
+
+unless those words appear naturally in user-created content or a specific editorial context.
+
+Do not repeatedly use **yonder** simply because it is in the brand name.
+
+## Punctuation and rhythm
+
+- Prefer short sentences.
+- Use sentence case in UI copy.
+- Use exclamation points rarely.
+- Avoid ellipses for personality.
+- Avoid unnecessary em dashes in controls and alerts.
+- Use contractions when they sound more natural: **You’re ready**, **We couldn’t save this map**.
+- Buttons should usually begin with a clear verb: **Save site**, **Download map**, **Check weather**, **Add gear**.
+
+## Example UI copy
+
+### Planning
+
+**Trip overview**
+> **Your trip is taking shape. Three items still need attention before you leave.**
+
+### Packing
+
+**Packing progress**
+> **6 things left to pack.**
+
+**Nothing left**
+> **Packed and ready.**
+
+### Weather
+
+**Normal forecast change**
+> **Rain is likely after 4 PM. Consider setting camp before then.**
+
+### Safety
+
+**Higher-consequence alert**
+> **High wind warning from 2–8 PM. Exposed campsites may be difficult to secure. Check conditions before setting up and secure loose gear.**
+
+### Offline preparation
+
+**Download complete**
+> **Offline pack ready. Maps and trip details are saved on this device.**
+
+**Download failed**
+> **Offline pack didn’t finish downloading. Connect to the internet and try again before you leave.**
+
+### Empty trips state
+
+> **No trips yet. Start with where you’re going and when.**
+
+### Empty saved sites state
+
+> **No saved sites yet. Save a campsite or waypoint when you find one worth keeping.**
+
+### Empty offline packs state
+
+> **Nothing saved offline yet. Download a trip before heading somewhere with limited service.**
+
+### Trip completion
+
+> **Trip wrapped. Keep your notes — they may make the next one easier.**
+
+## Voice test
+
+Before shipping copy, ask:
+
+1. Is the useful information obvious on the first read?
+2. Does it sound calm rather than robotic or excited?
+3. Would an experienced camper say this without sounding performative?
+4. Is any literary character helping the message rather than decorating it?
+5. If the situation matters for safety, did we remove humor and unnecessary softness?
+
+If the answer to any is no, simplify the copy.
 
 ---
 
-# 8. Stage 5 — Core color system
+# 8. Stage 5 — Core color system — NEXT
 
 Create three palette directions derived from the approved aesthetic references.
 
