@@ -4,7 +4,7 @@ Last updated: 2026-08-30
 
 ## Current sprint
 
-Core roadmap complete — collaboration and trip-management pass complete
+Priority 1 — publishable PWA via GitHub Pages is configured; enable Pages once in repository settings
 
 ## Completed
 
@@ -35,6 +35,7 @@ Core roadmap complete — collaboration and trip-management pass complete
 - no-password people profiles with reusable personal item lists and per-person item ownership
 - editable trip name, destination, address, dates, notes, people, and camper count
 - local trip sorting and portable share/import files for sending a trip to another app user
+- GitHub Pages workflow for a free, installable web distribution
 
 ## Verification
 
@@ -46,4 +47,5 @@ Core roadmap complete — collaboration and trip-management pass complete
 
 ## Next
 
+- Enable GitHub Pages: Settings → Pages → Source → GitHub Actions. The deployed URL will be `https://710breadman.github.io/not-all-who-wander/`.
 - Live multi-device editing and cloud sync still require a backend/account design. Share files are portable snapshots, not real-time collaboration.

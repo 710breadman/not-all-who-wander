@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  base: "/not-all-who-wander/",
   plugins: [
     react(),
     VitePWA({
@@ -15,7 +16,7 @@ export default defineConfig({
         theme_color: "#173c2b",
         background_color: "#f5f1e8",
         display: "standalone",
-        start_url: "/",
+        start_url: "/not-all-who-wander/",
         icons: [
           {
             src: "pwa-192.png",
