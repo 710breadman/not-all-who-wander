@@ -9,6 +9,7 @@ import type {
   WeatherSnapshot,
   RouteTrack,
   OfflineMapRegion,
+  OfflineTripPack,
   Trip,
   TripItem,
   TripItemStatus,
@@ -16,7 +17,7 @@ import type {
 import { loadChecklistSeed } from "./seedLoader";
 
 export const DATABASE_NAME = "camping-checklist";
-export const DATABASE_VERSION = 6;
+export const DATABASE_VERSION = 7;
 
 interface CampingDatabaseSchema extends DBSchema {
   meta: {
@@ -58,6 +59,11 @@ interface CampingDatabaseSchema extends DBSchema {
     value: OfflineMapRegion;
     indexes: { "by-trip-id": string; "by-status": OfflineMapRegion["status"] };
   };
+  offlineTripPacks: {
+    key: string;
+    value: OfflineTripPack;
+    indexes: { "by-trip-id": string; "by-updated-at": string };
+  };
   tripItems: {
     key: string;
     value: TripItem;
@@ -72,7 +78,7 @@ interface CampingDatabaseSchema extends DBSchema {
 export type CampingDatabase = IDBPDatabase<CampingDatabaseSchema>;
 type UpgradeTransaction = IDBPTransaction<
   CampingDatabaseSchema,
-  ["meta", "masterItems", "trips", "sites", "waypoints", "weatherSnapshots", "routeTracks", "offlineMapRegions", "tripItems"],
+  ["meta", "masterItems", "trips", "sites", "waypoints", "weatherSnapshots", "routeTracks", "offlineMapRegions", "offlineTripPacks", "tripItems"],
   "versionchange"
 >;
 
@@ -137,6 +143,14 @@ export const databaseMigrations: readonly DatabaseMigration[] = [
       const regions = database.createObjectStore("offlineMapRegions", { keyPath: "id" });
       regions.createIndex("by-trip-id", "tripId");
       regions.createIndex("by-status", "status");
+    },
+  },
+  {
+    version: 7,
+    migrate(database) {
+      const packs = database.createObjectStore("offlineTripPacks", { keyPath: "id" });
+      packs.createIndex("by-trip-id", "tripId");
+      packs.createIndex("by-updated-at", "updatedAt");
     },
   },
 ];

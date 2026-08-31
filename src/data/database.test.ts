@@ -1,6 +1,6 @@
 import "fake-indexeddb/auto";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import type { OfflineMapRegion, Site, Trip, TripItem, Waypoint } from "../domain/models";
+import type { OfflineMapRegion, OfflineTripPack, Site, Trip, TripItem, Waypoint } from "../domain/models";
 import {
   DATABASE_VERSION,
   databaseMigrations,
@@ -8,7 +8,7 @@ import {
   openCampingDatabase,
   type CampingDatabase,
 } from "./database";
-import { MasterItemRepository, OfflineMapRegionRepository, SiteRepository, TripItemRepository, TripRepository, WaypointRepository } from "./repositories";
+import { MasterItemRepository, OfflineMapRegionRepository, OfflineTripPackRepository, SiteRepository, TripItemRepository, TripRepository, WaypointRepository } from "./repositories";
 import { loadChecklistSeed } from "./seedLoader";
 
 describe("IndexedDB persistence", () => {
@@ -25,8 +25,8 @@ describe("IndexedDB persistence", () => {
   });
 
   it("uses an explicit migration version", () => {
-    expect(DATABASE_VERSION).toBe(6);
-    expect(databaseMigrations.map((migration) => migration.version)).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(DATABASE_VERSION).toBe(7);
+    expect(databaseMigrations.map((migration) => migration.version)).toEqual([1, 2, 3, 4, 5, 6, 7]);
   });
 
   it("imports the canonical seed once without duplicates", async () => {
@@ -216,5 +216,16 @@ describe("IndexedDB persistence", () => {
     expect((await regions.listByTrip(region.tripId))[0]?.name).toBe(region.name);
     await regions.delete(region.id);
     expect(await regions.get(region.id)).toBeUndefined();
+  });
+
+  it("keeps offline trip packs separate from the source trip", async () => {
+    database = await openCampingDatabase({ databaseName });
+    const trip: Trip = { id: "trip-pack", name: "Pack source", camperCount: 1, style: "car", createdAt: "2026-08-31T00:00:00.000Z", updatedAt: "2026-08-31T00:00:00.000Z", archived: false };
+    await new TripRepository(database).save(trip);
+    const pack: OfflineTripPack = { id: "pack-1", tripId: trip.id, name: "Pack source offline pack", components: { mapRegion: false, officialSites: false, siteIdeas: true, waypointsRoutes: false, weather: false, contextLayers: false, permits: false, emergency: true }, officialSites: [], siteIdeas: [], waypoints: [], routes: [], contextLayers: [], permits: [], sizeEstimateBytes: 0, downloadedAt: trip.createdAt, updatedAt: trip.updatedAt };
+    const packs = new OfflineTripPackRepository(database);
+    await packs.save(pack);
+    await packs.delete(pack.id);
+    expect(await new TripRepository(database).get(trip.id)).toEqual(trip);
   });
 });

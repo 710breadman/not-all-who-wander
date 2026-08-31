@@ -4,9 +4,9 @@ Last updated: 2026-08-31
 
 ## Current sprint
 
-**SPRINT-19 — Offline Trip Data Packs**
+**SPRINT-20 — Cloud Sync & Live Shared Trips**
 
-Sprint 18 is complete. Sprint 19 will package a selected trip’s map region and local field data with explicit freshness details.
+Sprint 19 is complete. Sprint 20 requires a backend/account architecture decision before any account or shared-trip data leaves this local-first app.
 
 Deployment housekeeping remains:
 - Enable GitHub Pages: Settings -> Pages -> Source -> GitHub Actions.
@@ -63,23 +63,24 @@ Deployment housekeeping remains:
 - active breadcrumb rendering, destination/waypoint distance and bearing, nearest-route distance, per-track deletion, and privacy confirmation before recorded-track export
 - licensed raster PMTiles offline-region library with region/zoom selection, capacity estimate, resumable download progress, pause/delete controls, quota checks, freshness metadata, and separate binary storage
 - browser-validated PMTiles v3 raster archives rendered through MapLibre’s local PMTiles protocol; incomplete, invalid, or unlicensed downloads never appear ready
+- independently stored offline trip packs with one-action preparation, component toggles, PMTiles map references, local site/route/waypoint snapshots, weather/context freshness, permit references, and medical-note exclusion
+- pack estimates, stale-component update controls, and safe pack deletion that preserves the source trip and local records
 
 ## Verification
 
 Last recorded verification:
 - `npm run lint` — passed
 - `npm run typecheck` — passed
-- `npm test` — 42 passed
+- `npm test` — 44 passed
 - `npm run build` — passed; manifest and service worker generated
 - `npm run test:e2e` — 8 passed across desktop Chromium and Pixel 5 profiles
 
-Sprint 09 through Sprint 18 application changes on 2026-08-31 passed all gates.
+Sprint 09 through Sprint 19 application changes on 2026-08-31 passed all gates.
 
 ## Ordered next work
 
-1. SPRINT-19 — Offline Trip Data Packs
-2. SPRINT-20 — Cloud Sync & Live Shared Trips
-3. SPRINT-21 — Community Campsite Intelligence & Moderation
-4. SPRINT-22 — Advanced Integrations & Smart Trip Review
+1. SPRINT-20 — Cloud Sync & Live Shared Trips
+2. SPRINT-21 — Community Campsite Intelligence & Moderation
+3. SPRINT-22 — Advanced Integrations & Smart Trip Review
 
 See `SPRINTS.md` for deliverables and acceptance criteria.

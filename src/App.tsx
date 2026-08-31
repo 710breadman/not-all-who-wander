@@ -33,6 +33,7 @@ import { ContextLayersDialog } from "./components/ContextLayersDialog";
 import { GpxDialog } from "./components/GpxDialog";
 import { AutomaticTrackRecordingDialog as TrackRecordingDialog } from "./components/AutomaticTrackRecordingDialog";
 import { OfflineMapRegionsDialog } from "./components/OfflineMapRegionsDialog";
+import { OfflineTripPacksDialog } from "./components/OfflineTripPacksDialog";
 import { loadChecklistSeed } from "./data/seedLoader";
 import type {
   CampingLevel,
@@ -113,6 +114,7 @@ export default function App() {
   const [showGpx, setShowGpx] = useState(false);
   const [showTrackRecording, setShowTrackRecording] = useState(false);
   const [showOfflineMaps, setShowOfflineMaps] = useState(false);
+  const [showOfflinePacks, setShowOfflinePacks] = useState(false);
   const [visibleStatuses, setVisibleStatuses] = useState<
     Record<TripItemStatus, boolean>
   >({
@@ -500,6 +502,7 @@ export default function App() {
             <button className="secondary-action" type="button" onClick={() => setShowGpx(true)}>GPX</button>
             <button className="secondary-action" type="button" onClick={() => setShowTrackRecording(true)}>Record track</button>
             <button className="secondary-action" type="button" onClick={() => setShowOfflineMaps(true)}>Offline maps</button>
+            <button className="secondary-action" type="button" onClick={() => setShowOfflinePacks(true)}>Offline pack</button>
             <button
               className="secondary-action"
               type="button"
@@ -758,6 +761,7 @@ export default function App() {
       {showGpx && <GpxDialog tripId={trip.id} onClose={() => setShowGpx(false)} />}
       {showTrackRecording && <TrackRecordingDialog tripId={trip.id} onClose={() => setShowTrackRecording(false)} />}
       {showOfflineMaps && <OfflineMapRegionsDialog trip={trip} onClose={() => setShowOfflineMaps(false)} />}
+      {showOfflinePacks && <OfflineTripPacksDialog trip={trip} onClose={() => setShowOfflinePacks(false)} />}
     </main>
   );
 }

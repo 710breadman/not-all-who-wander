@@ -67,6 +67,11 @@ test("a user can create a trip and view its checklist", async ({ page, context }
   await expect(page.getByRole("dialog", { name: "Offline map regions" })).toContainText(/ready for airplane-mode use/i);
   await context.setOffline(true);
   await page.getByRole("button", { name: "Close dialog" }).click();
+  await page.getByRole("button", { name: "Offline pack" }).click();
+  await expect(page.getByRole("dialog", { name: "Offline trip packs" })).toContainText(/private medical notes are never included/i);
+  await page.getByRole("button", { name: "Prepare offline pack" }).click();
+  await expect(page.getByRole("dialog", { name: "Offline trip packs" })).toContainText(/ready for offline use/i);
+  await page.getByRole("button", { name: "Close dialog" }).click();
   await page.getByRole("button", { name: "GPX" }).click();
   await expect(page.getByRole("dialog", { name: "GPX routes and tracks" })).toBeVisible();
   await page.getByRole("button", { name: "Close dialog" }).click();

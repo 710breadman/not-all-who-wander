@@ -188,6 +188,29 @@ export interface OfflineMapRegion {
   error?: string;
 }
 
+export const offlineTripPackComponents = ["mapRegion", "officialSites", "siteIdeas", "waypointsRoutes", "weather", "contextLayers", "permits", "emergency"] as const;
+export type OfflineTripPackComponent = (typeof offlineTripPackComponents)[number];
+export type OfflineTripPackSelection = Record<OfflineTripPackComponent, boolean>;
+export interface OfflineContextLayerSnapshot { id: string; title: string; sourceUrl: string; fetchedAt: string; featureCount: number; }
+export interface OfflineTripPack {
+  id: string;
+  tripId: string;
+  name: string;
+  components: OfflineTripPackSelection;
+  mapRegionId?: string;
+  officialSites: Site[];
+  siteIdeas: Site[];
+  waypoints: Waypoint[];
+  routes: RouteTrack[];
+  weatherSnapshot?: WeatherSnapshot;
+  contextLayers: OfflineContextLayerSnapshot[];
+  permits: string[];
+  emergencyReference?: { expectedDeparture?: string; expectedReturn?: string; contactName?: string; contactPhone?: string; vehicle?: string; destination?: string };
+  sizeEstimateBytes: number;
+  downloadedAt: string;
+  updatedAt: string;
+}
+
 export interface SiteAmenities {
   potableWater?: boolean;
   toilets?: boolean;
