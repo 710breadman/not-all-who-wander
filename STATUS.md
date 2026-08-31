@@ -1,10 +1,16 @@
 # Implementation Status
 
-Last updated: 2026-08-30
+Last updated: 2026-08-31
 
 ## Current sprint
 
-Priority 1 — publishable PWA via GitHub Pages is configured; enable Pages once in repository settings
+**SPRINT-09 — Saved Site Ideas & Campsite Profiles**
+
+This is the first post-v1 expansion sprint because it is the easiest high-value addition and creates the shared data model required by later GPS, weather, maps, campsite discovery, offline packs, and community features.
+
+Deployment housekeeping remains:
+- Enable GitHub Pages: Settings -> Pages -> Source -> GitHub Actions.
+- Expected deployed URL: `https://710breadman.github.io/not-all-who-wander/`
 
 ## Completed
 
@@ -36,16 +42,34 @@ Priority 1 — publishable PWA via GitHub Pages is configured; enable Pages once
 - editable trip name, destination, address, dates, notes, people, and camper count
 - local trip sorting and portable share/import files for sending a trip to another app user
 - GitHub Pages workflow for a free, installable web distribution
+- expanded post-v1 roadmap researched and ordered by implementation ease
 
 ## Verification
 
+Last recorded verification:
 - `npm run lint` — passed
 - `npm run typecheck` — passed
 - `npm test` — 16 passed
 - `npm run build` — passed; manifest and service worker generated
 - `npm run test:e2e` — 6 passed across desktop Chromium and Pixel 5 profiles
 
-## Next
+Documentation-only roadmap changes on 2026-08-31 did not modify application code.
 
-- Enable GitHub Pages: Settings → Pages → Source → GitHub Actions. The deployed URL will be `https://710breadman.github.io/not-all-who-wander/`.
-- Live multi-device editing and cloud sync still require a backend/account design. Share files are portable snapshots, not real-time collaboration.
+## Ordered next work
+
+1. SPRINT-09 — Saved Site Ideas & Campsite Profiles
+2. SPRINT-10 — Trip Preflight, Dependencies & Safety Card
+3. SPRINT-11 — GPS Basics & Local Waypoints
+4. SPRINT-12 — Weather & Severe Weather Alerts
+5. SPRINT-13 — Basic Online Map & Saved Markers
+6. SPRINT-14 — Official Campsite Discovery
+7. SPRINT-15 — Fire, Public Land, Access & Road-Legality Layers
+8. SPRINT-16 — GPX Import/Export & Route/Track Model
+9. SPRINT-17 — Track Recording & Field Navigation Basics
+10. SPRINT-18 — True Offline Map Regions
+11. SPRINT-19 — Offline Trip Data Packs
+12. SPRINT-20 — Cloud Sync & Live Shared Trips
+13. SPRINT-21 — Community Campsite Intelligence & Moderation
+14. SPRINT-22 — Advanced Integrations & Smart Trip Review
+
+See `SPRINTS.md` for deliverables and acceptance criteria.
