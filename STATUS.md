@@ -65,6 +65,8 @@ Deployment housekeeping remains:
 - browser-validated PMTiles v3 raster archives rendered through MapLibre’s local PMTiles protocol; incomplete, invalid, or unlicensed downloads never appear ready
 - independently stored offline trip packs with one-action preparation, component toggles, PMTiles map references, local site/route/waypoint snapshots, weather/context freshness, permit references, and medical-note exclusion
 - pack estimates, stale-component update controls, and safe pack deletion that preserves the source trip and local records
+- Android Capacitor package with bundled offline assets, native approximate-location handling, disabled device backup, and cleartext-network blocking
+- signed/reduced Android release pipeline that fails closed without an untracked signing key, plus GitHub debug-APK and Android-lint verification
 
 ## Verification
 
@@ -74,6 +76,9 @@ Last recorded verification:
 - `npm test` — 44 passed
 - `npm run build` — passed; manifest and service worker generated
 - `npm run test:e2e` — 8 passed across desktop Chromium and Pixel 5 profiles
+- `npm run android:debug` — passed against Android API 36 with JDK 21
+- `:app:lintDebug` — passed; debug APK manifest is limited to Internet, network state, and approximate foreground location
+- signed release verification — passed with R8/resource shrinking and APK v2/v3 signatures using a discarded test key
 
 Sprint 09 through Sprint 19 application changes on 2026-08-31 passed all gates.
 

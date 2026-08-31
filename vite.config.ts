@@ -2,11 +2,13 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
-export default defineConfig({
-  base: "/not-all-who-wander/",
-  plugins: [
-    react(),
-    VitePWA({
+export default defineConfig(({ mode }) => {
+  const nativeAndroid = mode === "android";
+  return {
+    base: nativeAndroid ? "./" : "/not-all-who-wander/",
+    plugins: [
+      react(),
+      VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["camping.svg", "pwa-192.png", "pwa-512.png"],
       manifest: {
@@ -41,11 +43,12 @@ export default defineConfig({
       workbox: {
         navigateFallback: "index.html",
       },
-    }),
-  ],
-  test: {
-    environment: "jsdom",
-    setupFiles: "./src/test/setup.ts",
-    include: ["src/**/*.test.{ts,tsx}"],
-  },
+      }),
+    ],
+    test: {
+      environment: "jsdom",
+      setupFiles: "./src/test/setup.ts",
+      include: ["src/**/*.test.{ts,tsx}"],
+    },
+  };
 });

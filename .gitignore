@@ -4,4 +4,8 @@ coverage/
 playwright-report/
 test-results/
 *.local
+android/keystore.properties
+android/local.properties
+android/*.jks
+android/*.keystore
 .DS_Store

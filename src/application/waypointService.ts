@@ -1,3 +1,5 @@
+import { Capacitor } from "@capacitor/core";
+import { Geolocation } from "@capacitor/geolocation";
 import { openCampingDatabase } from "../data/database";
 import { WaypointRepository } from "../data/repositories";
 import type { Waypoint, WaypointType } from "../domain/models";
@@ -9,12 +11,30 @@ export type LocationProvider = {
 
 const id = () => `waypoint-${crypto.randomUUID()}`;
 
-export function getCurrentCoordinates(provider: LocationProvider = navigator.geolocation): Promise<Coordinates> {
+function coordinatesFromBrowser(provider: LocationProvider): Promise<Coordinates> {
   return new Promise((resolve, reject) => provider.getCurrentPosition(
     (position) => resolve({ latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy, capturedAt: new Date(position.timestamp).toISOString() }),
     (error) => reject(new Error(error.code === error.PERMISSION_DENIED ? "Location permission was not granted." : "Current location is unavailable.")),
     { enableHighAccuracy: false, maximumAge: 60_000, timeout: 12_000 },
   ));
+}
+
+async function coordinatesFromNative(): Promise<Coordinates> {
+  const permissions = await Geolocation.requestPermissions({ permissions: ["coarseLocation"] });
+  if (permissions.coarseLocation !== "granted") throw new Error("Location permission was not granted.");
+  const position = await Geolocation.getCurrentPosition({ enableHighAccuracy: false, maximumAge: 60_000, timeout: 12_000 });
+  return {
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,
+    accuracy: position.coords.accuracy,
+    capturedAt: new Date(position.timestamp).toISOString(),
+  };
+}
+
+export function getCurrentCoordinates(provider?: LocationProvider): Promise<Coordinates> {
+  if (provider) return coordinatesFromBrowser(provider);
+  if (Capacitor.isNativePlatform()) return coordinatesFromNative();
+  return coordinatesFromBrowser(navigator.geolocation);
 }
 
 export async function listWaypoints(tripId: string): Promise<Waypoint[]> {
