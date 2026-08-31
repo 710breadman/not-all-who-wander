@@ -155,7 +155,55 @@ Approved aesthetic references:
 - boot print
 - mud
 
-## Stage 2 — App name exploration — NEXT
+## Stage 2 — App name exploration — IN PROGRESS
+
+### Approved naming constraints
+
+- **Not All Who Wander** is a serious candidate, not merely a repository name.
+- Explore literary nods and literary-feeling names, but prefer allusion over lifting recognizable quotations when possible.
+- One-word and two-word names are both acceptable; longer names may remain in contention if unusually strong.
+- The customer-facing name should remain clean and timeless. The retro “golden age of camping” character should primarily come from the visual identity rather than forcing a vintage-sounding name.
+- The name must be able to grow beyond packing lists into maps, weather, site discovery, GPS, trip planning, offline tools, and safety features.
+
+### Naming principles
+
+Favor names that feel:
+
+- calm
+- capable
+- memorable
+- outdoors-aware without sounding generic
+- slightly literary or field-guide adjacent when useful
+- easy to say aloud
+- strong as an app icon/wordmark
+
+Avoid overusing:
+
+- camp
+- trail
+- wild
+- roam
+- summit
+- wander
+
+Avoid startup-style invented spelling unless the result is unusually natural.
+
+### Preliminary conflict / dead-end notes
+
+These are not legal clearances. They are early web/app conflict screens only.
+
+- **Waypost** — remove from consideration. There is an active RV/trip-planning app with overlapping camping/travel functionality, plus an outdoor-gear brand.
+- **Open Road** — remove from consideration despite the useful Whitman literary association. There is an active travel app using the name.
+- **Fieldward** — remove from consideration. A 2026 U.S. software/SaaS trademark application exists.
+- **Not All Who Wander / Not All Who Wander Are Lost** — remains in consideration, but requires heightened clearance. The longer phrase has existing and historical U.S. trademark activity in multiple product classes. Do not treat it as legally available based on this workshop alone.
+
+### Literary strategy
+
+Use three levels of literary influence:
+
+1. **Direct nod** — recognizable reference such as Not All Who Wander. Use sparingly and subject to rights/trademark review.
+2. **Allusive** — names that feel like a line from a field journal, nature essay, travel book, or poem without copying one.
+3. **Material-literary** — combine book/map language with outdoor objects: margins, lines, folds, field books, lanterns, canvas, ground, light.
 
 Generate 30 name candidates across different approaches:
 
@@ -170,10 +218,6 @@ For every candidate, include:
 - a one-line reason it fits
 - any obvious concern
 - how well it supports the approved timeless / golden-age-camping identity
-
-Do not overuse words such as camp, trail, wild, roam, summit, or wander.
-
-Favor names that can grow beyond packing lists into maps, weather, site discovery, GPS, trip planning, offline tools, and safety features.
 
 Then narrow to the strongest 8 based on:
 
