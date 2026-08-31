@@ -10,8 +10,8 @@ Brand work should stay separate from technical architecture, Firebase configurat
 - **Name status:** user-selected, **provisional pending trademark/app-store/domain clearance**
 - **Stage 1 — Brand direction:** APPROVED
 - **Stage 2 — Naming:** SELECTED / NOT YET CLEARED
-- **Stage 3 — Mission, tagline, positioning:** DRAFT READY FOR TAGLINE SELECTION
-- **Stage 4 — Brand voice:** NEXT AFTER STAGE 3
+- **Stage 3 — Mission, tagline, positioning:** APPROVED
+- **Stage 4 — Brand voice:** NEXT
 - **Android package identifier:** `com.notallwhowander.camping` for now; do not change solely because the working brand name changed
 
 The product is a local-first camping planning app for Android and the web. It helps people plan trips, manage packing and gear, check weather and safety context, save campsites and waypoints, use offline maps and trip packs, and eventually share trips.
@@ -225,106 +225,54 @@ Do not reopen the naming stage unless **Over Yonder** fails clearance or the use
 
 ---
 
-# 6. Stage 3 — Mission, tagline, and positioning — DRAFT
+# 6. Stage 3 — Mission, tagline, and positioning — APPROVED
 
 ## Approved Stage 3 direction
 
-The brand should emphasize **planning and preparation first**. Discovery and exploration remain part of the emotional appeal, but the core value is helping people get ready before the trip.
+The brand emphasizes **planning and preparation first**. Discovery and exploration remain part of the emotional appeal, but the core value is helping people get ready before the trip.
 
-Tagline tone should mix:
+Tagline tone mixes:
 
 - practical clarity
 - warmth
 - restrained literary character
 
-Avoid making the tagline overly poetic, cute, rustic, or dependent on the words **Over Yonder**.
+The brand name should stand on its own rather than being repeatedly worked into slogans or UI copy.
 
-## Recommended mission statement
+## Approved mission statement
 
 > **Make preparing for the outdoors simple, calm, and dependable, so people can spend less time managing a trip and more time taking it.**
 
-This is the recommended canonical mission unless explicitly revised.
-
-## Recommended core product promise
+## Approved core product promise
 
 > **Bring the important parts of trip planning together before you head out.**
 
 The product promise should remain concrete. It should not imply that Over Yonder can eliminate uncertainty, guarantee safety, or replace judgment in the field.
 
-## Recommended positioning statement
+## Approved positioning statement
 
 > **Over Yonder is a local-first camping planner that brings trip plans, packing, places, maps, weather, and practical field information together so campers can prepare before leaving reliable service behind.**
+
+## Approved primary tagline
+
+> **Less guesswork before you leave. More outside when you get there.**
+
+### Why this works
+
+- combines the practical benefit of preparation with the emotional benefit of being outdoors
+- explicitly connects the planning phase with the trip itself
+- avoids repeating or explaining **Over Yonder**
+- fits packing, maps, weather, sites, gear, safety context, and offline preparation
+- sounds warm and human without becoming cute or faux-rustic
+- supports the brand’s clean modern utility while leaving the retro character to the visual identity
+
+### Short-form supporting line
+
+When space is too limited for the full tagline, **Less guesswork. More outside.** may be used as a secondary campaign or graphic line, but it is not the canonical primary tagline.
 
 ## 50-word app-store introduction
 
 > **Over Yonder helps you plan camping trips before you leave home. Build packing lists, organize gear, save campsites and waypoints, check useful weather and trip context, and prepare maps and information for offline use. Everything stays focused on making the trip easier to prepare for and simpler to manage.**
-
-## Tagline candidates
-
-### Strongest overall
-
-1. **Less guesswork. More outside.**  
-   Best balance of practical benefit, warmth, memorability, and brand personality.
-
-2. **Plan well. Get out there.**  
-   Straightforward, active, and broad enough for the full product.
-
-3. **The trip starts before you leave.**  
-   Strongest planning-first statement with a lightly literary feel.
-
-### Practical
-
-4. **Ready before you leave.**  
-   Simple and direct; emphasizes preparation without overclaiming.
-
-5. **Make the trip easier before it starts.**  
-   Clear benefit statement, though longer and less distinctive.
-
-6. **Plans made for the outdoors.**  
-   Calm and functional; works well beneath the wordmark.
-
-### Warm
-
-7. **Prepare once. Enjoy the trip.**  
-   Friendly and benefit-led, though “once” should not imply no later adjustments are needed.
-
-8. **Ready for the good part.**  
-   Warm and human; preparation is framed as supporting the experience rather than being the experience.
-
-9. **More time out there.**  
-   Minimal and emotional; best as campaign copy rather than the primary descriptive tagline.
-
-### Literary / field-minded
-
-10. **Prepared for the way ahead.**  
-    Timeless and capable without sounding tactical.
-
-11. **Bring the plan. Leave the noise.**  
-    Connects preparation with the Quiet Wild direction; slightly more campaign-like.
-
-12. **Pack smart. Go farther.**  
-    Energetic and concise, but narrower because it overemphasizes packing and distance.
-
-## Current tagline recommendation
-
-**Primary recommendation:** **Less guesswork. More outside.**
-
-Why:
-
-- communicates the practical value of preparation
-- does not repeat or explain the brand name
-- sounds modern without becoming tech-startup language
-- retains enough warmth to fit the classic-camping visual identity
-- works for packing, maps, weather, sites, gear, safety context, and offline preparation
-- short enough for app-store graphics, web headers, launch screens, and print
-
-**Runner-up:** **The trip starts before you leave.**
-
-This is more literary and more explicitly planning-focused, but is longer and less ownable as a compact brand line.
-
-### Stage 3 approval rule
-
-Before Stage 3 is marked approved, select the primary tagline or explicitly request another round. Mission, promise, positioning, and app-store introduction may then be tightened around that final tagline if needed.
 
 ---
 
