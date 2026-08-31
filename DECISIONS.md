@@ -70,3 +70,6 @@ PMTiles is a single-file tile archive designed for range access and MapLibre int
 
 ### D-018 — Android is a signed, local-first Capacitor package
 The Android app packages the same local-first web assets with Capacitor. It uses relative asset paths and HTTPS local origin support; disables Android device backups; blocks cleartext traffic; and requests approximate foreground location only on demand. Release builds use R8/resource shrinking and cannot run without a complete untracked signing configuration. GitHub verifies a debug APK and Android lint; real release keys remain outside the repository.
+
+### D-019 — Firebase is the Sprint 20 sync backend
+Optional accounts, cloud sync, and live shared trips will use Firebase Authentication and Cloud Firestore. The existing IndexedDB application remains the offline-first source of immediate UI behavior. Firebase implementation must not begin until the user chooses sign-in methods, sharing roles/invites, deterministic conflict behavior, and which private data is excluded from cloud sync.

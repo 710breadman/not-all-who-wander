@@ -6,7 +6,7 @@ Last updated: 2026-08-31
 
 **SPRINT-20 — Cloud Sync & Live Shared Trips**
 
-Sprint 19 is complete. Sprint 20 requires a backend/account architecture decision before any account or shared-trip data leaves this local-first app.
+Sprint 19 is complete. Sprint 20 will use Firebase Authentication and Cloud Firestore for optional sync and live shared trips. Product decisions still needed before implementation: sign-in methods, shared-trip roles/invites, conflict behavior, and the exact private-data sync boundary.
 
 Deployment housekeeping remains:
 - Enable GitHub Pages: Settings -> Pages -> Source -> GitHub Actions.
