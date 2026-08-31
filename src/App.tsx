@@ -994,19 +994,12 @@ function Home({
           >
             Start a new trip
           </button>
-          <button
-            className="secondary-action hero-profile"
-            type="button"
-            title="Sign in, switch profiles, and see that person's trips and personal list"
-            onClick={onSwitchProfile}
-          >
-            {activeProfile
-              ? `Switch from ${activeProfile.name}`
-              : "Sign in / switch profile"}
-          </button>
         </div>
         {menuOpen && (
           <nav className="burger-menu" aria-label="App menu">
+            <button type="button" title="Sign in, switch profiles, and view that person's trips and personal list" onClick={onSwitchProfile}>
+              {activeProfile ? `Switch profile (${activeProfile.name})` : "Sign in / switch profile"}
+            </button>
             <button type="button" onClick={onProfiles}>
               Profile settings
             </button>
