@@ -99,20 +99,25 @@
 
 .brand-row {
   display: flex;
-  gap: 18px;
   align-items: center;
 }
 
-.brand-mark {
-  display: grid;
-  width: 54px;
-  height: 54px;
-  place-items: center;
+.brand-lockup {
+  width: min(100%, 560px);
+}
+
+.brand-logo-heading {
+  max-width: none;
+}
+
+.brand-logo {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  padding: clamp(8px, 1.5vw, 14px);
   border-radius: 16px;
-  color: var(--forest);
-  background: var(--gold);
-  font-size: 25px;
-  transform: rotate(2deg);
+  background: var(--cream);
 }
 
 .eyebrow {
@@ -774,10 +779,8 @@ textarea {
     border-radius: 20px;
     padding: 26px 22px;
   }
-  .brand-mark {
-    width: 44px;
-    height: 44px;
-    border-radius: 13px;
+  .brand-logo {
+    border-radius: 12px;
   }
   .inventory-card {
     border-radius: 20px;

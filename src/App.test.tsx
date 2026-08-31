@@ -7,7 +7,7 @@ describe("App shell", () => {
     render(<App />);
 
     expect(
-      screen.getByRole("heading", { name: "Not all who wander pack light." }),
+      screen.getByRole("heading", { name: "Path A Logical" }),
     ).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /start a new trip/i }));
     expect(

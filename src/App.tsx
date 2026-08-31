@@ -1109,16 +1109,15 @@ function Home({
           ☰
         </button>
         <div className="brand-row">
-          <div className="brand-mark" aria-hidden="true">
-            ↟
-          </div>
-          <div>
-            <p className="eyebrow">FOR THE ROAD AHEAD</p>
-            <h1>Not all who wander pack light.</h1>
+          <div className="brand-lockup">
+            <p className="eyebrow">FOR THE PATH AHEAD</p>
+            <h1 className="brand-logo-heading">
+              <img className="brand-logo" src="path-local-logo.png" alt="Path A Logical" />
+            </h1>
           </div>
         </div>
         <p className="hero-copy">
-          A calmer way to remember meals, miles, and a well-made camp.
+          A better way to remember meals, miles, and a well-made camp.
         </p>
         <div className="hero-actions">
           <button
