@@ -160,76 +160,253 @@ Approved aesthetic references:
 ### Approved naming constraints
 
 - **Not All Who Wander** is a serious candidate, not merely a repository name.
-- Explore literary nods and literary-feeling names, but prefer allusion over lifting recognizable quotations when possible.
-- One-word and two-word names are both acceptable; longer names may remain in contention if unusually strong.
+- Literary nods are encouraged.
+- Prefer literary allusion, idiom, old field language, and travel-writing character over copying a famous quotation verbatim.
+- One-word, two-word, and unusually strong longer names are acceptable.
 - The customer-facing name should remain clean and timeless. The retro “golden age of camping” character should primarily come from the visual identity rather than forcing a vintage-sounding name.
 - The name must be able to grow beyond packing lists into maps, weather, site discovery, GPS, trip planning, offline tools, and safety features.
 
-### Naming principles
+### Naming direction now favored
 
-Favor names that feel:
+The strongest territory is a blend of three families:
 
-- calm
-- capable
-- memorable
-- outdoors-aware without sounding generic
-- slightly literary or field-guide adjacent when useful
-- easy to say aloud
-- strong as an app icon/wordmark
+1. **Literary journey** — names that could plausibly appear in an old travel book, nature essay, field journal, poem, or road story.
+2. **Old field language** — field-book, lantern, canvas, ground, range, almanac, botanical, and material vocabulary.
+3. **Map/navigation idioms** — bearings, contours, lines, folds, crow-flight, wayfinding, measurement, and route language.
 
-Avoid overusing:
+The goal is not to sound like a generic hiking app. The name should have some soul before the visual identity is applied.
 
-- camp
-- trail
-- wild
-- roam
-- summit
-- wander
+### Important reference phrases
 
-Avoid startup-style invented spelling unless the result is unusually natural.
+These are excellent mood references but poor exact-name candidates:
 
-### Preliminary conflict / dead-end notes
+- **The Road Less Traveled** — excellent literary/outdoor fit, but an active U.S. registration covers outdoor wilderness expeditions featuring camping. Use as inspiration only unless specialist legal clearance says otherwise.
+- **As the Crow Flies** — excellent map/navigation idiom, but an Android Maps & Navigation app already uses the exact name. Use the concept, not the exact phrase.
+- **The Long Way** — strong idea, but there is now an active navigation app using the exact name for scenic/back-road routing. Remove as an exact candidate.
 
-These are not legal clearances. They are early web/app conflict screens only.
+### Additional preliminary conflict notes
 
-- **Waypost** — remove from consideration. There is an active RV/trip-planning app with overlapping camping/travel functionality, plus an outdoor-gear brand.
-- **Open Road** — remove from consideration despite the useful Whitman literary association. There is an active travel app using the name.
-- **Fieldward** — remove from consideration. A 2026 U.S. software/SaaS trademark application exists.
-- **Not All Who Wander / Not All Who Wander Are Lost** — remains in consideration, but requires heightened clearance. The longer phrase has existing and historical U.S. trademark activity in multiple product classes. Do not treat it as legally available based on this workshop alone.
+These are early web/app screens only, not legal clearances.
 
-### Literary strategy
+- **Waypost** — remove; active RV/trip-planning overlap.
+- **Open Road** — remove; active travel-app overlap.
+- **Fieldward** — remove; software/SaaS trademark activity.
+- **Mapfold** — remove; active geography game using the exact name.
+- **Field & Fold** — remove; active travel-guide brand and another cabin/lifestyle business use the name.
+- **Waykeep** — deprioritize/remove; active software company using the exact name.
+- **Crowline** — remove; active App Store title using the exact name.
+- **Long Light / Longlight** — deprioritize; active federal mark exists in technology/scientific goods and the phrase is already commercially occupied.
+- **Not All Who Wander / Not All Who Wander Are Lost** — remains in consideration, but requires heightened trademark/app-store/domain review before adoption.
 
-Use three levels of literary influence:
+---
 
-1. **Direct nod** — recognizable reference such as Not All Who Wander. Use sparingly and subject to rights/trademark review.
-2. **Allusive** — names that feel like a line from a field journal, nature essay, travel book, or poem without copying one.
-3. **Material-literary** — combine book/map language with outdoor objects: margins, lines, folds, field books, lanterns, canvas, ground, light.
+## Refined 30-name exploration
 
-Generate 30 name candidates across different approaches:
+### Family A — Literary journey
 
-- 10 grounded and practical
-- 8 short and modern
-- 6 warm/shared-trip focused
-- 6 map, route, field-guide, or preparation inspired
+1. **Not All Who Wander**  
+   Direct literary nod; thoughtful, recognizable, and already tied to the project.  
+   Concern: long, heavily associated with Tolkien, and requires heightened clearance.
 
-For every candidate, include:
+2. **Less Worn**  
+   A quiet allusion to choosing the less-traveled path without repeating Frost.  
+   Golden-age fit: very high.  
+   Concern: related phrase “The Road Less Worn” is already used as a book title, so uniqueness needs checking.
 
-- pronunciation if not obvious
-- a one-line reason it fits
-- any obvious concern
-- how well it supports the approved timeless / golden-age-camping identity
+3. **By Another Way**  
+   Suggests alternate routes, discovery, and choosing your own path.  
+   Golden-age fit: high.  
+   Concern: common-language phrase may be harder to own.
 
-Then narrow to the strongest 8 based on:
+4. **The Other Road**  
+   Feels like an old travel essay and implies deliberate exploration.  
+   Golden-age fit: very high.  
+   Concern: somewhat generic.
 
-- memorability
-- clarity
-- distinctiveness
-- app-icon fit
-- spoken usability
-- future expansion
-- fit with the approved brand direction
+5. **Farther On**  
+   Short, old-fashioned journey language with forward motion but no urgency.  
+   Golden-age fit: very high.  
+   Concern: appears in traditional song/hymn usage and needs collision review.
 
-Do not adopt a name until trademark, domain, app-store, and obvious competitive conflicts are checked.
+6. **Beyond the Bend**  
+   Curiosity about what lies just out of sight.  
+   Golden-age fit: very high.  
+   Concern: phrase is widely used in unrelated contexts.
+
+7. **Where Roads End**  
+   Strong camping/backcountry implication: the trip starts where ordinary roads stop.  
+   Golden-age fit: very high.  
+   Concern: longer phrase; may skew toward overlanding.
+
+8. **The Field Beyond**  
+   Literary and spacious; suggests the next place without sounding extreme.  
+   Golden-age fit: very high.  
+   Concern: abstract; product category must be established by brand presentation.
+
+9. **Miles Unfold**  
+   Combines travel with the image of unfolding a paper map.  
+   Golden-age fit: very high.  
+   Concern: coined phrase; must test spoken naturalness.
+
+10. **Yonderward**  
+    Archaic-feeling movement toward “yonder”; distinctive without being faux-frontier.  
+    Pronunciation: YON-der-ward.  
+    Golden-age fit: high.  
+    Concern: unusual word may require one exposure before it feels natural.
+
+### Family B — Old field language
+
+11. **Lanternline**  
+    Lantern warmth + topo/route line. Connects the visual identity and product function unusually well.  
+    Golden-age fit: exceptional.  
+    Concern: requires full clearance, but no obvious close camping-app conflict surfaced in the first screen.
+
+12. **Gumbo Lily**  
+    Real western wildflower with strong regional/natural character and excellent icon potential.  
+    Golden-age fit: exceptional.  
+    Concern: does not explain the product category by itself.
+
+13. **Canvasbound**  
+    Canvas equipment + bookbinding + being bound for somewhere.  
+    Golden-age fit: exceptional.  
+    Concern: can sound like a physical-goods brand.
+
+14. **Rangebook**  
+    Range + field/reference book. Feels practical and archival.  
+    Golden-age fit: very high.  
+    Concern: slightly utilitarian; full collision check required.
+
+15. **Groundbook**  
+    A personal record of places, camps, notes, routes, and conditions.  
+    Golden-age fit: high.  
+    Concern: may sound like surveying or professional field software.
+
+16. **Packmark**  
+    Packing + waypoint/field mark; concise and app-friendly.  
+    Golden-age fit: medium-high.  
+    Concern: more functional than literary.
+
+17. **Lantern & Line**  
+    The two strongest brand motifs stated plainly: warm field gear and map language.  
+    Golden-age fit: exceptional.  
+    Concern: reads more like a studio/outdoor-goods brand than a software title.
+
+18. **Roadside Almanac**  
+    Feels like an old glove-box reference book containing what matters for the trip.  
+    Golden-age fit: exceptional.  
+    Concern: long; may imply driving more than camping.
+
+19. **Fieldmark**  
+    A mark made or recorded in the field; useful for sites, GPS, observations, and trip memory.  
+    Golden-age fit: high.  
+    Concern: generic professional-field connotations require clearance.
+
+20. **Open Acre**  
+    Simple land-and-space language; calm and approachable.  
+    Golden-age fit: high.  
+    Concern: may sound agricultural or real-estate related.
+
+### Family C — Map and navigation idioms
+
+21. **Crow’s Measure**  
+    An original allusion to “as the crow flies”: direct distance, map scale, and old navigation language.  
+    Golden-age fit: exceptional.  
+    Concern: slightly mysterious, which may be a benefit if the branding explains it.
+
+22. **True Bearing**  
+    Navigation phrase that also means sound judgment and orientation.  
+    Golden-age fit: high.  
+    Concern: likely crowded across navigation, consulting, and outdoor uses.
+
+23. **On Bearing**  
+    Calm, competent navigational language meaning correctly oriented.  
+    Golden-age fit: high.  
+    Concern: less immediately familiar to casual campers.
+
+24. **Contour & Canvas**  
+    Topographic map language + classic camping material.  
+    Golden-age fit: exceptional.  
+    Concern: like Lantern & Line, may read more as an outdoor-goods company than an app.
+
+25. **Groundline**  
+    Map/terrain language with a sturdy, practical feel.  
+    Golden-age fit: high.  
+    Concern: engineering/construction associations.
+
+26. **Northing**  
+    Real cartographic coordinate term; short, precise, uncommon in consumer apps.  
+    Golden-age fit: medium-high.  
+    Concern: technical and north-specific in feel.
+
+27. **Benchline**  
+    Inspired by benchmarks, survey marks, and contour lines.  
+    Golden-age fit: high.  
+    Concern: meaning is not obvious to most users.
+
+28. **Bearing & Bloom**  
+    Maps/navigation + the approved wildflower identity.  
+    Golden-age fit: exceptional.  
+    Concern: softer and more boutique than the product may want.
+
+29. **Cardinal Field**  
+    Cardinal directions + field notebook / open landscape.  
+    Golden-age fit: high.  
+    Concern: “cardinal” has many unrelated associations.
+
+30. **Line & Lantern**  
+    Map line first, lantern warmth second; a slightly more functional sibling to Lantern & Line.  
+    Golden-age fit: exceptional.  
+    Concern: brand/studio feel rather than conventional app-name feel.
+
+---
+
+## Working shortlist after expansion
+
+These are the strongest names to develop further before a final choice:
+
+### Tier A — strongest overall
+
+1. **Lanternline** — best balance of distinctiveness, mapping, camping heritage, visual identity, and app usability.
+2. **Crow’s Measure** — strongest descendant of the “as the crow flies” idea without copying the occupied phrase.
+3. **Less Worn** — strongest descendant of “road less traveled”; literary, restrained, and memorable.
+4. **The Field Beyond** — strongest pure literary/allusive option; broad enough for the entire future app.
+5. **Gumbo Lily** — most ownable-feeling personality candidate and strongest botanical identity.
+
+### Tier B — strong alternates
+
+6. **Miles Unfold** — excellent paper-map/travel metaphor with modern app potential.
+7. **Yonderward** — distinctive, old-fashioned without being overtly retro, and highly expandable.
+8. **Contour & Canvas** — nearly perfect visual-brand language; needs testing as a software title.
+9. **Roadside Almanac** — extremely aligned with the glove-box/field-guide personality, though long.
+10. **Not All Who Wander** — emotionally strong and already meaningful to the project, but with the most baggage and clearance work.
+
+### Names deliberately removed from the working shortlist
+
+- The Road Less Traveled
+- As the Crow Flies
+- The Long Way
+- Waypost
+- Open Road
+- Fieldward
+- Mapfold
+- Field & Fold
+- Waykeep
+- Crowline
+
+### Next naming step
+
+Take the working shortlist and reduce it to approximately 4–6 finalists. For each finalist, test:
+
+- spoken introduction: “I planned it in ___.”
+- app-store title readability
+- icon and wordmark possibilities
+- literary/brand story
+- visual fit with topo maps, lantern orange, evergreen, canvas tan, wildflowers, and field-guide graphics
+- ability to support Maps, Trips, Weather, Gear, Safety, Sites, and Offline Packs
+- obvious web/app/domain conflicts
+- preliminary trademark conflicts
+
+Do not mark Stage 2 approved until one name is deliberately selected after this comparison.
 
 ## Stage 3 — Mission, tagline, and positioning
 
