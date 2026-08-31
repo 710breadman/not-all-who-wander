@@ -10,7 +10,8 @@ Brand work should stay separate from technical architecture, Firebase configurat
 - **Name status:** user-selected, **provisional pending trademark/app-store/domain clearance**
 - **Stage 1 — Brand direction:** APPROVED
 - **Stage 2 — Naming:** SELECTED / NOT YET CLEARED
-- **Stage 3 — Mission, tagline, positioning:** NEXT
+- **Stage 3 — Mission, tagline, positioning:** DRAFT READY FOR TAGLINE SELECTION
+- **Stage 4 — Brand voice:** NEXT AFTER STAGE 3
 - **Android package identifier:** `com.notallwhowander.camping` for now; do not change solely because the working brand name changed
 
 The product is a local-first camping planning app for Android and the web. It helps people plan trips, manage packing and gear, check weather and safety context, save campsites and waypoints, use offline maps and trip packs, and eventually share trips.
@@ -41,12 +42,6 @@ Capable, map-aware, weather-aware, safety-conscious, and useful without becoming
 The identity should combine the familiarity and material warmth of classic camping equipment, field guides, canvas packs, paper maps, enamelware, lantern light, wildflowers, and old park graphics with a clean, highly usable modern interface.
 
 Retro influence should be an ingredient, not a costume. The product must still feel current, readable, accessible, and trustworthy.
-
-## Working brand promise
-
-> A trusted field companion that helps you prepare, get outside, and stay oriented without getting in the way of the trip.
-
-This remains a working promise until Stage 3 is approved.
 
 ## Visual balance rule
 
@@ -129,7 +124,7 @@ Status: **SELECTED BY USER — PROVISIONAL UNTIL CLEARED**
 
 ## Why it fits
 
-**Over Yonder** matches the approved brand unusually well because it is:
+**Over Yonder** matches the approved brand because it is:
 
 - conversational rather than corporate
 - timeless without sounding artificially vintage
@@ -141,19 +136,13 @@ Status: **SELECTED BY USER — PROVISIONAL UNTIL CLEARED**
 
 It carries some of the spirit that originally made **The Road Less Traveled**, **As the Crow Flies**, and **Not All Who Wander** appealing, but sounds more conversational and less like a borrowed quotation.
 
-## Brand feeling
+## Name-use rule
 
-The name should evoke:
+**Over Yonder should stand on its own.**
 
-> “What’s over yonder?”
-
-That should mean curiosity, preparation, and possibility — not reckless wandering.
-
-The app helps the user know what is over yonder, plan how to get there, bring what they need, understand conditions, and keep useful information available when service disappears.
+Do not repeatedly build marketing copy around phrases such as “what’s over yonder?” or force the word “yonder” into slogans, onboarding, feature labels, or UI copy. The name provides personality; the surrounding copy should remain clear, useful, and natural.
 
 ## Spoken-use test
-
-These all feel natural enough to keep developing:
 
 - “I planned the trip in Over Yonder.”
 - “Check Over Yonder before we leave.”
@@ -162,7 +151,7 @@ These all feel natural enough to keep developing:
 
 ## Visual opportunities created by the name
 
-Do **not** force a literal horizon logo. The name gives us room to use the already-approved visual language:
+Do **not** force a literal horizon logo. The name gives room to use the already-approved visual language:
 
 - topo lines moving beyond an edge or frame
 - a route disappearing around a contour
@@ -195,10 +184,6 @@ An Australian bikepacking/adventure group already uses **Over Yonder** as an out
 
 This creates additional outdoor-category crowding even though it is not the same product.
 
-### Other commercial occupancy — lower relevance
-
-Other **Over Yonder**-form marks and businesses exist, including **Over Yonder Brewing Co.** These are less directly related to camping software, but reinforce that the phrase is commercially occupied.
-
 ## Decision rule
 
 For now:
@@ -223,12 +208,6 @@ The naming process established a preference for three families:
 2. **Old field language** — lantern, canvas, field book, almanac, range, ground, botanical vocabulary
 3. **Map/navigation idioms** — bearing, contour, line, fold, crow-flight, wayfinding, and route language
 
-## Reference phrases that shaped the direction
-
-- **The Road Less Traveled** — excellent mood reference; poor exact candidate because of existing wilderness/camping trademark activity
-- **As the Crow Flies** — excellent navigation idiom; poor exact candidate because an Android navigation app already uses it
-- **Not All Who Wander** — serious prior candidate with strong literary/project connection but substantial association and clearance baggage
-
 ## Strong prior candidates retained for historical context
 
 - Lanternline
@@ -242,42 +221,114 @@ The naming process established a preference for three families:
 - Roadside Almanac
 - Not All Who Wander
 
-## Deliberately removed exact-name candidates
-
-- The Road Less Traveled
-- As the Crow Flies
-- The Long Way
-- Waypost
-- Open Road
-- Fieldward
-- Mapfold
-- Field & Fold
-- Waykeep
-- Crowline
-
 Do not reopen the naming stage unless **Over Yonder** fails clearance or the user explicitly requests it.
 
 ---
 
-# 6. Stage 3 — Mission, tagline, and positioning — NEXT
+# 6. Stage 3 — Mission, tagline, and positioning — DRAFT
 
-Build Stage 3 specifically around **Over Yonder**.
+## Approved Stage 3 direction
 
-Define:
+The brand should emphasize **planning and preparation first**. Discovery and exploration remain part of the emotional appeal, but the core value is helping people get ready before the trip.
 
-- one concise mission statement
-- one core product promise
-- 12 tagline candidates across practical, warm, minimal, literary, and adventurous tones
-- a one-sentence positioning statement
-- a 50-word app-store introduction
+Tagline tone should mix:
 
-The strongest writing should connect the idea of **“over yonder”** with preparation and curiosity without becoming corny.
+- practical clarity
+- warmth
+- restrained literary character
 
-Avoid empty claims such as “the ultimate” or “all-in-one.” Do not claim safety, offline coverage, or privacy beyond what the real product can prove.
+Avoid making the tagline overly poetic, cute, rustic, or dependent on the words **Over Yonder**.
+
+## Recommended mission statement
+
+> **Make preparing for the outdoors simple, calm, and dependable, so people can spend less time managing a trip and more time taking it.**
+
+This is the recommended canonical mission unless explicitly revised.
+
+## Recommended core product promise
+
+> **Bring the important parts of trip planning together before you head out.**
+
+The product promise should remain concrete. It should not imply that Over Yonder can eliminate uncertainty, guarantee safety, or replace judgment in the field.
+
+## Recommended positioning statement
+
+> **Over Yonder is a local-first camping planner that brings trip plans, packing, places, maps, weather, and practical field information together so campers can prepare before leaving reliable service behind.**
+
+## 50-word app-store introduction
+
+> **Over Yonder helps you plan camping trips before you leave home. Build packing lists, organize gear, save campsites and waypoints, check useful weather and trip context, and prepare maps and information for offline use. Everything stays focused on making the trip easier to prepare for and simpler to manage.**
+
+## Tagline candidates
+
+### Strongest overall
+
+1. **Less guesswork. More outside.**  
+   Best balance of practical benefit, warmth, memorability, and brand personality.
+
+2. **Plan well. Get out there.**  
+   Straightforward, active, and broad enough for the full product.
+
+3. **The trip starts before you leave.**  
+   Strongest planning-first statement with a lightly literary feel.
+
+### Practical
+
+4. **Ready before you leave.**  
+   Simple and direct; emphasizes preparation without overclaiming.
+
+5. **Make the trip easier before it starts.**  
+   Clear benefit statement, though longer and less distinctive.
+
+6. **Plans made for the outdoors.**  
+   Calm and functional; works well beneath the wordmark.
+
+### Warm
+
+7. **Prepare once. Enjoy the trip.**  
+   Friendly and benefit-led, though “once” should not imply no later adjustments are needed.
+
+8. **Ready for the good part.**  
+   Warm and human; preparation is framed as supporting the experience rather than being the experience.
+
+9. **More time out there.**  
+   Minimal and emotional; best as campaign copy rather than the primary descriptive tagline.
+
+### Literary / field-minded
+
+10. **Prepared for the way ahead.**  
+    Timeless and capable without sounding tactical.
+
+11. **Bring the plan. Leave the noise.**  
+    Connects preparation with the Quiet Wild direction; slightly more campaign-like.
+
+12. **Pack smart. Go farther.**  
+    Energetic and concise, but narrower because it overemphasizes packing and distance.
+
+## Current tagline recommendation
+
+**Primary recommendation:** **Less guesswork. More outside.**
+
+Why:
+
+- communicates the practical value of preparation
+- does not repeat or explain the brand name
+- sounds modern without becoming tech-startup language
+- retains enough warmth to fit the classic-camping visual identity
+- works for packing, maps, weather, sites, gear, safety context, and offline preparation
+- short enough for app-store graphics, web headers, launch screens, and print
+
+**Runner-up:** **The trip starts before you leave.**
+
+This is more literary and more explicitly planning-focused, but is longer and less ownable as a compact brand line.
+
+### Stage 3 approval rule
+
+Before Stage 3 is marked approved, select the primary tagline or explicitly request another round. Mission, promise, positioning, and app-store introduction may then be tightened around that final tagline if needed.
 
 ---
 
-# 7. Stage 4 — Brand voice
+# 7. Stage 4 — Brand voice — NEXT
 
 Create:
 
