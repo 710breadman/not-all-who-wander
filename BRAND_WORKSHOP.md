@@ -1,41 +1,44 @@
-# Camping app brand workshop
+# Over Yonder brand workshop
 
-This file is both the working brand workshop and the canonical record of approved brand decisions for the project.
+This file is both the working brand workshop and the canonical record of approved brand decisions for the camping project.
 
-Brand work should stay separate from technical architecture, Firebase configuration, store-account setup, and implementation decisions unless a brand choice directly affects the product experience.
+Brand work should stay separate from technical architecture, Firebase configuration, store-account setup, package-name changes, and implementation decisions unless a brand choice directly affects the product experience.
 
-## Context
+## Current brand status
 
-I am creating a local-first camping planning app for Android and the web. It helps people plan trips, pack lists, check weather and safety context, save sites and waypoints, use offline maps and trip packs, and share trips later.
+- **Working customer-facing name:** **Over Yonder**
+- **Name status:** user-selected, **provisional pending trademark/app-store/domain clearance**
+- **Stage 1 — Brand direction:** APPROVED
+- **Stage 2 — Naming:** SELECTED / NOT YET CLEARED
+- **Stage 3 — Mission, tagline, positioning:** NEXT
+- **Android package identifier:** `com.notallwhowander.camping` for now; do not change solely because the working brand name changed
+
+The product is a local-first camping planning app for Android and the web. It helps people plan trips, manage packing and gear, check weather and safety context, save campsites and waypoints, use offline maps and trip packs, and eventually share trips.
 
 The app should feel useful before a trip, calm when signal is poor, easy to understand, and trustworthy with personal information. It is not a social-media camping app, a luxury glamping brand, or a survivalist/tactical product.
 
-The current working name is **Camping**, which is temporary. The Android package identifier is `com.notallwhowander.camping`, but the customer-facing name is still open.
-
 ---
 
-# Approved core brand direction
-
-Status: **Stage 1 approved**
+# 1. Approved core brand direction
 
 ## Brand blend
 
-The approved direction combines three ideas:
+The approved direction combines three ideas.
 
-### 1. Calm field notebook
+### Calm field notebook
 Grounded, practical, durable, tactile, and lightly nostalgic. The product should feel like a trusted object that belongs in a pack, glove box, campsite, or kitchen table while planning a trip.
 
-### 2. Quiet wild
-Clean, low-noise, nature-respectful, privacy-conscious, and calm. The app should avoid the visual and verbal noise common to social, gamified, or overly adventurous outdoor products.
+### Quiet wild
+Clean, low-noise, nature-respectful, privacy-conscious, and calm. Avoid the visual and verbal noise common to social, gamified, or overly adventurous outdoor products.
 
-### 3. Prepared adventure
+### Prepared adventure
 Capable, map-aware, weather-aware, safety-conscious, and useful without becoming tactical, macho, alarmist, or survivalist.
 
 ## Core personality
 
 **Timeless outdoors with a retro “golden age of camping” influence.**
 
-The identity should combine the familiarity and material warmth of classic camping equipment, field guides, canvas packs, paper maps, enamelware, lantern light, and old park graphics with a clean, highly usable modern interface.
+The identity should combine the familiarity and material warmth of classic camping equipment, field guides, canvas packs, paper maps, enamelware, lantern light, wildflowers, and old park graphics with a clean, highly usable modern interface.
 
 Retro influence should be an ingredient, not a costume. The product must still feel current, readable, accessible, and trustworthy.
 
@@ -43,28 +46,11 @@ Retro influence should be an ingredient, not a costume. The product must still f
 
 > A trusted field companion that helps you prepare, get outside, and stay oriented without getting in the way of the trip.
 
-This is a working promise, not a final tagline.
+This remains a working promise until Stage 3 is approved.
 
-## Aesthetic reference library
+## Visual balance rule
 
-These references should guide future visual, UI, illustration, color, texture, icon, and brand decisions:
-
-- forest and field greens
-- warm tan / canvas tones
-- camp-orange accents
-- desert wildflowers
-- old topographic maps
-- classic Coleman-style lantern imagery and lantern-light warmth
-- canvas and weathered field gear
-- gumbo lily
-- columbines
-- boot prints
-- mud, dust, and honest outdoor wear
-- clean, modern, user-friendly interface design
-
-### Visual balance rule
-
-The brand should feel approximately:
+Aim approximately for:
 
 - **60% clean, modern utility**
 - **25% timeless field-guide / classic-camping character**
@@ -72,9 +58,30 @@ The brand should feel approximately:
 
 This prevents the retro direction from reducing clarity or making the product feel like a novelty theme.
 
-## Early color direction — references, not final palette
+---
 
-Use these as the starting family for later palette development:
+# 2. Aesthetic reference library
+
+These references should guide UI, illustration, color, texture, icon, logo, web, store, and marketing decisions.
+
+## Core references
+
+- forest and field greens
+- warm tan / canvas
+- lantern / camp orange
+- warm cream
+- dark earth and mud
+- desert wildflowers
+- gumbo lily
+- columbines
+- old topographic maps
+- classic Coleman-style lantern imagery and lantern-light warmth
+- canvas and weathered field gear
+- boot prints and tread geometry
+- mud, dust, and honest outdoor wear
+- clean, modern, user-friendly interface design
+
+## Early color family — not final palette
 
 - deep evergreen / pine
 - muted sage or field green
@@ -82,11 +89,11 @@ Use these as the starting family for later palette development:
 - burnt or lantern orange
 - warm cream
 - dark earth / mud brown
-- occasional wildflower accents inspired by columbines, gumbo lily, and desert blooms
+- restrained wildflower accents inspired by columbines, gumbo lily, and desert blooms
 
 Avoid making the interface predominantly brown, camouflage-like, neon, tactical black/red, or aggressively orange.
 
-## Early texture and graphic direction
+## Texture and graphic direction
 
 Good references:
 
@@ -97,7 +104,7 @@ Good references:
 - trail-marker geometry
 - boot-print or tread motifs used sparingly
 - wildflower silhouettes or botanical linework
-- lantern-glow warmth as an accent rather than literal skeuomorphism
+- lantern-glow warmth used as an accent rather than literal skeuomorphism
 
 Avoid:
 
@@ -107,280 +114,135 @@ Avoid:
 - camouflage
 - military/tactical motifs
 - overly rustic cabin branding
+- cowboy/frontier parody
 - glossy adventure-travel photography as the dominant identity
 
 ---
 
-# Workshop rules
+# 3. Stage 2 — Brand name
 
-Act as a sharp brand strategist and outdoor-product creative director. Be specific, original, and practical. Ask only one small set of questions at a time.
+## Selected working name
 
-Do not assume the brand needs a mountain, pine tree, compass, tent, campfire, or badge logo. Explore abstract marks, field-guide systems, map language, botanical forms, utility marks, and letterforms first.
+# **Over Yonder**
 
-Avoid names that look obviously close to well-known outdoor brands. Trademark, domain, app-store-name, and logo-rights availability must be checked before adoption.
+Status: **SELECTED BY USER — PROVISIONAL UNTIL CLEARED**
 
-Approved decisions above should be treated as constraints unless explicitly reopened.
+## Why it fits
 
----
+**Over Yonder** matches the approved brand unusually well because it is:
 
-# Core workshop sequence
+- conversational rather than corporate
+- timeless without sounding artificially vintage
+- lightly literary and idiomatic without depending on a famous quotation
+- associated with looking toward a place just beyond the immediate view
+- naturally connected to maps, routes, campsites, discovery, travel, and curiosity
+- warm enough for family camping while still working for solo trips and backcountry planning
+- broad enough to cover Maps, Trips, Gear, Weather, Safety, Sites, GPS, and Offline Packs
 
-Work through these stages in order. Record approved decisions directly in this file.
+It carries some of the spirit that originally made **The Road Less Traveled**, **As the Crow Flies**, and **Not All Who Wander** appealing, but sounds more conversational and less like a borrowed quotation.
 
-## Stage 1 — Brand direction — APPROVED
+## Brand feeling
 
-Approved blend:
+The name should evoke:
 
-- Calm field notebook
-- Quiet wild
-- Prepared adventure
+> “What’s over yonder?”
 
-Approved personality:
+That should mean curiosity, preparation, and possibility — not reckless wandering.
 
-- timeless mix
-- retro “golden age of camping” influence
-- clean and user friendly
+The app helps the user know what is over yonder, plan how to get there, bring what they need, understand conditions, and keep useful information available when service disappears.
 
-Approved aesthetic references:
+## Spoken-use test
 
-- green
-- tan
-- orange
-- desert wildflowers
-- old topo maps
-- Coleman lantern
-- canvas
-- gumbo lily
-- columbines
-- boot print
-- mud
+These all feel natural enough to keep developing:
 
-## Stage 2 — App name exploration — IN PROGRESS
+- “I planned the trip in Over Yonder.”
+- “Check Over Yonder before we leave.”
+- “I saved the campsite in Over Yonder.”
+- “Download it in Over Yonder before we lose service.”
 
-### Approved naming constraints
+## Visual opportunities created by the name
 
-- **Not All Who Wander** is a serious candidate, not merely a repository name.
-- Literary nods are encouraged.
-- Prefer literary allusion, idiom, old field language, and travel-writing character over copying a famous quotation verbatim.
-- One-word, two-word, and unusually strong longer names are acceptable.
-- The customer-facing name should remain clean and timeless. The retro “golden age of camping” character should primarily come from the visual identity rather than forcing a vintage-sounding name.
-- The name must be able to grow beyond packing lists into maps, weather, site discovery, GPS, trip planning, offline tools, and safety features.
+Do **not** force a literal horizon logo. The name gives us room to use the already-approved visual language:
 
-### Naming direction now favored
+- topo lines moving beyond an edge or frame
+- a route disappearing around a contour
+- a small lantern-glow point beyond a map line
+- field-guide margin marks
+- distant wildflower or botanical details
+- abstract “OY” letterform work
+- directional marks that suggest “there” without becoming a generic navigation arrow
+- horizon or distant-land geometry only if it remains distinctive at app-icon size
 
-The strongest territory is a blend of three families:
-
-1. **Literary journey** — names that could plausibly appear in an old travel book, nature essay, field journal, poem, or road story.
-2. **Old field language** — field-book, lantern, canvas, ground, range, almanac, botanical, and material vocabulary.
-3. **Map/navigation idioms** — bearings, contours, lines, folds, crow-flight, wayfinding, measurement, and route language.
-
-The goal is not to sound like a generic hiking app. The name should have some soul before the visual identity is applied.
-
-### Important reference phrases
-
-These are excellent mood references but poor exact-name candidates:
-
-- **The Road Less Traveled** — excellent literary/outdoor fit, but an active U.S. registration covers outdoor wilderness expeditions featuring camping. Use as inspiration only unless specialist legal clearance says otherwise.
-- **As the Crow Flies** — excellent map/navigation idiom, but an Android Maps & Navigation app already uses the exact name. Use the concept, not the exact phrase.
-- **The Long Way** — strong idea, but there is now an active navigation app using the exact name for scenic/back-road routing. Remove as an exact candidate.
-
-### Additional preliminary conflict notes
-
-These are early web/app screens only, not legal clearances.
-
-- **Waypost** — remove; active RV/trip-planning overlap.
-- **Open Road** — remove; active travel-app overlap.
-- **Fieldward** — remove; software/SaaS trademark activity.
-- **Mapfold** — remove; active geography game using the exact name.
-- **Field & Fold** — remove; active travel-guide brand and another cabin/lifestyle business use the name.
-- **Waykeep** — deprioritize/remove; active software company using the exact name.
-- **Crowline** — remove; active App Store title using the exact name.
-- **Long Light / Longlight** — deprioritize; active federal mark exists in technology/scientific goods and the phrase is already commercially occupied.
-- **Not All Who Wander / Not All Who Wander Are Lost** — remains in consideration, but requires heightened trademark/app-store/domain review before adoption.
+Avoid turning **Over Yonder** into faux-Western, cowboy, hillbilly, or rustic-country branding. Its age should come from field-guide materials and classic camping graphics, not caricature.
 
 ---
 
-## Refined 30-name exploration
+# 4. Name clearance warning
 
-### Family A — Literary journey
+The user has selected **Over Yonder** as the working brand, but the preliminary screen found meaningful existing use.
 
-1. **Not All Who Wander**  
-   Direct literary nod; thoughtful, recognizable, and already tied to the project.  
-   Concern: long, heavily associated with Tolkien, and requires heightened clearance.
+## Known early collisions
 
-2. **Less Worn**  
-   A quiet allusion to choosing the less-traveled path without repeating Frost.  
-   Golden-age fit: very high.  
-   Concern: related phrase “The Road Less Worn” is already used as a book title, so uniqueness needs checking.
+### Existing iPhone app — significant
 
-3. **By Another Way**  
-   Suggests alternate routes, discovery, and choosing your own path.  
-   Golden-age fit: high.  
-   Concern: common-language phrase may be harder to own.
+An iPhone app is already listed as **over yonder**. Its feature set includes pointing toward distant locations, straight-line distance, marking the user’s current location, and navigation back to that location.
 
-4. **The Other Road**  
-   Feels like an old travel essay and implies deliberate exploration.  
-   Golden-age fit: very high.  
-   Concern: somewhat generic.
+This is a meaningful overlap because the camping project is expected to include maps, GPS, waypoints, navigation-adjacent tools, and saved locations.
 
-5. **Farther On**  
-   Short, old-fashioned journey language with forward motion but no urgency.  
-   Golden-age fit: very high.  
-   Concern: appears in traditional song/hymn usage and needs collision review.
+### Existing outdoor/bikepacking brand — significant
 
-6. **Beyond the Bend**  
-   Curiosity about what lies just out of sight.  
-   Golden-age fit: very high.  
-   Concern: phrase is widely used in unrelated contexts.
+An Australian bikepacking/adventure group already uses **Over Yonder** as an outdoor identity, including adventure publishing, branding, apparel, and collaborations.
 
-7. **Where Roads End**  
-   Strong camping/backcountry implication: the trip starts where ordinary roads stop.  
-   Golden-age fit: very high.  
-   Concern: longer phrase; may skew toward overlanding.
+This creates additional outdoor-category crowding even though it is not the same product.
 
-8. **The Field Beyond**  
-   Literary and spacious; suggests the next place without sounding extreme.  
-   Golden-age fit: very high.  
-   Concern: abstract; product category must be established by brand presentation.
+### Other commercial occupancy — lower relevance
 
-9. **Miles Unfold**  
-   Combines travel with the image of unfolding a paper map.  
-   Golden-age fit: very high.  
-   Concern: coined phrase; must test spoken naturalness.
+Other **Over Yonder**-form marks and businesses exist, including **Over Yonder Brewing Co.** These are less directly related to camping software, but reinforce that the phrase is commercially occupied.
 
-10. **Yonderward**  
-    Archaic-feeling movement toward “yonder”; distinctive without being faux-frontier.  
-    Pronunciation: YON-der-ward.  
-    Golden-age fit: high.  
-    Concern: unusual word may require one exposure before it feels natural.
+## Decision rule
 
-### Family B — Old field language
+For now:
 
-11. **Lanternline**  
-    Lantern warmth + topo/route line. Connects the visual identity and product function unusually well.  
-    Golden-age fit: exceptional.  
-    Concern: requires full clearance, but no obvious close camping-app conflict surfaced in the first screen.
+- use **Over Yonder** as the internal and creative working brand name
+- continue Stage 3–6 brand development around it
+- do **not** treat the name as legally cleared
+- do **not** make irreversible package/store/domain/legal-entity changes based on the name yet
+- perform a dedicated trademark, Google Play, Apple App Store, domain, GitHub/social-handle, and outdoor-industry clearance before public release
 
-12. **Gumbo Lily**  
-    Real western wildflower with strong regional/natural character and excellent icon potential.  
-    Golden-age fit: exceptional.  
-    Concern: does not explain the product category by itself.
+If exact-name clearance proves poor, preserve the **Over Yonder** brand direction and test a qualified title such as **Over Yonder + descriptor** rather than immediately discarding the identity.
 
-13. **Canvasbound**  
-    Canvas equipment + bookbinding + being bound for somewhere.  
-    Golden-age fit: exceptional.  
-    Concern: can sound like a physical-goods brand.
-
-14. **Rangebook**  
-    Range + field/reference book. Feels practical and archival.  
-    Golden-age fit: very high.  
-    Concern: slightly utilitarian; full collision check required.
-
-15. **Groundbook**  
-    A personal record of places, camps, notes, routes, and conditions.  
-    Golden-age fit: high.  
-    Concern: may sound like surveying or professional field software.
-
-16. **Packmark**  
-    Packing + waypoint/field mark; concise and app-friendly.  
-    Golden-age fit: medium-high.  
-    Concern: more functional than literary.
-
-17. **Lantern & Line**  
-    The two strongest brand motifs stated plainly: warm field gear and map language.  
-    Golden-age fit: exceptional.  
-    Concern: reads more like a studio/outdoor-goods brand than a software title.
-
-18. **Roadside Almanac**  
-    Feels like an old glove-box reference book containing what matters for the trip.  
-    Golden-age fit: exceptional.  
-    Concern: long; may imply driving more than camping.
-
-19. **Fieldmark**  
-    A mark made or recorded in the field; useful for sites, GPS, observations, and trip memory.  
-    Golden-age fit: high.  
-    Concern: generic professional-field connotations require clearance.
-
-20. **Open Acre**  
-    Simple land-and-space language; calm and approachable.  
-    Golden-age fit: high.  
-    Concern: may sound agricultural or real-estate related.
-
-### Family C — Map and navigation idioms
-
-21. **Crow’s Measure**  
-    An original allusion to “as the crow flies”: direct distance, map scale, and old navigation language.  
-    Golden-age fit: exceptional.  
-    Concern: slightly mysterious, which may be a benefit if the branding explains it.
-
-22. **True Bearing**  
-    Navigation phrase that also means sound judgment and orientation.  
-    Golden-age fit: high.  
-    Concern: likely crowded across navigation, consulting, and outdoor uses.
-
-23. **On Bearing**  
-    Calm, competent navigational language meaning correctly oriented.  
-    Golden-age fit: high.  
-    Concern: less immediately familiar to casual campers.
-
-24. **Contour & Canvas**  
-    Topographic map language + classic camping material.  
-    Golden-age fit: exceptional.  
-    Concern: like Lantern & Line, may read more as an outdoor-goods company than an app.
-
-25. **Groundline**  
-    Map/terrain language with a sturdy, practical feel.  
-    Golden-age fit: high.  
-    Concern: engineering/construction associations.
-
-26. **Northing**  
-    Real cartographic coordinate term; short, precise, uncommon in consumer apps.  
-    Golden-age fit: medium-high.  
-    Concern: technical and north-specific in feel.
-
-27. **Benchline**  
-    Inspired by benchmarks, survey marks, and contour lines.  
-    Golden-age fit: high.  
-    Concern: meaning is not obvious to most users.
-
-28. **Bearing & Bloom**  
-    Maps/navigation + the approved wildflower identity.  
-    Golden-age fit: exceptional.  
-    Concern: softer and more boutique than the product may want.
-
-29. **Cardinal Field**  
-    Cardinal directions + field notebook / open landscape.  
-    Golden-age fit: high.  
-    Concern: “cardinal” has many unrelated associations.
-
-30. **Line & Lantern**  
-    Map line first, lantern warmth second; a slightly more functional sibling to Lantern & Line.  
-    Golden-age fit: exceptional.  
-    Concern: brand/studio feel rather than conventional app-name feel.
+This workshop is not legal advice.
 
 ---
 
-## Working shortlist after expansion
+# 5. Naming exploration archive
 
-These are the strongest names to develop further before a final choice:
+The naming process established a preference for three families:
 
-### Tier A — strongest overall
+1. **Literary journey** — old travel-book, poem, essay, and road-story language
+2. **Old field language** — lantern, canvas, field book, almanac, range, ground, botanical vocabulary
+3. **Map/navigation idioms** — bearing, contour, line, fold, crow-flight, wayfinding, and route language
 
-1. **Lanternline** — best balance of distinctiveness, mapping, camping heritage, visual identity, and app usability.
-2. **Crow’s Measure** — strongest descendant of the “as the crow flies” idea without copying the occupied phrase.
-3. **Less Worn** — strongest descendant of “road less traveled”; literary, restrained, and memorable.
-4. **The Field Beyond** — strongest pure literary/allusive option; broad enough for the entire future app.
-5. **Gumbo Lily** — most ownable-feeling personality candidate and strongest botanical identity.
+## Reference phrases that shaped the direction
 
-### Tier B — strong alternates
+- **The Road Less Traveled** — excellent mood reference; poor exact candidate because of existing wilderness/camping trademark activity
+- **As the Crow Flies** — excellent navigation idiom; poor exact candidate because an Android navigation app already uses it
+- **Not All Who Wander** — serious prior candidate with strong literary/project connection but substantial association and clearance baggage
 
-6. **Miles Unfold** — excellent paper-map/travel metaphor with modern app potential.
-7. **Yonderward** — distinctive, old-fashioned without being overtly retro, and highly expandable.
-8. **Contour & Canvas** — nearly perfect visual-brand language; needs testing as a software title.
-9. **Roadside Almanac** — extremely aligned with the glove-box/field-guide personality, though long.
-10. **Not All Who Wander** — emotionally strong and already meaningful to the project, but with the most baggage and clearance work.
+## Strong prior candidates retained for historical context
 
-### Names deliberately removed from the working shortlist
+- Lanternline
+- Crow’s Measure
+- Less Worn
+- The Field Beyond
+- Gumbo Lily
+- Miles Unfold
+- Yonderward
+- Contour & Canvas
+- Roadside Almanac
+- Not All Who Wander
+
+## Deliberately removed exact-name candidates
 
 - The Road Less Traveled
 - As the Crow Flies
@@ -393,36 +255,29 @@ These are the strongest names to develop further before a final choice:
 - Waykeep
 - Crowline
 
-### Next naming step
+Do not reopen the naming stage unless **Over Yonder** fails clearance or the user explicitly requests it.
 
-Take the working shortlist and reduce it to approximately 4–6 finalists. For each finalist, test:
+---
 
-- spoken introduction: “I planned it in ___.”
-- app-store title readability
-- icon and wordmark possibilities
-- literary/brand story
-- visual fit with topo maps, lantern orange, evergreen, canvas tan, wildflowers, and field-guide graphics
-- ability to support Maps, Trips, Weather, Gear, Safety, Sites, and Offline Packs
-- obvious web/app/domain conflicts
-- preliminary trademark conflicts
+# 6. Stage 3 — Mission, tagline, and positioning — NEXT
 
-Do not mark Stage 2 approved until one name is deliberately selected after this comparison.
+Build Stage 3 specifically around **Over Yonder**.
 
-## Stage 3 — Mission, tagline, and positioning
-
-Once a name direction is chosen, define:
+Define:
 
 - one concise mission statement
 - one core product promise
-- 12 tagline candidates across practical, warm, minimal, and adventurous tones
+- 12 tagline candidates across practical, warm, minimal, literary, and adventurous tones
 - a one-sentence positioning statement
 - a 50-word app-store introduction
 
+The strongest writing should connect the idea of **“over yonder”** with preparation and curiosity without becoming corny.
+
 Avoid empty claims such as “the ultimate” or “all-in-one.” Do not claim safety, offline coverage, or privacy beyond what the real product can prove.
 
-## Stage 4 — Brand voice
+---
 
-Define the core voice before writing launch copy.
+# 7. Stage 4 — Brand voice
 
 Create:
 
@@ -439,12 +294,16 @@ Target voice:
 - capable
 - calm
 - concise
+- lightly literary when appropriate
 - never macho
 - never alarmist
 - never corporate
 - never faux-rustic
+- never folksy for the sake of sounding old-fashioned
 
-## Stage 5 — Core color system
+---
+
+# 8. Stage 5 — Core color system
 
 Create three palette directions derived from the approved aesthetic references.
 
@@ -464,7 +323,9 @@ Each must include:
 
 The system must work in bright sunlight, dark mode, maps, weather screens, and safety contexts.
 
-## Stage 6 — Logo and app-icon direction
+---
+
+# 9. Stage 6 — Logo and app-icon direction
 
 Create three distinct identity families, then propose six logo/icon concepts for the chosen family.
 
@@ -476,8 +337,9 @@ Explore these sources before literal camping imagery:
 - boot/tread geometry
 - lantern-light geometry
 - abstract path/wayfinding symbols
-- letterforms
+- **OY** letterforms
 - negative-space marks
+- the concept of something just beyond the visible edge
 
 Every concept must still read at 48 px.
 
@@ -492,6 +354,17 @@ Once a direction is selected, produce an asset brief covering:
 - minimum sizes
 
 Do not create final artwork until a concept is selected.
+
+---
+
+# Workshop rules
+
+- Approved decisions are constraints unless explicitly reopened.
+- Ask only one small set of brand questions at a time.
+- Be specific, original, and practical.
+- Do not assume the brand needs a mountain, pine tree, compass, tent, campfire, or badge logo.
+- Favor usability over decorative nostalgia.
+- Treat trademark, domain, app-store-name, and logo-rights availability as verification tasks, not assumptions.
 
 ---
 
@@ -535,4 +408,4 @@ After choices are approved, maintain a concise brand kit with these exact headin
 11. Asset checklist
 12. Decisions still requiring verification
 
-The final section must flag trademark, domain, app-store-name, and logo-rights checks as required before release.
+The final section must explicitly flag trademark, domain, app-store-name, and logo-rights checks before release.
