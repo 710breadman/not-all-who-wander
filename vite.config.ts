@@ -12,9 +12,9 @@ export default defineConfig(({ mode }) => {
       registerType: "autoUpdate",
       includeAssets: ["camping.svg", "pwa-192.png", "pwa-512.png"],
       manifest: {
-        name: "Camping Checklist",
-        short_name: "Camping",
-        description: "A local-first camping planning and packing checklist.",
+        name: "Path A Logical",
+        short_name: "Path A Logical",
+        description: "A local-first camping planning and packing app.",
         theme_color: "#173c2b",
         background_color: "#f5f1e8",
         display: "standalone",

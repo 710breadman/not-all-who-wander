@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Camping</string>
-    <string name="title_activity_main">Camping</string>
+    <string name="app_name">Path A Logical</string>
+    <string name="title_activity_main">Path A Logical</string>
     <string name="package_name">com.notallwhowander.camping</string>
     <string name="custom_url_scheme">com.notallwhowander.camping</string>
 </resources>

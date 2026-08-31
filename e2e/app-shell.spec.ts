@@ -18,7 +18,7 @@ test("a user can create a trip and view its checklist", async ({ page, context }
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "Not all who wander pack light." }),
+    page.getByRole("heading", { name: "Path A Logical" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Start a new trip" }).click();
   await expect(
@@ -101,7 +101,7 @@ test("the loaded app remains usable while offline", async ({
 }) => {
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Not all who wander pack light." }),
+    page.getByRole("heading", { name: "Path A Logical" }),
   ).toBeVisible();
   await context.setOffline(true);
   await page.getByRole("button", { name: "Start a new trip" }).click();

@@ -1,4 +1,4 @@
-# Not All Who Wander
+# Path A Logical
 
 A responsive, local-first camping PWA that began as a packing/checklist replacement and is now expanding toward a full camping trip companion.
 

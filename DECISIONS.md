@@ -73,3 +73,6 @@ The Android app packages the same local-first web assets with Capacitor. It uses
 
 ### D-019 — Firebase is the Sprint 20 sync backend
 Optional accounts, cloud sync, and live shared trips will use Firebase Authentication and Cloud Firestore. The existing IndexedDB application remains the offline-first source of immediate UI behavior. Firebase implementation must not begin until the user chooses sign-in methods, sharing roles/invites, deterministic conflict behavior, and which private data is excluded from cloud sync.
+
+### D-020 — Path A Logical is the confirmed customer-facing brand
+The app’s customer-facing name is **Path A Logical**. Public web, PWA, and Android display metadata use this name. The existing Android application ID, IndexedDB database name, backup formats, and repository identifiers remain unchanged so existing local data and future app updates remain compatible.

@@ -1,4 +1,4 @@
-# Path A Logic (PAL) brand workshop
+# Path A Logical (PAL) brand workshop
 
 This file is the canonical record of approved core brand decisions for the camping project.
 
@@ -6,7 +6,7 @@ Brand work stays separate from technical architecture, Firebase configuration, s
 
 ## Current brand status
 
-- **Full customer-facing brand:** **Path A Logic**
+- **Full customer-facing brand:** **Path A Logical**
 - **Compact brand / app shorthand:** **PAL**
 - **Name status:** selected by user; trademark, app-store, domain, and handle clearance still required before public release
 - **Stage 1 — Brand direction:** APPROVED
@@ -28,9 +28,9 @@ The app should feel useful before a trip, calm when signal is poor, easy to unde
 
 ## Primary brand
 
-# **Path A Logic**
+# **Path A Logical**
 
-Use **Path A Logic** for:
+Use **Path A Logical** for:
 
 - store listings
 - websites and landing pages
@@ -40,7 +40,7 @@ Use **Path A Logic** for:
 - larger wordmark placements
 - marketing and public-facing descriptions
 
-The capitalization is **Path A Logic**.
+The capitalization is **Path A Logical**.
 
 Do not stylize the written name as `Path-A-Logic`, `PathLogic`, `Pathalogic`, or other altered spellings unless a future clearance requirement forces a naming change.
 
@@ -61,11 +61,11 @@ Use **PAL** for:
 
 ### Hierarchy rule
 
-**Path A Logic is the name. PAL is the shorthand.**
+**Path A Logical is the name. PAL is the shorthand.**
 
 Do not make PAL a separate sub-brand. Do not create competing identities for the two forms.
 
-On first exposure, prefer **Path A Logic**. Once the brand is established, PAL can carry compact UI and icon duties.
+On first exposure, prefer **Path A Logical**. Once the brand is established, PAL can carry compact UI and icon duties.
 
 ---
 
@@ -117,7 +117,7 @@ The product must not imply that PAL can eliminate uncertainty, guarantee safety,
 
 ## Positioning
 
-> **Path A Logic is a local-first camping planner that brings trip plans, packing, places, maps, weather, and practical field information together so campers can prepare before leaving reliable service behind.**
+> **Path A Logical is a local-first camping planner that brings trip plans, packing, places, maps, weather, and practical field information together so campers can prepare before leaving reliable service behind.**
 
 ## Primary tagline
 
@@ -131,7 +131,7 @@ Use the short line only when space is limited or as secondary campaign copy. The
 
 ## App-store introduction
 
-> **Path A Logic helps you plan camping trips before you leave home. Build packing lists, organize gear, save campsites and waypoints, check useful weather and trip context, and prepare maps and information for offline use. Everything stays focused on making the trip easier to prepare for and simpler to manage.**
+> **Path A Logical helps you plan camping trips before you leave home. Build packing lists, organize gear, save campsites and waypoints, check useful weather and trip context, and prepare maps and information for offline use. Everything stays focused on making the trip easier to prepare for and simpler to manage.**
 
 ---
 
@@ -267,7 +267,7 @@ This system is a permanent UI requirement unless the user explicitly reopens the
 
 ## Voice character
 
-**Path A Logic sounds like a calm field guide written by a knowledgeable camping friend.**
+**Path A Logical sounds like a calm field guide written by a knowledgeable camping friend.**
 
 Working balance:
 
@@ -321,7 +321,7 @@ Never use humor for:
 
 ## Brand presentation rule
 
-**Path A Logic is the full brand presentation. PAL is the compact/app identity.**
+**Path A Logical is the full brand presentation. PAL is the compact/app identity.**
 
 This is the approved hierarchy.
 
@@ -329,7 +329,7 @@ This is the approved hierarchy.
 
 The primary lockup should present:
 
-- **Path A Logic** as the dominant readable name
+- **Path A Logical** as the dominant readable name
 - optional **PAL** as a small supporting shorthand when space allows
 - an understated path/field-guide mark beside or above the wordmark
 
@@ -376,7 +376,7 @@ The app icon should still read clearly at **48 px**.
 - **48 px and above:** PAL monogram + restrained secondary path/topo detail is acceptable
 - **24–47 px:** simplify to PAL with minimal geometry
 - **16–23 px favicon:** use the simplest recognizable PAL/P-path mark; remove texture and thin lines
-- Never shrink the full Path A Logic wordmark into unreadable sizes
+- Never shrink the full Path A Logical wordmark into unreadable sizes
 
 ## Monochrome mark
 
@@ -393,7 +393,7 @@ It must remain identifiable without Lantern Orange, topo texture, gradients, or 
 
 Do not:
 
-- create separate unrelated logos for Path A Logic and PAL
+- create separate unrelated logos for Path A Logical and PAL
 - make PAL look like a sports-team acronym
 - make the identity tactical or military
 - make a generic mountain/pine/tent badge the entire logo
@@ -409,7 +409,7 @@ Final production assets should include:
 - Android adaptive foreground asset
 - Android adaptive background asset
 - iOS/app-store icon export as needed
-- full Path A Logic horizontal wordmark
+- full Path A Logical horizontal wordmark
 - stacked wordmark
 - PAL compact mark
 - one-color/monochrome versions
@@ -442,11 +442,11 @@ The approved mockup direction is a visual reference, not a substitute for final 
 
 # 10. Name and rights verification — REQUIRED BEFORE RELEASE
 
-**Path A Logic / PAL is selected creatively but is not yet legally or commercially cleared.**
+**Path A Logical / PAL is selected creatively but is not yet legally or commercially cleared.**
 
 Before public release, verify:
 
-- U.S. trademark conflicts for **Path A Logic**, **PAL**, and confusingly similar software/outdoor marks
+- U.S. trademark conflicts for **Path A Logical**, **PAL**, and confusingly similar software/outdoor marks
 - Google Play name conflicts
 - Apple App Store name conflicts
 - relevant domains
@@ -464,7 +464,7 @@ This workshop is not legal advice.
 
 ## Brand name
 
-**Path A Logic**
+**Path A Logical**
 
 Compact identity: **PAL**
 
@@ -500,7 +500,7 @@ Brand/display typography may use a warm field-guide-inspired serif; UI typograph
 
 ## Logo/icon brief
 
-Full branding uses **Path A Logic**. Compact/app branding uses **PAL**. The PAL mark should combine strong lettering with restrained path/topo geometry and the approved Field Guide palette.
+Full branding uses **Path A Logical**. Compact/app branding uses **PAL**. The PAL mark should combine strong lettering with restrained path/topo geometry and the approved Field Guide palette.
 
 ## Voice
 
