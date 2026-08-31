@@ -62,3 +62,8 @@ The application uses React, strict TypeScript, and Vite. Vitest covers unit beha
 
 ### D-016 — Camping setup levels
 Trip setup offers Camper / RV, Tent camping, and Backpacking levels. Camper and tent use the complete car-camping inventory; Backpacking uses the existing lightweight seed filter. Every trip remains editable after generation.
+
+### D-017 — Offline maps use licensed raster PMTiles archives
+Sprint 18 uses a user-supplied or self-hosted HTTPS raster PMTiles v3 archive. The user must explicitly confirm that their archive license permits offline downloading before the app stores it. The archive is downloaded into its own IndexedDB store with pause/resume/delete status; only a fully validated archive can render as an offline base map. The app never bulk-downloads public OpenStreetMap community tiles, and it does not bundle provider keys or a proprietary source.
+
+PMTiles is a single-file tile archive designed for range access and MapLibre integration. Because browser PWA storage and provider licensing vary, an incomplete or invalid archive remains paused/failed rather than being labelled as ready. Offline archives are deliberately excluded from JSON backup exports because binary map data can be large and its license may prohibit redistribution.

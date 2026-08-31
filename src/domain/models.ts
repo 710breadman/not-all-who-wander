@@ -167,6 +167,27 @@ export interface RouteTrack {
   updatedAt: string;
 }
 
+export type OfflineMapRegionStatus = "downloading" | "paused" | "complete" | "failed";
+
+export interface OfflineMapRegion {
+  id: string;
+  tripId: string;
+  name: string;
+  bounds: { west: number; south: number; east: number; north: number };
+  minZoom: number;
+  maxZoom: number;
+  sourceUrl: string;
+  provider: "user-supplied-pmtiles";
+  licenseConfirmed: boolean;
+  status: OfflineMapRegionStatus;
+  bytesDownloaded: number;
+  bytesTotal?: number;
+  archive?: Blob;
+  downloadedAt?: string;
+  updatedAt: string;
+  error?: string;
+}
+
 export interface SiteAmenities {
   potableWater?: boolean;
   toilets?: boolean;

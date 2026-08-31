@@ -5,6 +5,7 @@ import type {
   Waypoint,
   WeatherSnapshot,
   RouteTrack,
+  OfflineMapRegion,
   Trip,
   TripItem,
   TripItemStatus,
@@ -151,6 +152,16 @@ export class RouteTrackRepository {
   }
   async save(route: RouteTrack): Promise<void> { await this.database.put("routeTracks", route); }
   async delete(id: string): Promise<void> { await this.database.delete("routeTracks", id); }
+}
+
+export class OfflineMapRegionRepository {
+  constructor(private readonly database: CampingDatabase) {}
+  async listByTrip(tripId: string): Promise<OfflineMapRegion[]> {
+    return await this.database.getAllFromIndex("offlineMapRegions", "by-trip-id", tripId);
+  }
+  get(id: string): Promise<OfflineMapRegion | undefined> { return this.database.get("offlineMapRegions", id); }
+  save(region: OfflineMapRegion): Promise<IDBValidKey> { return this.database.put("offlineMapRegions", region); }
+  delete(id: string): Promise<void> { return this.database.delete("offlineMapRegions", id); }
 }
 
 export class TripItemRepository {

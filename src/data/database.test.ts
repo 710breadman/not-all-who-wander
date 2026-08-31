@@ -1,6 +1,6 @@
 import "fake-indexeddb/auto";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import type { Site, Trip, TripItem, Waypoint } from "../domain/models";
+import type { OfflineMapRegion, Site, Trip, TripItem, Waypoint } from "../domain/models";
 import {
   DATABASE_VERSION,
   databaseMigrations,
@@ -8,7 +8,7 @@ import {
   openCampingDatabase,
   type CampingDatabase,
 } from "./database";
-import { MasterItemRepository, SiteRepository, TripItemRepository, TripRepository, WaypointRepository } from "./repositories";
+import { MasterItemRepository, OfflineMapRegionRepository, SiteRepository, TripItemRepository, TripRepository, WaypointRepository } from "./repositories";
 import { loadChecklistSeed } from "./seedLoader";
 
 describe("IndexedDB persistence", () => {
@@ -25,8 +25,8 @@ describe("IndexedDB persistence", () => {
   });
 
   it("uses an explicit migration version", () => {
-    expect(DATABASE_VERSION).toBe(5);
-    expect(databaseMigrations.map((migration) => migration.version)).toEqual([1, 2, 3, 4, 5]);
+    expect(DATABASE_VERSION).toBe(6);
+    expect(databaseMigrations.map((migration) => migration.version)).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
   it("imports the canonical seed once without duplicates", async () => {
@@ -206,5 +206,15 @@ describe("IndexedDB persistence", () => {
     const waypoint: Waypoint = { id: "waypoint-start", tripId: "trip-waypoint", type: "trailhead", name: "Fern Canyon trailhead", latitude: 41.4, longitude: -124.1, createdAt: "2026-08-30T00:00:00.000Z", updatedAt: "2026-08-30T00:00:00.000Z" };
     await waypoints.save(waypoint);
     expect(await waypoints.listByTrip(waypoint.tripId)).toEqual([waypoint]);
+  });
+
+  it("keeps offline map archives in their own removable store", async () => {
+    database = await openCampingDatabase({ databaseName });
+    const regions = new OfflineMapRegionRepository(database);
+    const region: OfflineMapRegion = { id: "region-redwoods", tripId: "trip-map", name: "Redwoods", bounds: { west: -124.2, south: 41.2, east: -123.8, north: 41.5 }, minZoom: 8, maxZoom: 14, sourceUrl: "https://maps.example/redwoods.pmtiles", provider: "user-supplied-pmtiles", licenseConfirmed: true, status: "complete", bytesDownloaded: 3, archive: new Blob(["map"]), downloadedAt: "2026-08-31T00:00:00.000Z", updatedAt: "2026-08-31T00:00:00.000Z" };
+    await regions.save(region);
+    expect((await regions.listByTrip(region.tripId))[0]?.name).toBe(region.name);
+    await regions.delete(region.id);
+    expect(await regions.get(region.id)).toBeUndefined();
   });
 });

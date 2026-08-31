@@ -22,7 +22,7 @@ Use this as the implementation queue.
 - [x] SPRINT-15 — Fire, Public Land, Access & Road-Legality Layers
 - [x] SPRINT-16 — GPX Import/Export & Route/Track Model
 - [x] SPRINT-17 — Track Recording & Field Navigation Basics
-- [ ] SPRINT-18 — True Offline Map Regions
+- [x] SPRINT-18 — True Offline Map Regions
 - [ ] SPRINT-19 — Offline Trip Data Packs
 - [ ] SPRINT-20 — Cloud Sync & Live Shared Trips
 - [ ] SPRINT-21 — Community Campsite Intelligence & Moderation
