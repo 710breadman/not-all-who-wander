@@ -4,9 +4,9 @@ Last updated: 2026-08-31
 
 ## Current sprint
 
-**SPRINT-17 — Track Recording & Field Navigation Basics**
+**SPRINT-18 — True Offline Map Regions**
 
-Sprint 16 is complete. Sprint 17 will add explicitly started, battery-aware track recording with crash-safe local persistence.
+Sprint 17 is complete. Sprint 18 is gated on an explicitly lawful offline-map source strategy; no public OSM tile bulk download.
 
 Deployment housekeeping remains:
 - Enable GitHub Pages: Settings -> Pages -> Source -> GitHub Actions.
@@ -59,25 +59,26 @@ Deployment housekeeping remains:
 - official USFS and BLM ArcGIS campsite discovery adapters with source provenance, freshness, duplicate-candidate surfacing, and durable save-to-local Site Ideas
 - cached safety/access layer contracts with independent NASA FIRMS, BLM, and USFS providers; source/freshness/legend controls; and explicit legal-designation, physical-passability, and unknown states
 - validated GPX route, track, and waypoint import/export with duplicate waypoint handling, local geometry persistence, backup/restore coverage, distance/elevation summaries, and map rendering
+- explicitly started track recording with balanced and battery-saver sampling, crash-safe local persistence, elapsed/distance readouts, pause/resume/stop, and simplified saved tracks
+- active breadcrumb rendering, destination/waypoint distance and bearing, nearest-route distance, per-track deletion, and privacy confirmation before recorded-track export
 
 ## Verification
 
 Last recorded verification:
 - `npm run lint` — passed
 - `npm run typecheck` — passed
-- `npm test` — 34 passed
+- `npm test` — 38 passed
 - `npm run build` — passed; manifest and service worker generated
 - `npm run test:e2e` — 8 passed across desktop Chromium and Pixel 5 profiles
 
-Sprint 09 through Sprint 16 application changes on 2026-08-31 passed all gates.
+Sprint 09 through Sprint 17 application changes on 2026-08-31 passed all gates.
 
 ## Ordered next work
 
-1. SPRINT-17 — Track Recording & Field Navigation Basics
-7. SPRINT-18 — True Offline Map Regions
-8. SPRINT-19 — Offline Trip Data Packs
-9. SPRINT-20 — Cloud Sync & Live Shared Trips
-10. SPRINT-21 — Community Campsite Intelligence & Moderation
-11. SPRINT-22 — Advanced Integrations & Smart Trip Review
+1. SPRINT-18 — True Offline Map Regions
+2. SPRINT-19 — Offline Trip Data Packs
+3. SPRINT-20 — Cloud Sync & Live Shared Trips
+4. SPRINT-21 — Community Campsite Intelligence & Moderation
+5. SPRINT-22 — Advanced Integrations & Smart Trip Review
 
 See `SPRINTS.md` for deliverables and acceptance criteria.
