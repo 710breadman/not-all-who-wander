@@ -150,6 +150,7 @@ export class RouteTrackRepository {
     return await this.database.getAllFromIndex("routeTracks", "by-trip-id", tripId);
   }
   async save(route: RouteTrack): Promise<void> { await this.database.put("routeTracks", route); }
+  async delete(id: string): Promise<void> { await this.database.delete("routeTracks", id); }
 }
 
 export class TripItemRepository {
