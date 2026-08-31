@@ -84,7 +84,14 @@ Last recorded verification:
 
 Sprint 09 through Sprint 19 application changes on 2026-08-31 passed all gates.
 
-Brand asset/token changes were added after the last recorded verification; rerun lint/typecheck/tests/build and Android icon verification when Codex applies the binary launcher exports.
+PAL binary PWA, favicon, and Android launcher exports were applied and verified on 2026-08-31:
+- `npm run lint` — passed
+- `npm run typecheck` — passed
+- `npm test` — 44 passed
+- `npm run build` — passed; PWA manifest and service worker generated
+- `npm run test:e2e` — 8 passed across desktop Chromium and Pixel 5 profiles
+- `npm run android:debug` — passed with the installed Android SDK and JDK 21
+- `:app:lintDebug` — passed
 
 ## Ordered next work
 

@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
       react(),
       VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["pal.svg", "pal-favicon.svg"],
+      includeAssets: ["pal.svg", "pal-favicon.svg", "favicon.ico", "pwa-192.png", "pwa-512.png"],
       manifest: {
         name: "Path A Logical",
         short_name: "PAL",
@@ -20,6 +20,18 @@ export default defineConfig(({ mode }) => {
         display: "standalone",
         start_url: "/not-all-who-wander/",
         icons: [
+          {
+            src: "pwa-192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any maskable",
+          },
+          {
+            src: "pwa-512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable",
+          },
           {
             src: "pal.svg",
             sizes: "any",
