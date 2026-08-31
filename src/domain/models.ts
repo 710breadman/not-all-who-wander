@@ -66,6 +66,7 @@ export interface Trip {
   setupLevel?: CampingLevel;
   notes?: string;
   participantIds?: string[];
+  ownerProfileId?: string;
   createdAt: string;
   updatedAt: string;
   archived: boolean;
@@ -99,6 +100,8 @@ export interface PersonalItemTemplate {
 export interface UserProfile {
   id: string;
   name: string;
+  email?: string;
+  passwordHash?: string;
   personalItems: PersonalItemTemplate[];
   createdAt: string;
   updatedAt: string;

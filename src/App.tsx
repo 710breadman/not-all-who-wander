@@ -7,6 +7,7 @@ import {
 } from "./application/backupService";
 import {
   addCustomTripItem,
+  addPersonalItemToProfile,
   addParticipantItems,
   createTrip,
   importSharedTrip,
@@ -73,6 +74,7 @@ const levelDetails: Record<
 };
 type Filter = "all" | TripItemStatus | "remaining";
 type Screen = "home" | "inventory" | "data" | "profiles";
+type ChecklistTab = ChecklistCategory | "personal";
 
 export default function App() {
   const seed = useMemo(() => loadChecklistSeed(), []);
@@ -80,8 +82,19 @@ export default function App() {
   const [profiles, setProfiles] = useState<UserProfile[]>([]);
   const [trip, setTrip] = useState<Trip>();
   const [items, setItems] = useState<TripItem[]>([]);
-  const [activeCategory, setActiveCategory] =
-    useState<ChecklistCategory>("food");
+  const [activeCategory, setActiveCategory] = useState<ChecklistTab>("food");
+  const [activeProfileId, setActiveProfileId] = useState<string>();
+  const [showProfileSwitch, setShowProfileSwitch] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [showShare, setShowShare] = useState(false);
+  const [visibleStatuses, setVisibleStatuses] = useState<
+    Record<TripItemStatus, boolean>
+  >({
+    "not-packed": true,
+    packed: true,
+    "need-to-buy": true,
+    "not-needed": true,
+  });
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
   const [packingMode, setPackingMode] = useState(false);
@@ -145,6 +158,7 @@ export default function App() {
         style: levelDetails[setupLevel].style,
         setupLevel,
         participantIds: form.getAll("participants").map(String),
+        ...(activeProfileId ? { ownerProfileId: activeProfileId } : {}),
         ...tripFields(form),
       });
       await refreshTrips();
@@ -209,7 +223,18 @@ export default function App() {
       name,
       String(form.get("category")) as ChecklistCategory,
       String(form.get("section") ?? "Custom items"),
+      String(form.get("personalProfile") ?? "") || undefined,
     );
+    const personalProfile = String(form.get("personalProfile") ?? "");
+    if (personalProfile)
+      await addPersonalItemToProfile(personalProfile, {
+        name,
+        category: item.category,
+        section: item.section,
+        quantity: item.quantity,
+        unit: item.unit,
+      });
+    if (personalProfile) await refreshProfiles();
     setItems((current) => [...current, item]);
     setActiveCategory(item.category);
     setShowCustom(false);
@@ -236,6 +261,25 @@ export default function App() {
       return;
     }
     downloadText(filename, text, "application/json");
+  }
+  async function emailItinerary() {
+    if (!trip) return;
+    const people =
+      profiles
+        .filter((profile) => trip.participantIds?.includes(profile.id))
+        .map((profile) => profile.name)
+        .join(", ") || "Not specified";
+    const itinerary = [
+      `Camping itinerary: ${trip.name}`,
+      `Dates: ${trip.startDate || "Not set"} to ${trip.endDate || "Not set"}`,
+      `Location: ${[trip.destination, trip.address].filter(Boolean).join(" — ") || "Not set"}`,
+      `Who is going: ${people}`,
+      trip.notes ? `Notes: ${trip.notes}` : "",
+      "\nShared for trip safety and planning.",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    window.location.href = `mailto:?subject=${encodeURIComponent(`Camping itinerary — ${trip.name}`)}&body=${encodeURIComponent(itinerary)}`;
   }
   async function importTrip(file?: File) {
     if (!file) return;
@@ -290,6 +334,12 @@ export default function App() {
         onProfiles={() => setScreen("profiles")}
         onImport={importTrip}
         profiles={profiles}
+        activeProfile={profiles.find(
+          (profile) => profile.id === activeProfileId,
+        )}
+        onSwitchProfile={() => setShowProfileSwitch(true)}
+        menuOpen={showMenu}
+        onToggleMenu={() => setShowMenu((value) => !value)}
         showNew={showNewTrip}
         onCreate={create}
         onDismiss={() => setShowNewTrip(false)}
@@ -299,7 +349,13 @@ export default function App() {
   const effectiveFilter = packingMode ? "remaining" : filter;
   const visibleItems = items.filter(
     (item) =>
-      (filter === "need-to-buy" || item.category === activeCategory) &&
+      (filter === "need-to-buy" ||
+        (activeCategory === "personal"
+          ? activeProfileId
+            ? item.assigneeId === activeProfileId
+            : item.assigneeId !== undefined
+          : item.category === activeCategory)) &&
+      visibleStatuses[item.status] &&
       isMatchingItem(item, search, effectiveFilter),
   );
   const itemSections = groupItemsBySection(visibleItems);
@@ -367,7 +423,7 @@ export default function App() {
             <button
               className="secondary-action"
               type="button"
-              onClick={() => void shareTrip()}
+              onClick={() => setShowShare(true)}
             >
               Share trip
             </button>
@@ -410,6 +466,19 @@ export default function App() {
               {category.name}
             </button>
           ))}
+          <button
+            className={
+              activeCategory === "personal"
+                ? "category-tab active"
+                : "category-tab"
+            }
+            type="button"
+            aria-pressed={activeCategory === "personal"}
+            title="View personal items assigned to individual campers"
+            onClick={() => setActiveCategory("personal")}
+          >
+            <span aria-hidden="true">◎</span>Personal
+          </button>
         </nav>
         <div className="toolbar">
           <input
@@ -431,10 +500,23 @@ export default function App() {
           </select>
         </div>
         <p className="status-key">
-          <span className="packed">Green: packed</span>
-          <span className="need-to-buy">Red: buy</span>
-          <span className="not-packed">Yellow: pack</span>
-          <span className="not-needed">Gray: skip</span>
+          {statusChoices.map(([status, label]) => (
+            <button
+              key={status}
+              type="button"
+              title={`Show or hide ${label.toLocaleLowerCase()} items`}
+              className={`${status} ${visibleStatuses[status] ? "active" : ""}`}
+              aria-pressed={visibleStatuses[status]}
+              onClick={() =>
+                setVisibleStatuses((current) => ({
+                  ...current,
+                  [status]: !current[status],
+                }))
+              }
+            >
+              {statusColor(status)}: {label}
+            </button>
+          ))}
         </p>
         {busy ? (
           <p className="empty-state">Loading your checklist…</p>
@@ -484,6 +566,30 @@ export default function App() {
                 <input name="section" defaultValue="Custom items" />
               </label>
             </div>
+            {profiles.length > 0 && (
+              <fieldset className="choice-set">
+                <legend>Personal item?</legend>
+                <p className="empty-state">
+                  Choose a person to also save this item to their Personal tab.
+                  Its packed state stays linked on this trip.
+                </p>
+                <label>
+                  Who is this for?
+                  <select name="personalProfile" defaultValue="">
+                    <option value="">No — shared trip item</option>
+                    {profiles
+                      .filter((profile) =>
+                        trip.participantIds?.includes(profile.id),
+                      )
+                      .map((profile) => (
+                        <option key={profile.id} value={profile.id}>
+                          {profile.name}
+                        </option>
+                      ))}
+                  </select>
+                </label>
+              </fieldset>
+            )}
             <button className="primary-action" type="submit">
               Add to checklist
             </button>
@@ -507,6 +613,22 @@ export default function App() {
           profiles={profiles}
           onClose={() => setEditingTrip(false)}
           onSubmit={saveTrip}
+        />
+      )}
+      {showProfileSwitch && (
+        <ProfileSwitchDialog
+          profiles={profiles}
+          activeProfileId={activeProfileId}
+          onClose={() => setShowProfileSwitch(false)}
+          onSelect={setActiveProfileId}
+        />
+      )}
+      {showShare && (
+        <ShareDialog
+          trip={trip}
+          onClose={() => setShowShare(false)}
+          onShare={shareTrip}
+          onEmail={emailItinerary}
         />
       )}
     </main>
@@ -797,6 +919,10 @@ function Home({
   onProfiles,
   onImport,
   profiles,
+  activeProfile,
+  onSwitchProfile,
+  menuOpen,
+  onToggleMenu,
   showNew,
   onCreate,
   onDismiss,
@@ -812,36 +938,96 @@ function Home({
   onProfiles: () => void;
   onImport: (file?: File) => Promise<void>;
   profiles: UserProfile[];
+  activeProfile?: UserProfile | undefined;
+  onSwitchProfile: () => void;
+  menuOpen: boolean;
+  onToggleMenu: () => void;
   showNew: boolean;
   onCreate: (event: FormEvent<HTMLFormElement>) => void;
   onDismiss: () => void;
 }) {
   const [sort, setSort] = useState<"recent" | "name" | "date">("recent");
-  const shown = [...trips].sort((left, right) =>
-    sort === "name"
-      ? left.name.localeCompare(right.name)
-      : sort === "date"
-        ? (left.startDate ?? "9999").localeCompare(right.startDate ?? "9999")
-        : right.updatedAt.localeCompare(left.updatedAt),
-  );
+  const shown = trips
+    .filter(
+      (trip) =>
+        !activeProfile ||
+        !trip.ownerProfileId ||
+        trip.ownerProfileId === activeProfile.id,
+    )
+    .sort((left, right) =>
+      sort === "name"
+        ? left.name.localeCompare(right.name)
+        : sort === "date"
+          ? (left.startDate ?? "9999").localeCompare(right.startDate ?? "9999")
+          : right.updatedAt.localeCompare(left.updatedAt),
+    );
   return (
     <main className="app-shell">
       <header className="hero">
+        <button
+          className="hero-menu"
+          type="button"
+          title="Open settings, inventory, backup, and shared-trip tools"
+          aria-label="Open menu"
+          onClick={onToggleMenu}
+        >
+          ☰
+        </button>
         <div className="brand-row">
           <div className="brand-mark" aria-hidden="true">
-            ▲
+            ↟
           </div>
           <div>
-            <p className="eyebrow">LOCAL-FIRST CAMPING</p>
-            <h1>Pack well. Wander far.</h1>
+            <p className="eyebrow">FOR THE ROAD AHEAD</p>
+            <h1>Not all who wander pack light.</h1>
           </div>
         </div>
         <p className="hero-copy">
-          A reusable packing list that works even when the signal doesn’t.
+          A calmer way to remember meals, miles, and a well-made camp.
         </p>
-        <button className="primary-action" type="button" onClick={onNew}>
-          Start a new trip
-        </button>
+        <div className="hero-actions">
+          <button
+            className="primary-action"
+            type="button"
+            title="Create a new camping checklist"
+            onClick={onNew}
+          >
+            Start a new trip
+          </button>
+          <button
+            className="secondary-action hero-profile"
+            type="button"
+            title="Sign in, switch profiles, and see that person's trips and personal list"
+            onClick={onSwitchProfile}
+          >
+            {activeProfile
+              ? `Switch from ${activeProfile.name}`
+              : "Sign in / switch profile"}
+          </button>
+        </div>
+        {menuOpen && (
+          <nav className="burger-menu" aria-label="App menu">
+            <button type="button" onClick={onProfiles}>
+              Profile settings
+            </button>
+            <button type="button" onClick={onInventory}>
+              Manage master inventory
+            </button>
+            <button type="button" onClick={onDataTools}>
+              Backup & restore
+            </button>
+            <label>
+              Import shared trip
+              <input
+                type="file"
+                accept="application/json,.json"
+                onChange={(event) =>
+                  void onImport(event.currentTarget.files?.[0])
+                }
+              />
+            </label>
+          </nav>
+        )}
       </header>
       <section className="inventory-card" aria-labelledby="trips-heading">
         <div className="section-heading">
@@ -892,39 +1078,6 @@ function Home({
             Create a trip to generate your checklist from the master inventory.
           </p>
         )}
-        <div className="data-actions">
-          <button
-            className="secondary-action"
-            type="button"
-            onClick={onProfiles}
-          >
-            People & profiles
-          </button>
-          <button
-            className="secondary-action"
-            type="button"
-            onClick={onInventory}
-          >
-            Manage master inventory
-          </button>
-          <button
-            className="secondary-action"
-            type="button"
-            onClick={onDataTools}
-          >
-            Backup & restore
-          </button>
-          <label className="secondary-action">
-            Import shared trip
-            <input
-              type="file"
-              accept="application/json,.json"
-              onChange={(event) =>
-                void onImport(event.currentTarget.files?.[0])
-              }
-            />
-          </label>
-        </div>
       </section>
       {error && (
         <p className="error-message" role="alert">
@@ -952,6 +1105,7 @@ function ProfilesScreen({
   onSaved: () => Promise<void>;
 }) {
   const [editor, setEditor] = useState<UserProfile>();
+  const [personalItem, setPersonalItem] = useState<PersonalItemTemplate>();
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
@@ -960,9 +1114,15 @@ function ProfilesScreen({
     await saveProfile({
       ...(editor?.id ? { id: editor.id, createdAt: editor.createdAt } : {}),
       name,
-      personalItems: parsePersonalItems(
-        String(form.get("personalItems") ?? ""),
-      ),
+      ...(String(form.get("email") ?? "").trim()
+        ? { email: String(form.get("email")).trim() }
+        : {}),
+      ...(String(form.get("password") ?? "")
+        ? { passwordHash: await hashText(String(form.get("password"))) }
+        : editor?.passwordHash
+          ? { passwordHash: editor.passwordHash }
+          : {}),
+      personalItems: editor?.personalItems ?? [],
     });
     await onSaved();
     setEditor(undefined);
@@ -973,7 +1133,6 @@ function ProfilesScreen({
         <button className="text-button" type="button" onClick={onBack}>
           ← All trips
         </button>
-        <p className="eyebrow">NO PASSWORDS</p>
         <h1>People & profiles</h1>
         <p className="trip-destination">
           Save individual essentials such as meds, drinks, a pillow, or a
@@ -983,8 +1142,7 @@ function ProfilesScreen({
       <section className="inventory-card">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">{profiles.length} PROFILES</p>
-            <h2>Personal lists</h2>
+            <h2>Profiles</h2>
           </div>
           <button
             className="primary-action"
@@ -1008,13 +1166,6 @@ function ProfilesScreen({
               <li className="inventory-item" key={profile.id}>
                 <div>
                   <strong>{profile.name}</strong>
-                  <small>
-                    {profile.personalItems.length
-                      ? profile.personalItems
-                          .map((item) => item.name)
-                          .join(", ")
-                      : "No personal items yet"}
-                  </small>
                 </div>
                 <button
                   className="promote"
@@ -1040,7 +1191,7 @@ function ProfilesScreen({
         >
           <form onSubmit={(event) => void submit(event)}>
             <label>
-              Name
+              Username
               <input
                 name="name"
                 defaultValue={editor.name}
@@ -1049,24 +1200,155 @@ function ProfilesScreen({
               />
             </label>
             <label>
-              Personal items{" "}
-              <small>One per line. Optional: Item | category | section</small>
-              <textarea
-                name="personalItems"
-                rows={7}
-                defaultValue={personalItemsText(editor.personalItems)}
-                placeholder={
-                  "Personal meds | hygiene-first-aid | Personal\nFavorite drinks | food | Drinks\nPillow | gear | Shelter & Sleep"
-                }
+              Email <small>(optional)</small>
+              <input
+                name="email"
+                type="email"
+                defaultValue={editor.email}
+                placeholder="you@example.com"
               />
             </label>
+            <label>
+              Password{" "}
+              <small>
+                {editor.passwordHash
+                  ? "Leave blank to keep the current password."
+                  : "Optional local password for switching profiles."}
+              </small>
+              <input name="password" type="password" minLength={4} />
+            </label>
+            <div className="section-heading">
+              <strong>Personal checklist</strong>
+              <button
+                className="secondary-action"
+                type="button"
+                onClick={() =>
+                  setPersonalItem({
+                    name: "",
+                    category: "hygiene-first-aid",
+                    section: "Personal items",
+                    quantity: 1,
+                    unit: "item",
+                  })
+                }
+              >
+                + Add item
+              </button>
+            </div>
+            {editor.personalItems.length ? (
+              <ul className="item-list">
+                {editor.personalItems.map((item, index) => (
+                  <li className="inventory-item" key={`${item.name}-${index}`}>
+                    <div>
+                      <strong>{item.name}</strong>
+                      <small>
+                        {categoryNames[item.category]} · {item.section}
+                      </small>
+                    </div>
+                    <button
+                      className="promote danger"
+                      type="button"
+                      onClick={() =>
+                        setEditor((current) =>
+                          current
+                            ? {
+                                ...current,
+                                personalItems: current.personalItems.filter(
+                                  (_, itemIndex) => itemIndex !== index,
+                                ),
+                              }
+                            : current,
+                        )
+                      }
+                    >
+                      Remove
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="empty-state">
+                Add meds, drinks, pillows, or other individual essentials.
+              </p>
+            )}
             <button className="primary-action" type="submit">
               Save profile
             </button>
           </form>
         </Dialog>
       )}
+      {personalItem && (
+        <PersonalItemDialog
+          item={personalItem}
+          onClose={() => setPersonalItem(undefined)}
+          onAdd={(item) => {
+            setEditor((current) =>
+              current
+                ? {
+                    ...current,
+                    personalItems: [...current.personalItems, item],
+                  }
+                : current,
+            );
+            setPersonalItem(undefined);
+          }}
+        />
+      )}
     </main>
+  );
+}
+function PersonalItemDialog({
+  item,
+  onClose,
+  onAdd,
+}: {
+  item: PersonalItemTemplate;
+  onClose: () => void;
+  onAdd: (item: PersonalItemTemplate) => void;
+}) {
+  function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") ?? "").trim();
+    if (!name) return;
+    onAdd({
+      name,
+      category: String(form.get("category")) as ChecklistCategory,
+      section:
+        String(form.get("section") ?? "Personal items").trim() ||
+        "Personal items",
+      quantity: 1,
+      unit: "item",
+    });
+  }
+  return (
+    <Dialog title="Add personal item" onClose={onClose}>
+      <form onSubmit={submit}>
+        <label>
+          Item name
+          <input name="name" defaultValue={item.name} autoFocus required />
+        </label>
+        <div className="field-row">
+          <label>
+            Category
+            <select name="category" defaultValue={item.category}>
+              {Object.entries(categoryNames).map(([id, name]) => (
+                <option key={id} value={id}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Section
+            <input name="section" defaultValue={item.section} />
+          </label>
+        </div>
+        <button className="primary-action" type="submit">
+          Add to personal list
+        </button>
+      </form>
+    </Dialog>
   );
 }
 function TripDialog({
@@ -1253,12 +1535,153 @@ function Dialog({
     </div>
   );
 }
+
+function ProfileSwitchDialog({
+  profiles,
+  activeProfileId,
+  onClose,
+  onSelect,
+}: {
+  profiles: UserProfile[];
+  activeProfileId?: string | undefined;
+  onClose: () => void;
+  onSelect: (id: string | undefined) => void;
+}) {
+  const [selected, setSelected] = useState<UserProfile>();
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  async function signIn() {
+    if (!selected) return;
+    if (
+      selected.passwordHash &&
+      selected.passwordHash !== (await hashText(password))
+    ) {
+      setMessage("That password does not match this local profile.");
+      return;
+    }
+    onSelect(selected.id);
+    onClose();
+  }
+  return (
+    <Dialog title="Sign in or switch profile" onClose={onClose}>
+      <p className="empty-state">
+        Profiles stay on this device. Choose one to show their trips and
+        personal checklist.
+      </p>
+      <div className="profile-switcher">
+        {profiles.map((profile) => (
+          <button
+            key={profile.id}
+            type="button"
+            className={selected?.id === profile.id ? "active" : ""}
+            onClick={() => {
+              setSelected(profile);
+              setMessage("");
+            }}
+          >
+            {profile.name}
+            {profile.email ? <small>{profile.email}</small> : null}
+          </button>
+        ))}
+      </div>
+      {selected && (
+        <>
+          <label>
+            Password{" "}
+            {selected.passwordHash ? (
+              <input
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                autoFocus
+              />
+            ) : (
+              <small>This profile has no password yet.</small>
+            )}
+          </label>
+          <button
+            className="primary-action"
+            type="button"
+            onClick={() => void signIn()}
+          >
+            Continue as {selected.name}
+          </button>
+        </>
+      )}
+      {activeProfileId && (
+        <button
+          className="text-button"
+          type="button"
+          onClick={() => {
+            onSelect(undefined);
+            onClose();
+          }}
+        >
+          View shared trips
+        </button>
+      )}
+      {message && <p className="error-message">{message}</p>}
+    </Dialog>
+  );
+}
+
+function ShareDialog({
+  trip,
+  onClose,
+  onShare,
+  onEmail,
+}: {
+  trip: Trip;
+  onClose: () => void;
+  onShare: () => Promise<void>;
+  onEmail: () => Promise<void>;
+}) {
+  return (
+    <Dialog title={`Share ${trip.name}`} onClose={onClose}>
+      <p className="empty-state">
+        Send the base checklist as an importable file to another app user, or
+        open your email app with a safety itinerary.
+      </p>
+      <button
+        className="primary-action"
+        type="button"
+        title="Downloads or opens the system share sheet with the complete checklist"
+        onClick={() => void onShare()}
+      >
+        Share packing list
+      </button>
+      <button
+        className="secondary-action"
+        type="button"
+        title="Creates an email with dates, location, attendees, and notes"
+        onClick={() => void onEmail()}
+      >
+        Email safety itinerary
+      </button>
+    </Dialog>
+  );
+}
 const statusChoices: Array<[TripItemStatus, string]> = [
   ["not-packed", "To pack"],
   ["packed", "Packed"],
   ["need-to-buy", "Need to buy"],
   ["not-needed", "Not needed"],
 ];
+function statusColor(status: TripItemStatus): string {
+  return {
+    packed: "Green",
+    "need-to-buy": "Red",
+    "not-packed": "Yellow",
+    "not-needed": "Gray",
+  }[status];
+}
+async function hashText(value: string): Promise<string> {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return [...new Uint8Array(digest)]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
 function tripFields(
   values: FormData,
 ): Partial<
@@ -1271,34 +1694,6 @@ function tripFields(
   ) as Partial<
     Pick<Trip, "destination" | "address" | "startDate" | "endDate" | "notes">
   >;
-}
-function parsePersonalItems(text: string): PersonalItemTemplate[] {
-  return text
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const [
-        name = "",
-        category = "hygiene-first-aid",
-        section = "Personal items",
-      ] = line.split("|").map((entry) => entry.trim());
-      return {
-        name,
-        category: isCategory(category) ? category : "extras",
-        section: section || "Personal items",
-        quantity: 1,
-        unit: "item",
-      };
-    });
-}
-function personalItemsText(items: PersonalItemTemplate[]): string {
-  return items
-    .map((item) => `${item.name} | ${item.category} | ${item.section}`)
-    .join("\n");
-}
-function isCategory(value: string): value is ChecklistCategory {
-  return value in categoryNames;
 }
 function slug(value: string): string {
   return (

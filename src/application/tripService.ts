@@ -29,6 +29,7 @@ export type NewTrip = {
   setupLevel?: CampingLevel;
   notes?: string;
   participantIds?: string[];
+  ownerProfileId?: string;
 };
 
 const id = (prefix: string) => `${prefix}-${crypto.randomUUID()}`;
@@ -102,6 +103,7 @@ export async function updateTrip(
       | "camperCount"
       | "notes"
       | "participantIds"
+      | "ownerProfileId"
     >
   >,
 ): Promise<Trip | undefined> {
@@ -224,6 +226,7 @@ export async function addCustomTripItem(
   name: string,
   category: ChecklistCategory = "extras",
   section = "Custom items",
+  assigneeId?: string,
 ): Promise<TripItem> {
   const database = await openCampingDatabase();
   try {
@@ -241,9 +244,39 @@ export async function addCustomTripItem(
       tags: [],
       custom: true,
       sortOrder: Math.max(-1, ...existing.map((entry) => entry.sortOrder)) + 1,
+      ...(assigneeId ? { assigneeId } : {}),
     };
     await repository.save(item);
     return item;
+  } finally {
+    database.close();
+  }
+}
+
+export async function addPersonalItemToProfile(
+  profileId: string,
+  item: PersonalItemTemplate,
+): Promise<void> {
+  const database = await openCampingDatabase();
+  try {
+    const profiles = new UserProfileRepository(database);
+    const profile = (await profiles.list()).find(
+      (entry) => entry.id === profileId,
+    );
+    if (
+      !profile ||
+      profile.personalItems.some(
+        (entry) =>
+          entry.name.trim().toLocaleLowerCase() ===
+          item.name.trim().toLocaleLowerCase(),
+      )
+    )
+      return;
+    await profiles.save({
+      ...profile,
+      personalItems: [...profile.personalItems, item],
+      updatedAt: new Date().toISOString(),
+    });
   } finally {
     database.close();
   }
