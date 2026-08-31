@@ -1,0 +1,17 @@
+import { distanceAndBearing, type Coordinates } from "./waypointService";
+import type { RouteTrack } from "../domain/models";
+import { openCampingDatabase } from "../data/database";
+import { RouteTrackRepository } from "../data/repositories";
+
+export type RecordingState = "idle" | "recording" | "paused" | "stopped";
+export type SamplingPreset = "battery-saver" | "balanced";
+export interface TrackRecording { state: RecordingState; preset: SamplingPreset; startedAt?: string; pausedAt?: string; elapsedMs: number; points: Array<{ latitude: number; longitude: number; elevation?: number }>; }
+export const samplingIntervals: Record<SamplingPreset, number> = { "battery-saver": 60_000, balanced: 15_000 };
+export function startRecording(preset: SamplingPreset = "balanced", now = Date.now()): TrackRecording { return { state: "recording", preset, startedAt: new Date(now).toISOString(), elapsedMs: 0, points: [] }; }
+export function pauseRecording(recording: TrackRecording, now = Date.now()): TrackRecording { return recording.state === "recording" ? { ...recording, state: "paused", pausedAt: new Date(now).toISOString(), elapsedMs: recording.elapsedMs + (now - new Date(recording.startedAt ?? now).getTime()) } : recording; }
+export function resumeRecording(recording: TrackRecording, now = Date.now()): TrackRecording { if (recording.state !== "paused") return recording; const { pausedAt, ...rest } = recording; void pausedAt; return { ...rest, state: "recording", startedAt: new Date(now).toISOString() }; }
+export function appendPoint(recording: TrackRecording, point: Coordinates): TrackRecording { if (recording.state !== "recording") return recording; const last = recording.points.at(-1); if (last && distanceAndBearing(last, point).meters < 3) return recording; return { ...recording, points: [...recording.points, { latitude: point.latitude, longitude: point.longitude }] }; }
+export function stopRecording(recording: TrackRecording, tripId: string, name = "Recorded track", now = Date.now()): RouteTrack | undefined { const paused = pauseRecording(recording, now); if (paused.points.length < 2) return undefined; return { id: `track-${crypto.randomUUID()}`, tripId, kind: "track", name, points: paused.points, distanceMeters: paused.points.slice(1).reduce((total, point, index) => total + distanceAndBearing(paused.points[index]!, point).meters, 0), createdAt: new Date(now).toISOString(), updatedAt: new Date(now).toISOString() }; }
+export async function loadRecording(tripId: string): Promise<TrackRecording | undefined> { const database = await openCampingDatabase(); try { return await database.get("meta", `recording:${tripId}`) as TrackRecording | undefined; } finally { database.close(); } }
+export async function persistRecording(tripId: string, recording: TrackRecording): Promise<void> { const database = await openCampingDatabase(); try { await database.put("meta", recording, `recording:${tripId}`); } finally { database.close(); } }
+export async function finishRecording(tripId: string, recording: TrackRecording): Promise<RouteTrack | undefined> { const track = stopRecording(recording, tripId); const database = await openCampingDatabase(); try { if (track) await new RouteTrackRepository(database).save(track); await database.delete("meta", `recording:${tripId}`); return track; } finally { database.close(); } }

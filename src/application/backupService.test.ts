@@ -3,6 +3,9 @@ import { afterEach, describe, expect, it } from "vitest";
 import { deleteCampingDatabase, openCampingDatabase } from "../data/database";
 import {
   MasterItemRepository,
+  SiteRepository,
+  WaypointRepository,
+  RouteTrackRepository,
   TripItemRepository,
   TripRepository,
 } from "../data/repositories";
@@ -53,7 +56,7 @@ describe("backup service", () => {
       ],
     );
     expect(csv).toContain('"Bob\'s ""Burgers"""');
-    expect(BACKUP_VERSION).toBe(1);
+    expect(BACKUP_VERSION).toBe(5);
   });
   it("creates and reads a portable shared trip file", () => {
     const trip = {
@@ -109,6 +112,36 @@ describe("backup service", () => {
       archived: false,
     };
     await new TripRepository(database).save(trip);
+    await new SiteRepository(database).save({
+      id: "site-backup",
+      name: "Backup site",
+      tags: ["test"],
+      visitState: "want-to-visit",
+      amenities: { fireRing: true },
+      createdAt: "2026-01-01",
+      updatedAt: "2026-01-01",
+      archived: false,
+    });
+    await new WaypointRepository(database).save({
+      id: "waypoint-backup",
+      tripId: trip.id,
+      type: "trailhead",
+      name: "Backup trailhead",
+      latitude: 40.1,
+      longitude: -124.2,
+      createdAt: "2026-01-01",
+      updatedAt: "2026-01-01",
+    });
+    await new RouteTrackRepository(database).save({
+      id: "route-backup",
+      tripId: trip.id,
+      kind: "route",
+      name: "Backup route",
+      points: [{ latitude: 40, longitude: -124 }, { latitude: 40.01, longitude: -124 }],
+      distanceMeters: 1112,
+      createdAt: "2026-01-01",
+      updatedAt: "2026-01-01",
+    });
     await new TripItemRepository(database).save({
       id: "item-backup",
       tripId: trip.id,
@@ -147,6 +180,9 @@ describe("backup service", () => {
     expect(
       (await new MasterItemRepository(restored).get("user-backup"))?.name,
     ).toBe("Custom lamp");
+    expect((await new SiteRepository(restored).get("site-backup"))?.name).toBe("Backup site");
+    expect((await new WaypointRepository(restored).get("waypoint-backup"))?.name).toBe("Backup trailhead");
+    expect((await new RouteTrackRepository(restored).listByTrip(trip.id))[0]?.name).toBe("Backup route");
     restored.close();
   });
 });

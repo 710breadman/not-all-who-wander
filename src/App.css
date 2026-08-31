@@ -575,6 +575,28 @@ textarea {
   background: var(--paper);
   box-shadow: 0 24px 70px rgb(0 0 0 / 25%);
 }
+.map-dialog {
+  width: min(100%, 820px);
+}
+.trip-map {
+  min-height: 320px;
+  margin: 18px 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.map-marker {
+  width: 25px;
+  height: 25px;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  background: var(--forest);
+  cursor: pointer;
+}
+.map-marker.site { background: #805a1f; }
+.map-marker.waypoint { background: #2c638d; }
+.map-marker.current { background: #a43e33; }
 .dialog-heading {
   display: flex;
   justify-content: space-between;

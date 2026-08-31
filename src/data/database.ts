@@ -4,6 +4,10 @@ import type {
   ChecklistCategory,
   ChecklistSeed,
   MasterItem,
+  Site,
+  Waypoint,
+  WeatherSnapshot,
+  RouteTrack,
   Trip,
   TripItem,
   TripItemStatus,
@@ -11,7 +15,7 @@ import type {
 import { loadChecklistSeed } from "./seedLoader";
 
 export const DATABASE_NAME = "camping-checklist";
-export const DATABASE_VERSION = 1;
+export const DATABASE_VERSION = 5;
 
 interface CampingDatabaseSchema extends DBSchema {
   meta: {
@@ -28,6 +32,26 @@ interface CampingDatabaseSchema extends DBSchema {
     value: Trip;
     indexes: { "by-updated-at": string };
   };
+  sites: {
+    key: string;
+    value: Site;
+    indexes: { "by-updated-at": string; "by-visit-state": Site["visitState"] };
+  };
+  waypoints: {
+    key: string;
+    value: Waypoint;
+    indexes: { "by-trip-id": string; "by-updated-at": string };
+  };
+  weatherSnapshots: {
+    key: string;
+    value: WeatherSnapshot;
+    indexes: { "by-trip-id": string; "by-fetched-at": string };
+  };
+  routeTracks: {
+    key: string;
+    value: RouteTrack;
+    indexes: { "by-trip-id": string; "by-kind": RouteTrack["kind"] };
+  };
   tripItems: {
     key: string;
     value: TripItem;
@@ -42,7 +66,7 @@ interface CampingDatabaseSchema extends DBSchema {
 export type CampingDatabase = IDBPDatabase<CampingDatabaseSchema>;
 type UpgradeTransaction = IDBPTransaction<
   CampingDatabaseSchema,
-  ["meta", "masterItems", "trips", "tripItems"],
+  ["meta", "masterItems", "trips", "sites", "waypoints", "weatherSnapshots", "routeTracks", "tripItems"],
   "versionchange"
 >;
 
@@ -67,6 +91,38 @@ export const databaseMigrations: readonly DatabaseMigration[] = [
       tripItems.createIndex("by-trip-id", "tripId");
       tripItems.createIndex("by-trip-category", ["tripId", "category"]);
       tripItems.createIndex("by-trip-status", ["tripId", "status"]);
+    },
+  },
+  {
+    version: 2,
+    migrate(database) {
+      const sites = database.createObjectStore("sites", { keyPath: "id" });
+      sites.createIndex("by-updated-at", "updatedAt");
+      sites.createIndex("by-visit-state", "visitState");
+    },
+  },
+  {
+    version: 3,
+    migrate(database) {
+      const waypoints = database.createObjectStore("waypoints", { keyPath: "id" });
+      waypoints.createIndex("by-trip-id", "tripId");
+      waypoints.createIndex("by-updated-at", "updatedAt");
+    },
+  },
+  {
+    version: 4,
+    migrate(database) {
+      const weather = database.createObjectStore("weatherSnapshots", { keyPath: "id" });
+      weather.createIndex("by-trip-id", "tripId");
+      weather.createIndex("by-fetched-at", "fetchedAt");
+    },
+  },
+  {
+    version: 5,
+    migrate(database) {
+      const routes = database.createObjectStore("routeTracks", { keyPath: "id" });
+      routes.createIndex("by-trip-id", "tripId");
+      routes.createIndex("by-kind", "kind");
     },
   },
 ];

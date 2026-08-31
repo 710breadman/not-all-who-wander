@@ -30,6 +30,18 @@ export type NewTrip = {
   notes?: string;
   participantIds?: string[];
   ownerProfileId?: string;
+  siteId?: string;
+  expectedDeparture?: string;
+  expectedReturn?: string;
+  emergencyContactName?: string;
+  emergencyContactPhone?: string;
+  vehicleDescription?: string;
+  vehiclePlateNote?: string;
+  medicalAllergyNote?: string;
+  destinationLatitude?: number;
+  destinationLongitude?: number;
+  preflightChecks?: Trip["preflightChecks"];
+  dismissedDependencyWarnings?: string[];
 };
 
 const id = (prefix: string) => `${prefix}-${crypto.randomUUID()}`;
@@ -38,9 +50,11 @@ export async function createTrip(input: NewTrip): Promise<Trip> {
   const database = await openCampingDatabase();
   try {
     const now = new Date().toISOString();
+    const { preflightChecks, ...tripInput } = input;
     const trip: Trip = {
       id: id("trip"),
-      ...input,
+      ...tripInput,
+      ...(preflightChecks ? { preflightChecks } : {}),
       createdAt: now,
       updatedAt: now,
       archived: false,
@@ -104,6 +118,18 @@ export async function updateTrip(
       | "notes"
       | "participantIds"
       | "ownerProfileId"
+      | "siteId"
+      | "expectedDeparture"
+      | "expectedReturn"
+      | "emergencyContactName"
+      | "emergencyContactPhone"
+      | "vehicleDescription"
+      | "vehiclePlateNote"
+      | "medicalAllergyNote"
+      | "destinationLatitude"
+      | "destinationLongitude"
+      | "preflightChecks"
+      | "dismissedDependencyWarnings"
     >
   >,
 ): Promise<Trip | undefined> {

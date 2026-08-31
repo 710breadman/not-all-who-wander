@@ -1,0 +1,3 @@
+import { describe, expect, it } from "vitest";
+import { appendPoint, pauseRecording, startRecording, stopRecording } from "./trackRecordingService";
+describe("track recording", () => { it("only records after an explicit start and persists a stoppable track", () => { const first = appendPoint(startRecording(), { latitude: 40, longitude: -124, accuracy: 5, capturedAt: "" }); const second = appendPoint(first, { latitude: 40.01, longitude: -124, accuracy: 5, capturedAt: "" }); expect(stopRecording(pauseRecording(second), "trip")).toMatchObject({ kind: "track", points: expect.any(Array) }); }); });

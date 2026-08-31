@@ -1,6 +1,6 @@
 import "fake-indexeddb/auto";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import type { Trip, TripItem } from "../domain/models";
+import type { Site, Trip, TripItem, Waypoint } from "../domain/models";
 import {
   DATABASE_VERSION,
   databaseMigrations,
@@ -8,7 +8,7 @@ import {
   openCampingDatabase,
   type CampingDatabase,
 } from "./database";
-import { MasterItemRepository, TripItemRepository, TripRepository } from "./repositories";
+import { MasterItemRepository, SiteRepository, TripItemRepository, TripRepository, WaypointRepository } from "./repositories";
 import { loadChecklistSeed } from "./seedLoader";
 
 describe("IndexedDB persistence", () => {
@@ -25,8 +25,8 @@ describe("IndexedDB persistence", () => {
   });
 
   it("uses an explicit migration version", () => {
-    expect(DATABASE_VERSION).toBe(1);
-    expect(databaseMigrations.map((migration) => migration.version)).toEqual([1]);
+    expect(DATABASE_VERSION).toBe(5);
+    expect(databaseMigrations.map((migration) => migration.version)).toEqual([1, 2, 3, 4, 5]);
   });
 
   it("imports the canonical seed once without duplicates", async () => {
@@ -168,5 +168,43 @@ describe("IndexedDB persistence", () => {
     expect((await repository.listByTripAndStatus("trip-query", "need-to-buy")).map((item) => item.id)).toEqual([food.id]);
     await repository.delete(food.id);
     expect(await repository.get(food.id)).toBeUndefined();
+  });
+
+  it("keeps archived sites available to historical trip references", async () => {
+    database = await openCampingDatabase({ databaseName });
+    const sites = new SiteRepository(database);
+    const site: Site = {
+      id: "site-redwoods",
+      name: "Redwoods Camp",
+      tags: ["coast"],
+      visitState: "want-to-visit",
+      amenities: { toilets: true },
+      createdAt: "2026-08-30T00:00:00.000Z",
+      updatedAt: "2026-08-30T00:00:00.000Z",
+      archived: false,
+    };
+    await sites.save(site);
+    await new TripRepository(database).save({
+      id: "trip-site",
+      name: "Redwoods",
+      siteId: site.id,
+      camperCount: 1,
+      style: "car",
+      createdAt: site.createdAt,
+      updatedAt: site.updatedAt,
+      archived: false,
+    });
+    await sites.archive(site.id);
+    expect(await sites.list()).toEqual([]);
+    expect((await sites.list(true))[0]?.archived).toBe(true);
+    expect((await new TripRepository(database).get("trip-site"))?.siteId).toBe(site.id);
+  });
+
+  it("persists local waypoints by trip", async () => {
+    database = await openCampingDatabase({ databaseName });
+    const waypoints = new WaypointRepository(database);
+    const waypoint: Waypoint = { id: "waypoint-start", tripId: "trip-waypoint", type: "trailhead", name: "Fern Canyon trailhead", latitude: 41.4, longitude: -124.1, createdAt: "2026-08-30T00:00:00.000Z", updatedAt: "2026-08-30T00:00:00.000Z" };
+    await waypoints.save(waypoint);
+    expect(await waypoints.listByTrip(waypoint.tripId)).toEqual([waypoint]);
   });
 });

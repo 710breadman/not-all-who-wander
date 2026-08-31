@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { FormEvent, lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import {
   downloadText,
   readSharedTripFile,
@@ -20,13 +20,25 @@ import {
   updateTrip,
   updateTripItem,
 } from "./application/tripService";
+import { listSites, saveTripDestinationAsSite } from "./application/siteService";
+import { getDependencyWarnings, itineraryText } from "./application/preflightService";
+import { preflightChecks } from "./domain/models";
 import { DataTools } from "./components/DataTools";
 import { InventoryScreen } from "./components/InventoryScreen";
+import { SitesScreen } from "./components/SitesScreen";
+import { WaypointsDialog } from "./components/WaypointsDialog";
+import { WeatherDialog } from "./components/WeatherDialog";
+import { DiscoveryDialog } from "./components/DiscoveryDialog";
+import { ContextLayersDialog } from "./components/ContextLayersDialog";
+import { GpxDialog } from "./components/GpxDialog";
+import { TrackRecordingDialog } from "./components/TrackRecordingDialog";
 import { loadChecklistSeed } from "./data/seedLoader";
 import type {
   CampingLevel,
   ChecklistCategory,
   PersonalItemTemplate,
+  PreflightCheck,
+  Site,
   Trip,
   TripItem,
   TripItemStatus,
@@ -72,14 +84,18 @@ const levelDetails: Record<
     style: "light-backpacking",
   },
 };
+const MapDialog = lazy(() =>
+  import("./components/MapDialog").then(({ MapDialog: Component }) => ({ default: Component })),
+);
 type Filter = "all" | TripItemStatus | "remaining";
-type Screen = "home" | "inventory" | "data" | "profiles";
+type Screen = "home" | "inventory" | "data" | "profiles" | "sites";
 type ChecklistTab = ChecklistCategory | "personal";
 
 export default function App() {
   const seed = useMemo(() => loadChecklistSeed(), []);
   const [trips, setTrips] = useState<Trip[]>([]);
   const [profiles, setProfiles] = useState<UserProfile[]>([]);
+  const [sites, setSites] = useState<Site[]>([]);
   const [trip, setTrip] = useState<Trip>();
   const [items, setItems] = useState<TripItem[]>([]);
   const [activeCategory, setActiveCategory] = useState<ChecklistTab>("food");
@@ -87,6 +103,14 @@ export default function App() {
   const [showProfileSwitch, setShowProfileSwitch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  const [showPreflight, setShowPreflight] = useState(false);
+  const [showWaypoints, setShowWaypoints] = useState(false);
+  const [showWeather, setShowWeather] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+  const [showDiscovery, setShowDiscovery] = useState(false);
+  const [showContextLayers, setShowContextLayers] = useState(false);
+  const [showGpx, setShowGpx] = useState(false);
+  const [showTrackRecording, setShowTrackRecording] = useState(false);
   const [visibleStatuses, setVisibleStatuses] = useState<
     Record<TripItemStatus, boolean>
   >({
@@ -105,12 +129,14 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>("home");
   const [busy, setBusy] = useState(true);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const refreshTrips = useCallback(async () => setTrips(await listTrips()), []);
   const refreshProfiles = useCallback(
     async () => setProfiles(await listProfiles()),
     [],
   );
+  const refreshSites = useCallback(async () => setSites(await listSites(true)), []);
   const openTrip = useCallback(async (next: Trip) => {
     setBusy(true);
     setError("");
@@ -125,11 +151,12 @@ export default function App() {
   }, []);
   useEffect(() => {
     let alive = true;
-    void Promise.all([listTrips(), listProfiles()])
-      .then(([nextTrips, nextProfiles]) => {
+    void Promise.all([listTrips(), listProfiles(), listSites(true)])
+      .then(([nextTrips, nextProfiles, nextSites]) => {
         if (alive) {
           setTrips(nextTrips);
           setProfiles(nextProfiles);
+          setSites(nextSites);
         }
       })
       .catch(() => {
@@ -159,6 +186,7 @@ export default function App() {
         setupLevel,
         participantIds: form.getAll("participants").map(String),
         ...(activeProfileId ? { ownerProfileId: activeProfileId } : {}),
+        ...(String(form.get("siteId") ?? "") ? { siteId: String(form.get("siteId")) } : {}),
         ...tripFields(form),
       });
       await refreshTrips();
@@ -178,6 +206,9 @@ export default function App() {
       name: String(form.get("name") ?? "").trim() || trip.name,
       camperCount: Math.max(1, Number(form.get("campers")) || 1),
       participantIds,
+      ...(String(form.get("siteId") ?? "")
+        ? { siteId: String(form.get("siteId")) }
+        : {}),
       ...tripFields(form),
     });
     if (!updated) return;
@@ -320,6 +351,14 @@ export default function App() {
         onSaved={refreshProfiles}
       />
     );
+  if (screen === "sites")
+    return (
+      <SitesScreen
+        sites={sites}
+        onBack={() => setScreen("home")}
+        onChanged={refreshSites}
+      />
+    );
   if (!trip)
     return (
       <Home
@@ -330,10 +369,12 @@ export default function App() {
         onNew={() => setShowNewTrip(true)}
         onOpen={openTrip}
         onInventory={() => setScreen("inventory")}
+        onSites={() => setScreen("sites")}
         onDataTools={() => setScreen("data")}
         onProfiles={() => setScreen("profiles")}
         onImport={importTrip}
         profiles={profiles}
+        sites={sites}
         activeProfile={profiles.find(
           (profile) => profile.id === activeProfileId,
         )}
@@ -364,6 +405,15 @@ export default function App() {
   const progress = applicable.length
     ? Math.round((packed / applicable.length) * 100)
     : 0;
+  const linkedSite = sites.find((site) => site.id === trip.siteId);
+  const dependencyWarnings = getDependencyWarnings(items).filter(
+    (warning) => !trip.dismissedDependencyWarnings?.includes(warning.id),
+  );
+  const weatherCoordinates = trip.destinationLatitude !== undefined && trip.destinationLongitude !== undefined
+    ? { latitude: trip.destinationLatitude, longitude: trip.destinationLongitude }
+    : linkedSite?.latitude !== undefined && linkedSite.longitude !== undefined
+      ? { latitude: linkedSite.latitude, longitude: linkedSite.longitude }
+      : undefined;
   return (
     <main className={`app-shell ${packingMode ? "packing-mode" : ""}`}>
       <header className="trip-header">
@@ -392,6 +442,11 @@ export default function App() {
           <p className="trip-destination">
             {trip.destination}
             {trip.address ? ` · ${trip.address}` : ""}
+          </p>
+        )}
+        {linkedSite && (
+          <p className="trip-destination">
+            Saved site: {linkedSite.name}{linkedSite.archived ? " (archived)" : ""}
           </p>
         )}
         <div className="progress-row">
@@ -423,10 +478,49 @@ export default function App() {
             <button
               className="secondary-action"
               type="button"
+              onClick={() => setShowPreflight(true)}
+            >
+              Trip safety
+            </button>
+            <button className="secondary-action" type="button" onClick={() => setShowWaypoints(true)}>
+              Waypoints
+            </button>
+            <button className="secondary-action" type="button" onClick={() => setShowWeather(true)}>
+              Weather
+            </button>
+            <button className="secondary-action" type="button" onClick={() => setShowMap(true)}>
+              Map
+            </button>
+            <button className="secondary-action" type="button" onClick={() => setShowDiscovery(true)}>
+              Discover sites
+            </button>
+            <button className="secondary-action" type="button" onClick={() => setShowContextLayers(true)}>Safety layers</button>
+            <button className="secondary-action" type="button" onClick={() => setShowGpx(true)}>GPX</button>
+            <button className="secondary-action" type="button" onClick={() => setShowTrackRecording(true)}>Record track</button>
+            <button
+              className="secondary-action"
+              type="button"
               onClick={() => setShowShare(true)}
             >
               Share trip
             </button>
+            {trip.destination && !trip.siteId && (
+              <button
+                className="secondary-action"
+                type="button"
+                onClick={() =>
+                  void saveTripDestinationAsSite(trip).then(async (site) => {
+                    if (!site) return;
+                    await updateTrip(trip.id, { siteId: site.id });
+                    setTrip((current) => current ? { ...current, siteId: site.id } : current);
+                    await refreshSites();
+                    setMessage(`Saved ${site.name} as a site idea.`);
+                  })
+                }
+              >
+                Save site idea
+              </button>
+            )}
             <button
               className="secondary-action"
               type="button"
@@ -543,6 +637,7 @@ export default function App() {
           {error}
         </p>
       )}
+      {message && <p className="empty-state" role="status">{message}</p>}
       {showCustom && (
         <Dialog title="Add a new item" onClose={() => setShowCustom(false)}>
           <form onSubmit={addItem}>
@@ -611,6 +706,7 @@ export default function App() {
           title="Edit trip"
           trip={trip}
           profiles={profiles}
+          sites={sites}
           onClose={() => setEditingTrip(false)}
           onSubmit={saveTrip}
         />
@@ -631,6 +727,33 @@ export default function App() {
           onEmail={emailItinerary}
         />
       )}
+      {showPreflight && (
+        <PreflightDialog
+          trip={trip}
+          warnings={dependencyWarnings}
+          onClose={() => setShowPreflight(false)}
+          onSave={async (changes) => {
+            const updated = await updateTrip(trip.id, changes);
+            if (updated) setTrip(updated);
+          }}
+          onDismissWarning={async (warningId) => {
+            const updated = await updateTrip(trip.id, {
+              dismissedDependencyWarnings: [
+                ...(trip.dismissedDependencyWarnings ?? []),
+                warningId,
+              ],
+            });
+            if (updated) setTrip(updated);
+          }}
+        />
+      )}
+      {showWaypoints && <WaypointsDialog tripId={trip.id} onClose={() => setShowWaypoints(false)} />}
+      {showWeather && <WeatherDialog tripId={trip.id} {...(weatherCoordinates ? { coordinates: weatherCoordinates } : {})} onClose={() => setShowWeather(false)} />}
+      {showMap && <Suspense fallback={<p className="empty-state">Loading map…</p>}><MapDialog trip={trip} sites={sites} onClose={() => setShowMap(false)} /></Suspense>}
+      {showDiscovery && <DiscoveryDialog {...(weatherCoordinates ? { coordinates: weatherCoordinates } : {})} onClose={() => setShowDiscovery(false)} onSaved={refreshSites} />}
+      {showContextLayers && <ContextLayersDialog {...(weatherCoordinates ? { coordinates: weatherCoordinates } : {})} onClose={() => setShowContextLayers(false)} />}
+      {showGpx && <GpxDialog tripId={trip.id} onClose={() => setShowGpx(false)} />}
+      {showTrackRecording && <TrackRecordingDialog tripId={trip.id} onClose={() => setShowTrackRecording(false)} />}
     </main>
   );
 }
@@ -915,10 +1038,12 @@ function Home({
   onNew,
   onOpen,
   onInventory,
+  onSites,
   onDataTools,
   onProfiles,
   onImport,
   profiles,
+  sites,
   activeProfile,
   onSwitchProfile,
   menuOpen,
@@ -934,10 +1059,12 @@ function Home({
   onNew: () => void;
   onOpen: (trip: Trip) => void;
   onInventory: () => void;
+  onSites: () => void;
   onDataTools: () => void;
   onProfiles: () => void;
   onImport: (file?: File) => Promise<void>;
   profiles: UserProfile[];
+  sites: Site[];
   activeProfile?: UserProfile | undefined;
   onSwitchProfile: () => void;
   menuOpen: boolean;
@@ -1005,6 +1132,9 @@ function Home({
             </button>
             <button type="button" onClick={onInventory}>
               Manage master inventory
+            </button>
+            <button type="button" onClick={onSites}>
+              Saved site ideas
             </button>
             <button type="button" onClick={onDataTools}>
               Backup & restore
@@ -1081,6 +1211,7 @@ function Home({
         <TripDialog
           title="New camping trip"
           profiles={profiles}
+          sites={sites}
           onSubmit={onCreate}
           onClose={onDismiss}
         />
@@ -1348,12 +1479,14 @@ function TripDialog({
   title,
   trip,
   profiles,
+  sites,
   onSubmit,
   onClose,
 }: {
   title: string;
   trip?: Trip;
   profiles: UserProfile[];
+  sites: Site[];
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   onClose: () => void;
 }) {
@@ -1385,6 +1518,17 @@ function TripDialog({
             defaultValue={trip?.address}
             placeholder="Campsite address or reservation details"
           />
+        </label>
+        <label>
+          Saved site <small>(optional)</small>
+          <select name="siteId" defaultValue={trip?.siteId ?? ""}>
+            <option value="">No saved site</option>
+            {sites.map((site) => (
+              <option key={site.id} value={site.id}>
+                {site.name}{site.archived ? " (archived)" : ""}
+              </option>
+            ))}
+          </select>
         </label>
         <div className="field-row">
           <label>
@@ -1651,6 +1795,166 @@ function ShareDialog({
       >
         Email safety itinerary
       </button>
+    </Dialog>
+  );
+}
+
+function PreflightDialog({
+  trip,
+  warnings,
+  onClose,
+  onSave,
+  onDismissWarning,
+}: {
+  trip: Trip;
+  warnings: ReturnType<typeof getDependencyWarnings>;
+  onClose: () => void;
+  onSave: (
+    changes: Partial<
+      Pick<
+        Trip,
+        | "expectedDeparture"
+        | "expectedReturn"
+        | "emergencyContactName"
+        | "emergencyContactPhone"
+        | "vehicleDescription"
+        | "vehiclePlateNote"
+        | "medicalAllergyNote"
+        | "destinationLatitude"
+        | "destinationLongitude"
+        | "preflightChecks"
+      >
+    >,
+  ) => Promise<void>;
+  onDismissWarning: (warningId: string) => Promise<void>;
+}) {
+  const [snapshotFields, setSnapshotFields] = useState<string[]>([
+    "schedule",
+    "location",
+    "contact",
+    "vehicle",
+  ]);
+  const text = itineraryText(trip, snapshotFields);
+  const coordinates =
+    trip.destinationLatitude === undefined || trip.destinationLongitude === undefined
+      ? undefined
+      : `${trip.destinationLatitude}, ${trip.destinationLongitude}`;
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const values = new FormData(event.currentTarget);
+    const coordinate = (key: string) => {
+      const value = String(values.get(key) ?? "").trim();
+      return value ? Number(value) : undefined;
+    };
+    const latitude = coordinate("destinationLatitude");
+    const longitude = coordinate("destinationLongitude");
+    await onSave({
+      expectedDeparture: String(values.get("expectedDeparture") ?? ""),
+      expectedReturn: String(values.get("expectedReturn") ?? ""),
+      emergencyContactName: String(values.get("emergencyContactName") ?? "").trim(),
+      emergencyContactPhone: String(values.get("emergencyContactPhone") ?? "").trim(),
+      vehicleDescription: String(values.get("vehicleDescription") ?? "").trim(),
+      vehiclePlateNote: String(values.get("vehiclePlateNote") ?? "").trim(),
+      medicalAllergyNote: String(values.get("medicalAllergyNote") ?? "").trim(),
+      ...(latitude === undefined ? {} : { destinationLatitude: latitude }),
+      ...(longitude === undefined ? {} : { destinationLongitude: longitude }),
+      preflightChecks: Object.fromEntries(
+        preflightChecks.map((check) => [check, values.get(check) === "on"]),
+      ) as Partial<Record<PreflightCheck, boolean>>,
+    });
+    onClose();
+  }
+  function toggleSnapshotField(field: string) {
+    setSnapshotFields((current) =>
+      current.includes(field)
+        ? current.filter((entry) => entry !== field)
+        : [...current, field],
+    );
+  }
+  function printSnapshot() {
+    const popup = window.open("", "_blank", "noopener,noreferrer");
+    if (!popup) return;
+    popup.document.write(`<pre>${text.replaceAll("&", "&amp;").replaceAll("<", "&lt;")}</pre>`);
+    popup.document.close();
+    popup.print();
+  }
+  return (
+    <Dialog title="Trip safety & preflight" onClose={onClose}>
+      <form onSubmit={(event) => void submit(event)}>
+        <div className="field-row">
+          <label>
+            Expected departure
+            <input name="expectedDeparture" type="datetime-local" defaultValue={trip.expectedDeparture} />
+          </label>
+          <label>
+            Expected return
+            <input name="expectedReturn" type="datetime-local" defaultValue={trip.expectedReturn} />
+          </label>
+        </div>
+        <div className="field-row">
+          <label>
+            Destination latitude
+            <input name="destinationLatitude" type="number" step="any" defaultValue={trip.destinationLatitude} />
+          </label>
+          <label>
+            Destination longitude
+            <input name="destinationLongitude" type="number" step="any" defaultValue={trip.destinationLongitude} />
+          </label>
+        </div>
+        {coordinates && <button className="secondary-action" type="button" onClick={() => void navigator.clipboard?.writeText(coordinates)}>Copy coordinates</button>}
+        <div className="field-row">
+          <label>
+            Emergency contact
+            <input name="emergencyContactName" defaultValue={trip.emergencyContactName} />
+          </label>
+          <label>
+            Contact phone
+            <input name="emergencyContactPhone" type="tel" defaultValue={trip.emergencyContactPhone} />
+          </label>
+        </div>
+        <div className="field-row">
+          <label>
+            Vehicle
+            <input name="vehicleDescription" defaultValue={trip.vehicleDescription} />
+          </label>
+          <label>
+            Plate note
+            <input name="vehiclePlateNote" defaultValue={trip.vehiclePlateNote} />
+          </label>
+        </div>
+        <details className="category-guide">
+          <summary>Private medical or allergy note</summary>
+          <p className="empty-state">Stored only on this device. It is never included in the itinerary snapshot.</p>
+          <textarea name="medicalAllergyNote" rows={3} defaultValue={trip.medicalAllergyNote} />
+        </details>
+        <fieldset className="choice-set">
+          <legend>Offline readiness</legend>
+          {preflightChecks.map((check) => (
+            <label key={check}>
+              <input name={check} type="checkbox" defaultChecked={trip.preflightChecks?.[check] ?? false} />
+              {check.replaceAll("-", " ")}
+            </label>
+          ))}
+        </fieldset>
+        {warnings.length > 0 && <section className="category-guide" aria-label="Checklist dependencies"><strong>Checklist reminders</strong>{warnings.map((warning) => <p key={warning.id}>{warning.message} <button className="promote" type="button" onClick={() => void onDismissWarning(warning.id)}>Dismiss</button></p>)}</section>}
+        <button className="primary-action" type="submit">Save preflight</button>
+      </form>
+      <section className="inventory-card">
+        <h3>Shareable itinerary</h3>
+        <p className="empty-state">Choose the fields to include. Private medical notes are never shared.</p>
+        <fieldset className="choice-set">
+          {([
+            ["schedule", "Schedule"],
+            ["location", "Location and coordinates"],
+            ["contact", "Emergency contact"],
+            ["vehicle", "Vehicle"],
+          ] as Array<[string, string]>).map(([field, label]) => <label key={field}><input type="checkbox" checked={snapshotFields.includes(field)} onChange={() => toggleSnapshotField(field)} />{label}</label>)}
+        </fieldset>
+        <div className="data-actions">
+          <button className="secondary-action" type="button" onClick={() => void navigator.clipboard?.writeText(text)}>Copy itinerary</button>
+          <button className="secondary-action" type="button" onClick={printSnapshot}>Print itinerary</button>
+        </div>
+      </section>
     </Dialog>
   );
 }

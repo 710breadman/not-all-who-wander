@@ -1,6 +1,10 @@
 import type {
   ChecklistCategory,
   MasterItem,
+  Site,
+  Waypoint,
+  WeatherSnapshot,
+  RouteTrack,
   Trip,
   TripItem,
   TripItemStatus,
@@ -76,6 +80,76 @@ export class TripRepository {
     }
     await transaction.done;
   }
+}
+
+export class SiteRepository {
+  constructor(private readonly database: CampingDatabase) {}
+
+  get(id: string): Promise<Site | undefined> {
+    return this.database.get("sites", id);
+  }
+
+  async list(includeArchived = false): Promise<Site[]> {
+    const sites = await this.database.getAllFromIndex("sites", "by-updated-at");
+    return sites.filter((site) => includeArchived || !site.archived).reverse();
+  }
+
+  async save(site: Site): Promise<void> {
+    await this.database.put("sites", site);
+  }
+
+  async archive(id: string): Promise<void> {
+    const transaction = this.database.transaction("sites", "readwrite");
+    const site = await transaction.store.get(id);
+    if (site)
+      await transaction.store.put({
+        ...site,
+        archived: true,
+        updatedAt: new Date().toISOString(),
+      });
+    await transaction.done;
+  }
+}
+
+export class WaypointRepository {
+  constructor(private readonly database: CampingDatabase) {}
+
+  get(id: string): Promise<Waypoint | undefined> {
+    return this.database.get("waypoints", id);
+  }
+
+  async listByTrip(tripId: string): Promise<Waypoint[]> {
+    const waypoints = await this.database.getAllFromIndex("waypoints", "by-trip-id", tripId);
+    return waypoints.sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
+  }
+
+  async save(waypoint: Waypoint): Promise<void> {
+    await this.database.put("waypoints", waypoint);
+  }
+
+  delete(id: string): Promise<void> {
+    return this.database.delete("waypoints", id);
+  }
+}
+
+export class WeatherSnapshotRepository {
+  constructor(private readonly database: CampingDatabase) {}
+
+  getByTrip(tripId: string): Promise<WeatherSnapshot | undefined> {
+    return this.database.get("weatherSnapshots", `weather-${tripId}`);
+  }
+
+  async save(snapshot: WeatherSnapshot): Promise<void> {
+    await this.database.put("weatherSnapshots", snapshot);
+  }
+}
+
+export class RouteTrackRepository {
+  constructor(private readonly database: CampingDatabase) {}
+  async listByTrip(tripId: string): Promise<RouteTrack[]> {
+    return await this.database.getAllFromIndex("routeTracks", "by-trip-id", tripId);
+  }
+  async save(route: RouteTrack): Promise<void> { await this.database.put("routeTracks", route); }
 }
 
 export class TripItemRepository {

@@ -67,6 +67,134 @@ export interface Trip {
   notes?: string;
   participantIds?: string[];
   ownerProfileId?: string;
+  siteId?: string;
+  expectedDeparture?: string;
+  expectedReturn?: string;
+  emergencyContactName?: string;
+  emergencyContactPhone?: string;
+  vehicleDescription?: string;
+  vehiclePlateNote?: string;
+  medicalAllergyNote?: string;
+  destinationLatitude?: number;
+  destinationLongitude?: number;
+  preflightChecks?: Partial<Record<PreflightCheck, boolean>>;
+  dismissedDependencyWarnings?: string[];
+  createdAt: string;
+  updatedAt: string;
+  archived: boolean;
+}
+
+export const preflightChecks = [
+  "maps-downloaded",
+  "weather-checked",
+  "permits-saved",
+  "emergency-contact-set",
+  "fuel",
+  "water",
+  "first-aid",
+  "power",
+] as const;
+export type PreflightCheck = (typeof preflightChecks)[number];
+
+export type SiteVisitState = "want-to-visit" | "visited" | "revisit";
+
+export const waypointTypes = [
+  "campsite",
+  "parking",
+  "trailhead",
+  "water",
+  "hazard",
+  "custom",
+] as const;
+export type WaypointType = (typeof waypointTypes)[number];
+
+export interface Waypoint {
+  id: string;
+  tripId: string;
+  siteId?: string;
+  type: WaypointType;
+  name: string;
+  latitude: number;
+  longitude: number;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WeatherPeriod {
+  name: string;
+  startTime: string;
+  temperature?: number;
+  temperatureUnit?: string;
+  shortForecast: string;
+  detailedForecast?: string;
+  windSpeed?: string;
+  windDirection?: string;
+  precipitationChance?: number;
+}
+
+export interface WeatherAlert {
+  id: string;
+  event: string;
+  severity?: string;
+  headline?: string;
+  description?: string;
+  effective?: string;
+  expires?: string;
+}
+
+export interface WeatherSnapshot {
+  id: string;
+  tripId: string;
+  latitude: number;
+  longitude: number;
+  provider: "nws";
+  fetchedAt: string;
+  current?: WeatherPeriod;
+  hourly: WeatherPeriod[];
+  daily: WeatherPeriod[];
+  alerts: WeatherAlert[];
+}
+
+export interface RouteTrack {
+  id: string;
+  tripId: string;
+  kind: "route" | "track";
+  name: string;
+  points: Array<{ latitude: number; longitude: number; elevation?: number }>;
+  distanceMeters: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SiteAmenities {
+  potableWater?: boolean;
+  toilets?: boolean;
+  showers?: boolean;
+  fireRing?: boolean;
+  picnicTable?: boolean;
+  bearStorage?: boolean;
+  electricity?: boolean;
+  cellServiceNotes?: string;
+}
+
+export interface Site {
+  id: string;
+  name: string;
+  latitude?: number;
+  longitude?: number;
+  notes?: string;
+  sourceUrl?: string;
+  tags: string[];
+  rating?: number;
+  visitState: SiteVisitState;
+  lastVerified?: string;
+  amenities: SiteAmenities;
+  accessNotes?: string;
+  vehicleSuitability?: string;
+  trailerRvNotes?: string;
+  parkingNotes?: string;
+  costReservationPermitNotes?: string;
   createdAt: string;
   updatedAt: string;
   archived: boolean;

@@ -4,9 +4,9 @@ Last updated: 2026-08-31
 
 ## Current sprint
 
-**SPRINT-09 — Saved Site Ideas & Campsite Profiles**
+**SPRINT-17 — Track Recording & Field Navigation Basics**
 
-This is the first post-v1 expansion sprint because it is the easiest high-value addition and creates the shared data model required by later GPS, weather, maps, campsite discovery, offline packs, and community features.
+Sprint 16 is complete. Sprint 17 will add explicitly started, battery-aware track recording with crash-safe local persistence.
 
 Deployment housekeeping remains:
 - Enable GitHub Pages: Settings -> Pages -> Source -> GitHub Actions.
@@ -43,33 +43,41 @@ Deployment housekeeping remains:
 - local trip sorting and portable share/import files for sending a trip to another app user
 - GitHub Pages workflow for a free, installable web distribution
 - expanded post-v1 roadmap researched and ordered by implementation ease
+- versioned `Site` records with offline site-idea creation, edit, archive, amenities, access, provenance, ratings, and verification details
+- trip-to-site links that retain archived sites for historical trips
+- one-tap save of a trip destination as a local site idea
+- site-inclusive backup and restore coverage
+- offline trip preflight readiness list, emergency and vehicle planning details, and private local medical/allergy note
+- opt-in itinerary copy/print snapshot that excludes medical notes
+- deterministic and dismissible checklist dependency reminders
+- permission-aware current-coordinate lookup, local named waypoints, copy/share coordinates, and offline distance/bearing calculations
+- explicit no-background-recording GPS behavior; location requests occur only from a user action
+- waypoint-inclusive backup and restore coverage
+- cache-first NWS forecast and active-alert adapter using documented point discovery and forecast endpoints
+- offline-visible weather snapshot, stale-data warning, manual refresh, and weather-aware suggestions that never alter a checklist
+- MapLibre-compatible map with visible attribution, lazy-loaded map code, current location opt-in, saved site/waypoint/trip markers, marker details, and external navigation fallback
+- official USFS and BLM ArcGIS campsite discovery adapters with source provenance, freshness, duplicate-candidate surfacing, and durable save-to-local Site Ideas
+- cached safety/access layer contracts with independent NASA FIRMS, BLM, and USFS providers; source/freshness/legend controls; and explicit legal-designation, physical-passability, and unknown states
+- validated GPX route, track, and waypoint import/export with duplicate waypoint handling, local geometry persistence, backup/restore coverage, distance/elevation summaries, and map rendering
 
 ## Verification
 
 Last recorded verification:
 - `npm run lint` — passed
 - `npm run typecheck` — passed
-- `npm test` — 16 passed
+- `npm test` — 34 passed
 - `npm run build` — passed; manifest and service worker generated
-- `npm run test:e2e` — 6 passed across desktop Chromium and Pixel 5 profiles
+- `npm run test:e2e` — 8 passed across desktop Chromium and Pixel 5 profiles
 
-Documentation-only roadmap changes on 2026-08-31 did not modify application code.
+Sprint 09 through Sprint 16 application changes on 2026-08-31 passed all gates.
 
 ## Ordered next work
 
-1. SPRINT-09 — Saved Site Ideas & Campsite Profiles
-2. SPRINT-10 — Trip Preflight, Dependencies & Safety Card
-3. SPRINT-11 — GPS Basics & Local Waypoints
-4. SPRINT-12 — Weather & Severe Weather Alerts
-5. SPRINT-13 — Basic Online Map & Saved Markers
-6. SPRINT-14 — Official Campsite Discovery
-7. SPRINT-15 — Fire, Public Land, Access & Road-Legality Layers
-8. SPRINT-16 — GPX Import/Export & Route/Track Model
-9. SPRINT-17 — Track Recording & Field Navigation Basics
-10. SPRINT-18 — True Offline Map Regions
-11. SPRINT-19 — Offline Trip Data Packs
-12. SPRINT-20 — Cloud Sync & Live Shared Trips
-13. SPRINT-21 — Community Campsite Intelligence & Moderation
-14. SPRINT-22 — Advanced Integrations & Smart Trip Review
+1. SPRINT-17 — Track Recording & Field Navigation Basics
+7. SPRINT-18 — True Offline Map Regions
+8. SPRINT-19 — Offline Trip Data Packs
+9. SPRINT-20 — Cloud Sync & Live Shared Trips
+10. SPRINT-21 — Community Campsite Intelligence & Moderation
+11. SPRINT-22 — Advanced Integrations & Smart Trip Review
 
 See `SPRINTS.md` for deliverables and acceptance criteria.

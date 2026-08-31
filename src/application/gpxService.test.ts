@@ -1,0 +1,3 @@
+import { describe, expect, it } from "vitest";
+import { exportGpx, parseGpx } from "./gpxService";
+describe("GPX interchange", () => { it("round-trips supported routes and waypoints", () => { const parsed = parseGpx('<gpx><wpt lat="40" lon="-124"><name>Camp</name></wpt><rte><name>Walk</name><rtept lat="40" lon="-124"/><rtept lat="40.01" lon="-124"/></rte></gpx>', "trip"); const next = parseGpx(exportGpx(parsed.waypoints, parsed.routes), "trip"); expect(next.waypoints[0]?.name).toBe("Camp"); expect(next.routes[0]?.distanceMeters).toBeGreaterThan(1000); }); it("rejects malformed GPX", () => expect(() => parseGpx("<nope/>", "trip")).toThrow(/valid GPX/i)); });

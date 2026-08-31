@@ -1,13 +1,17 @@
 import type {
   AppSettings,
   MasterItem,
+  Site,
+  Waypoint,
+  WeatherSnapshot,
+  RouteTrack,
   Trip,
   TripItem,
   UserProfile,
 } from "../domain/models";
 import { openCampingDatabase } from "../data/database";
 
-export const BACKUP_VERSION = 1;
+export const BACKUP_VERSION = 5;
 export interface CampingBackup {
   backupVersion: number;
   exportedAt: string;
@@ -15,6 +19,10 @@ export interface CampingBackup {
   masterItems: MasterItem[];
   trips: Trip[];
   tripItems: TripItem[];
+  sites: Site[];
+  waypoints: Waypoint[];
+  weatherSnapshots: WeatherSnapshot[];
+  routeTracks: RouteTrack[];
 }
 
 export async function createBackup(
@@ -33,6 +41,10 @@ export async function createBackup(
       masterItems: await database.getAll("masterItems"),
       trips: await database.getAll("trips"),
       tripItems: await database.getAll("tripItems"),
+      sites: await database.getAll("sites"),
+      waypoints: await database.getAll("waypoints"),
+      weatherSnapshots: await database.getAll("weatherSnapshots"),
+      routeTracks: await database.getAll("routeTracks"),
     };
   } finally {
     database.close();
@@ -48,22 +60,30 @@ export function parseBackup(text: string): CampingBackup {
   }
   if (
     !isRecord(value) ||
-    value.backupVersion !== BACKUP_VERSION ||
+    (value.backupVersion !== 1 && value.backupVersion !== 2 && value.backupVersion !== 3 && value.backupVersion !== 4 && value.backupVersion !== BACKUP_VERSION) ||
     !isString(value.exportedAt) ||
     !Array.isArray(value.masterItems) ||
     !Array.isArray(value.trips) ||
-    !Array.isArray(value.tripItems)
+    !Array.isArray(value.tripItems) ||
+    (value.backupVersion >= 2 && !Array.isArray(value.sites)) ||
+    (value.backupVersion >= 3 && !Array.isArray(value.waypoints)) ||
+    (value.backupVersion >= 4 && !Array.isArray(value.weatherSnapshots)) ||
+    (value.backupVersion === BACKUP_VERSION && !Array.isArray(value.routeTracks))
   )
     throw new Error("That file is not a compatible camping checklist backup.");
   if (
     !value.masterItems.every(isMasterItem) ||
     !value.trips.every(isTrip) ||
-    !value.tripItems.every(isTripItem)
+    !value.tripItems.every(isTripItem) ||
+    (value.sites !== undefined && (!Array.isArray(value.sites) || !value.sites.every(isSite))) ||
+    (value.waypoints !== undefined && (!Array.isArray(value.waypoints) || !value.waypoints.every(isWaypoint))) ||
+    (value.weatherSnapshots !== undefined && (!Array.isArray(value.weatherSnapshots) || !value.weatherSnapshots.every(isWeatherSnapshot))) ||
+    (value.routeTracks !== undefined && (!Array.isArray(value.routeTracks) || !value.routeTracks.every(isRouteTrack)))
   )
     throw new Error("That backup contains invalid checklist data.");
   if (value.appSettings !== undefined && !isSettings(value.appSettings))
     throw new Error("That backup contains invalid settings.");
-  return value as unknown as CampingBackup;
+  return { ...value, backupVersion: BACKUP_VERSION, sites: value.sites ?? [], waypoints: value.waypoints ?? [], weatherSnapshots: value.weatherSnapshots ?? [], routeTracks: value.routeTracks ?? [] } as unknown as CampingBackup;
 }
 
 export async function restoreBackup(
@@ -75,12 +95,16 @@ export async function restoreBackup(
   );
   try {
     const transaction = database.transaction(
-      ["meta", "masterItems", "trips", "tripItems"],
+      ["meta", "masterItems", "trips", "sites", "waypoints", "weatherSnapshots", "routeTracks", "tripItems"],
       "readwrite",
     );
     await Promise.all([
       transaction.objectStore("masterItems").clear(),
       transaction.objectStore("trips").clear(),
+      transaction.objectStore("sites").clear(),
+      transaction.objectStore("waypoints").clear(),
+      transaction.objectStore("weatherSnapshots").clear(),
+      transaction.objectStore("routeTracks").clear(),
       transaction.objectStore("tripItems").clear(),
       ...(backup.appSettings === undefined
         ? []
@@ -93,6 +117,10 @@ export async function restoreBackup(
         transaction.objectStore("masterItems").put(item),
       ),
       ...backup.trips.map((trip) => transaction.objectStore("trips").put(trip)),
+      ...backup.sites.map((site) => transaction.objectStore("sites").put(site)),
+      ...backup.waypoints.map((waypoint) => transaction.objectStore("waypoints").put(waypoint)),
+      ...backup.weatherSnapshots.map((snapshot) => transaction.objectStore("weatherSnapshots").put(snapshot)),
+      ...backup.routeTracks.map((route) => transaction.objectStore("routeTracks").put(route)),
       ...backup.tripItems.map((item) =>
         transaction.objectStore("tripItems").put(item),
       ),
@@ -216,6 +244,47 @@ function isTrip(value: unknown): value is Trip {
     typeof value.archived === "boolean"
   );
 }
+function isSite(value: unknown): value is Site {
+  return (
+    isRecord(value) &&
+    isString(value.id) &&
+    isString(value.name) &&
+    Array.isArray(value.tags) &&
+    isString(value.visitState) &&
+    isRecord(value.amenities) &&
+    isString(value.createdAt) &&
+    isString(value.updatedAt) &&
+    typeof value.archived === "boolean"
+  );
+}
+function isWaypoint(value: unknown): value is Waypoint {
+  return (
+    isRecord(value) &&
+    isString(value.id) &&
+    isString(value.tripId) &&
+    isString(value.type) &&
+    isString(value.name) &&
+    typeof value.latitude === "number" &&
+    typeof value.longitude === "number" &&
+    isString(value.createdAt) &&
+    isString(value.updatedAt)
+  );
+}
+function isWeatherSnapshot(value: unknown): value is WeatherSnapshot {
+  return (
+    isRecord(value) &&
+    isString(value.id) &&
+    isString(value.tripId) &&
+    typeof value.latitude === "number" &&
+    typeof value.longitude === "number" &&
+    isString(value.provider) &&
+    isString(value.fetchedAt) &&
+    Array.isArray(value.hourly) &&
+    Array.isArray(value.daily) &&
+    Array.isArray(value.alerts)
+  );
+}
+function isRouteTrack(value: unknown): value is RouteTrack { return isRecord(value) && isString(value.id) && isString(value.tripId) && (value.kind === "route" || value.kind === "track") && isString(value.name) && Array.isArray(value.points) && typeof value.distanceMeters === "number" && isString(value.createdAt) && isString(value.updatedAt); }
 function isTripItem(value: unknown): value is TripItem {
   return (
     isRecord(value) &&
