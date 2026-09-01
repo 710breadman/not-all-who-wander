@@ -10,30 +10,18 @@ export default defineConfig(({ mode }) => {
       react(),
       VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["camping.svg", "pwa-192.png", "pwa-512.png"],
+      includeAssets: ["pal.svg", "pal-favicon.svg"],
       manifest: {
         name: "Path A Logical",
-        short_name: "Path A Logical",
+        short_name: "PAL",
         description: "A local-first camping planning and packing app.",
-        theme_color: "#173c2b",
-        background_color: "#f5f1e8",
+        theme_color: "#24452F",
+        background_color: "#F7F0DE",
         display: "standalone",
         start_url: "/not-all-who-wander/",
         icons: [
           {
-            src: "pwa-192.png",
-            sizes: "192x192",
-            type: "image/png",
-            purpose: "any",
-          },
-          {
-            src: "pwa-512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any maskable",
-          },
-          {
-            src: "camping.svg",
+            src: "pal.svg",
             sizes: "any",
             type: "image/svg+xml",
             purpose: "any maskable",
