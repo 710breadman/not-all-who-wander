@@ -12,7 +12,8 @@ Brand work should stay separate from technical architecture, Firebase configurat
 - **Stage 2 — Naming:** SELECTED / NOT YET CLEARED
 - **Stage 3 — Mission, tagline, positioning:** APPROVED
 - **Stage 4 — Brand voice:** APPROVED
-- **Stage 5 — Core color system:** NEXT
+- **Stage 5 — Core color system:** DRAFT READY FOR SELECTION
+- **Stage 6 — Logo and app-icon direction:** NEXT AFTER STAGE 5
 - **Android package identifier:** `com.notallwhowander.camping` for now; do not change solely because the working brand name changed
 
 The product is a local-first camping planning app for Android and the web. It helps people plan trips, manage packing and gear, check weather and safety context, save campsites and waypoints, use offline maps and trip packs, and eventually share trips.
@@ -77,7 +78,7 @@ These references should guide UI, illustration, color, texture, icon, logo, web,
 - mud, dust, and honest outdoor wear
 - clean, modern, user-friendly interface design
 
-## Early color family — not final palette
+## Early color family
 
 - deep evergreen / pine
 - muted sage or field green
@@ -502,25 +503,167 @@ If the answer to any is no, simplify the copy.
 
 ---
 
-# 8. Stage 5 — Core color system — NEXT
+# 8. Stage 5 — Core color system — DRAFT READY FOR SELECTION
 
-Create three palette directions derived from the approved aesthetic references.
+The core color system must feel like **classic camping equipment and field guides translated into a modern interface**, not a vintage costume.
 
-Each must include:
+All three directions keep the approved ingredients:
 
-- primary green
-- secondary green or earth tone
-- canvas/tan neutral
-- warm cream/background
-- orange accent
-- dark text/background color
-- optional wildflower accent colors
-- hex codes
-- light-mode usage
-- dark-mode usage
-- accessibility/contrast notes
+- evergreen / field green
+- canvas tan
+- warm cream
+- lantern orange
+- dark earth
+- restrained wildflower accents
 
-The system must work in bright sunlight, dark mode, maps, weather screens, and safety contexts.
+The differences are emphasis and temperature.
+
+## Palette A — Field Guide — RECOMMENDED
+
+**Best overall fit with the approved 60% modern utility / 25% classic field-guide / 15% expressive outdoor balance.**
+
+This direction feels like an old topo map, canvas field notebook, green camp gear, and a warm lantern translated into a clean contemporary UI.
+
+| Role | Name | Hex | Primary use |
+| --- | --- | --- | --- |
+| Primary | Evergreen | `#24452F` | Primary buttons, navigation emphasis, headers, selected states |
+| Secondary | Field Sage | `#6F8064` | Secondary controls, chips, map/UI accents, subtle fills |
+| Neutral | Canvas | `#D2B98D` | Cards, dividers, illustrations, secondary surfaces |
+| Background | Warm Cream | `#F7F0DE` | Main light-mode background |
+| Accent | Lantern Orange | `#C8612C` | Calls to attention, progress, highlights, brand accents |
+| Ink | Mud Ink | `#242720` | Primary light-mode text and dark neutral |
+| Wildflower | Columbine | `#5E6FA3` | Rare decorative/data-series accent |
+| Wildflower | Gumbo Lily | `#E7C95C` | Rare decorative/data-series accent |
+| Dark background | Night Pine | `#182019` | Main dark-mode background |
+| Dark surface | Camp Table | `#222C23` | Dark-mode cards and panels |
+| Dark text | Parchment | `#F3EBD9` | Primary dark-mode text |
+| Dark accent | Lantern Glow | `#E47A3F` | Dark-mode brand accent and active states |
+
+### Field Guide usage
+
+**Light mode**
+
+- Warm Cream is the default canvas rather than pure white.
+- Mud Ink is the default text color.
+- Evergreen carries primary actions and important selected states.
+- Field Sage is secondary and should not replace Evergreen for high-priority actions.
+- Canvas appears in restrained surfaces, separators, cards, illustrations, and topo treatments.
+- Lantern Orange is an accent, not the dominant interface color.
+- Wildflower colors should usually occupy less than 5% of a screen.
+
+**Dark mode**
+
+- Night Pine replaces black as the default background.
+- Camp Table provides subtle surface separation.
+- Parchment provides warm high-contrast text.
+- Lantern Glow may become slightly brighter than the light-mode orange.
+- Avoid turning dark mode into “black + orange”; greens and warm neutrals must remain visible parts of the system.
+
+### Field Guide contrast checks
+
+Representative WCAG contrast ratios:
+
+- Mud Ink `#242720` on Warm Cream `#F7F0DE`: **13.33:1** — excellent for normal text.
+- White on Evergreen `#24452F`: **10.67:1** — excellent for button text.
+- Parchment `#F3EBD9` on Night Pine `#182019`: **14.05:1** — excellent for dark-mode text.
+- Black on Lantern Orange `#C8612C`: **5.20:1** — acceptable for normal text.
+- White on Lantern Orange: **4.04:1** — do **not** use for ordinary small text; reserve for large/bold text or use dark text instead.
+
+## Palette B — Lantern Camp
+
+**Warmer, richer, and slightly more nostalgic.**
+
+This is the closest to classic lantern light, enamelware, camp signage, and mid-century camping ephemera. It has more personality but risks feeling themed if overused.
+
+| Role | Name | Hex | Primary use |
+| --- | --- | --- | --- |
+| Primary | Deep Camp Green | `#183D32` | Primary actions, navigation, strong brand blocks |
+| Secondary | Field Green | `#55705B` | Secondary controls and calm supporting surfaces |
+| Neutral | Worn Canvas | `#C7AA79` | Cards, field-note surfaces, dividers |
+| Background | Lantern Cream | `#FFF4D8` | Main light-mode background |
+| Accent | Camp Orange | `#D86B2A` | Highlights, progress, selected details |
+| Ink | Charcoal Green | `#202621` | Primary light-mode text |
+| Wildflower | Dusk Columbine | `#6C6FAE` | Rare botanical/data accent |
+| Wildflower | Prairie Bloom | `#D9A552` | Rare warm botanical accent |
+| Dark background | Deep Woods | `#111A17` | Main dark background |
+| Dark surface | Pine Table | `#1B2822` | Cards/panels in dark mode |
+| Dark text | Lantern Paper | `#F5EAD4` | Primary dark-mode text |
+| Dark accent | Firelight | `#F18442` | Active/brand accent in dark mode |
+
+### Lantern Camp contrast checks
+
+- Charcoal Green on Lantern Cream: **14.10:1**.
+- White on Deep Camp Green: **11.98:1**.
+- Lantern Paper on Deep Woods: **14.87:1**.
+- Black on Camp Orange: **6.06:1**.
+- White on Camp Orange: **3.47:1** — not suitable for normal text.
+
+### Lantern Camp risk
+
+Keep orange and cream restrained. If every card becomes cream and every active state becomes orange, the app will read like a themed retro campsite rather than a modern tool.
+
+## Palette C — High Desert
+
+**Earthier, botanical, and slightly more Western without becoming cowboy-themed.**
+
+This direction gives the wildflowers, mud, dust, canvas, and open-landscape references more weight. It is attractive, but less immediately “classic camping equipment” than Palette A.
+
+| Role | Name | Hex | Primary use |
+| --- | --- | --- | --- |
+| Primary | Juniper | `#35513A` | Primary actions and navigation |
+| Secondary | Desert Sage | `#7B8B6A` | Secondary controls, map accents, quiet fills |
+| Neutral | Dry Canvas | `#C9A877` | Cards, illustrations, secondary surfaces |
+| Background | Sand Cream | `#F4E8CF` | Main light background |
+| Accent | Burnt Orange | `#B9532D` | Highlights and important accents |
+| Ink | Dark Earth | `#302922` | Primary light-mode text |
+| Wildflower | Columbine Dusk | `#6D668F` | Rare cool botanical accent |
+| Wildflower | Desert Bloom | `#D89A52` | Rare warm botanical accent |
+| Dark background | Camp Earth | `#1E1B17` | Main dark background |
+| Dark surface | Dry Pine | `#2A2821` | Dark-mode cards and panels |
+| Dark text | Warm Paper | `#F1E5CF` | Primary dark text |
+| Dark accent | Ember | `#E47A49` | Dark-mode accent |
+
+### High Desert contrast checks
+
+- Dark Earth on Sand Cream: **11.79:1**.
+- White on Juniper: **8.79:1**.
+- Warm Paper on Camp Earth: **13.76:1**.
+- White on Burnt Orange: **4.84:1** — passes AA for normal text, but use cautiously.
+
+### High Desert risk
+
+This palette can drift toward lifestyle/outdoor-retail branding. The UI should keep generous clean surfaces and modern typography so the earthy palette does not become rustic.
+
+## Recommended palette decision
+
+**Recommend Palette A — Field Guide.**
+
+Why:
+
+- strongest match for the approved aesthetic references
+- best balance between modern software and golden-age camping character
+- evergreen and cream provide excellent readability in bright conditions
+- orange feels like lantern light without dominating the interface
+- canvas and sage support topo maps and field-guide treatments naturally
+- wildflower colors can add identity without becoming decorative clutter
+- dark mode remains recognizably Over Yonder rather than generic black UI
+
+## Global color rules
+
+Regardless of the palette selected:
+
+1. **Brand colors never replace semantic safety colors.** Fire danger, severe weather, closures, destructive actions, and other consequential states need dedicated semantic colors and labels.
+2. **Never communicate status by color alone.** Pair color with text, icons, shape, or pattern.
+3. **Orange is an accent, not a universal action color.** Primary actions should usually use the main green.
+4. **Wildflower colors are seasoning.** Use for charts, illustrations, small badges, route differentiation, or occasional brand moments.
+5. **Topo lines should be low contrast.** They are texture/supporting information, not visual noise behind text.
+6. **Map colors must prioritize cartographic legibility over brand purity.** Roads, water, terrain, closures, routes, and hazards must remain distinguishable.
+7. **Bright-sunlight usability matters.** Important controls need strong contrast and clear boundaries; subtle low-contrast “designer” UI should be avoided.
+8. **Dark mode is designed, not inverted.** Use the dedicated dark tokens rather than mechanically reversing the light palette.
+
+## Stage 5 approval rule
+
+Choose **Field Guide**, **Lantern Camp**, **High Desert**, or request a hybrid. Once selected, convert that direction into the canonical token set and mark Stage 5 approved.
 
 ---
 
