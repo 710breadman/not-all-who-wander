@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 720" role="img" aria-label="PAL monochrome trail mark">
+  <path d="M110 595V270C110 120 205 50 320 50s210 70 210 220v325Z" fill="none" stroke="currentColor" stroke-width="24"/>
+  <path d="M125 515 248 300l74 111 82-138 124 242Z" fill="currentColor"/>
+  <path d="M290 483c-89 49-126 103-110 164 12 45 65 71 151 83-65-37-88-69-67-99 21-29 67-50 140-67-62-19-101-46-114-81Z" fill="white"/>
+</svg>
