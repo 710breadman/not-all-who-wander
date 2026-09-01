@@ -1,20 +1,22 @@
-# Over Yonder brand workshop
+# Path A Logic (PAL) brand workshop
 
-This file is both the working brand workshop and the canonical record of approved brand decisions for the camping project.
+This file is the canonical record of approved core brand decisions for the camping project.
 
-Brand work should stay separate from technical architecture, Firebase configuration, store-account setup, package-name changes, and implementation decisions unless a brand choice directly affects the product experience.
+Brand work stays separate from technical architecture, Firebase configuration, store-account setup, package-name changes, and implementation decisions unless a brand choice directly affects the product experience.
 
 ## Current brand status
 
-- **Working customer-facing name:** **Over Yonder**
-- **Name status:** user-selected, **provisional pending trademark/app-store/domain clearance**
+- **Full customer-facing brand:** **Path A Logic**
+- **Compact brand / app shorthand:** **PAL**
+- **Name status:** selected by user; trademark, app-store, domain, and handle clearance still required before public release
 - **Stage 1 — Brand direction:** APPROVED
-- **Stage 2 — Naming:** SELECTED / NOT YET CLEARED
+- **Stage 2 — Naming:** APPROVED / NOT YET CLEARED
 - **Stage 3 — Mission, tagline, positioning:** APPROVED
 - **Stage 4 — Brand voice:** APPROVED
-- **Stage 5 — Core color system:** DRAFT READY FOR SELECTION
-- **Stage 6 — Logo and app-icon direction:** NEXT AFTER STAGE 5
-- **Android package identifier:** `com.notallwhowander.camping` for now; do not change solely because the working brand name changed
+- **Stage 5 — Core color system:** APPROVED — FIELD GUIDE
+- **Stage 6 — Logo and app-icon system:** APPROVED DIRECTION
+- **Checklist visual-status system:** LOCKED
+- **Android package identifier:** `com.notallwhowander.camping` for now; do not change solely because the brand name changed
 
 The product is a local-first camping planning app for Android and the web. It helps people plan trips, manage packing and gear, check weather and safety context, save campsites and waypoints, use offline maps and trip packs, and eventually share trips.
 
@@ -22,28 +24,74 @@ The app should feel useful before a trip, calm when signal is poor, easy to unde
 
 ---
 
-# 1. Approved core brand direction
+# 1. Brand name and hierarchy
 
-## Brand blend
+## Primary brand
 
-The approved direction combines three ideas.
+# **Path A Logic**
 
-### Calm field notebook
+Use **Path A Logic** for:
+
+- store listings
+- websites and landing pages
+- onboarding and first-run brand moments
+- legal/product identification
+- documentation
+- larger wordmark placements
+- marketing and public-facing descriptions
+
+The capitalization is **Path A Logic**.
+
+Do not stylize the written name as `Path-A-Logic`, `PathLogic`, `Pathalogic`, or other altered spellings unless a future clearance requirement forces a naming change.
+
+## Compact brand
+
+# **PAL**
+
+PAL is the approved shorthand and compact visual identity.
+
+Use **PAL** for:
+
+- app icon
+- compact navigation/header placements
+- favicon and shortcut assets where legible
+- badges and small brand marks
+- loading/splash moments where the full wordmark would be too large
+- internal shorthand in product copy only when the user already knows the brand
+
+### Hierarchy rule
+
+**Path A Logic is the name. PAL is the shorthand.**
+
+Do not make PAL a separate sub-brand. Do not create competing identities for the two forms.
+
+On first exposure, prefer **Path A Logic**. Once the brand is established, PAL can carry compact UI and icon duties.
+
+---
+
+# 2. Approved core brand direction
+
+The brand combines three ideas.
+
+## Calm field notebook
+
 Grounded, practical, durable, tactile, and lightly nostalgic. The product should feel like a trusted object that belongs in a pack, glove box, campsite, or kitchen table while planning a trip.
 
-### Quiet wild
+## Quiet wild
+
 Clean, low-noise, nature-respectful, privacy-conscious, and calm. Avoid the visual and verbal noise common to social, gamified, or overly adventurous outdoor products.
 
-### Prepared adventure
+## Prepared adventure
+
 Capable, map-aware, weather-aware, safety-conscious, and useful without becoming tactical, macho, alarmist, or survivalist.
 
 ## Core personality
 
 **Timeless outdoors with a retro “golden age of camping” influence.**
 
-The identity should combine the familiarity and material warmth of classic camping equipment, field guides, canvas packs, paper maps, enamelware, lantern light, wildflowers, and old park graphics with a clean, highly usable modern interface.
+The identity combines the familiarity and material warmth of classic camping equipment, field guides, canvas packs, paper maps, enamelware, lantern light, wildflowers, and old park graphics with a clean, highly usable modern interface.
 
-Retro influence should be an ingredient, not a costume. The product must still feel current, readable, accessible, and trustworthy.
+Retro influence is an ingredient, not a costume. The product must still feel current, readable, accessible, and trustworthy.
 
 ## Visual balance rule
 
@@ -53,13 +101,43 @@ Aim approximately for:
 - **25% timeless field-guide / classic-camping character**
 - **15% expressive outdoor texture and color**
 
-This prevents the retro direction from reducing clarity or making the product feel like a novelty theme.
+---
+
+# 3. Mission, promise, positioning, and tagline
+
+## Mission
+
+> **Make preparing for the outdoors simple, calm, and dependable, so people can spend less time managing a trip and more time taking it.**
+
+## Core product promise
+
+> **Bring the important parts of trip planning together before you head out.**
+
+The product must not imply that PAL can eliminate uncertainty, guarantee safety, or replace judgment in the field.
+
+## Positioning
+
+> **Path A Logic is a local-first camping planner that brings trip plans, packing, places, maps, weather, and practical field information together so campers can prepare before leaving reliable service behind.**
+
+## Primary tagline
+
+> **Less guesswork before you leave. More outside when you get there.**
+
+## Short supporting line
+
+> **Less guesswork. More outside.**
+
+Use the short line only when space is limited or as secondary campaign copy. The longer line remains the canonical primary tagline.
+
+## App-store introduction
+
+> **Path A Logic helps you plan camping trips before you leave home. Build packing lists, organize gear, save campsites and waypoints, check useful weather and trip context, and prepare maps and information for offline use. Everything stays focused on making the trip easier to prepare for and simpler to manage.**
 
 ---
 
-# 2. Aesthetic reference library
+# 4. Aesthetic reference library
 
-These references should guide UI, illustration, color, texture, icon, logo, web, store, and marketing decisions.
+These references guide UI, illustration, color, texture, icon, logo, web, store, and marketing decisions.
 
 ## Core references
 
@@ -78,19 +156,7 @@ These references should guide UI, illustration, color, texture, icon, logo, web,
 - mud, dust, and honest outdoor wear
 - clean, modern, user-friendly interface design
 
-## Early color family
-
-- deep evergreen / pine
-- muted sage or field green
-- canvas tan / warm parchment
-- burnt or lantern orange
-- warm cream
-- dark earth / mud brown
-- restrained wildflower accents inspired by columbines, gumbo lily, and desert blooms
-
-Avoid making the interface predominantly brown, camouflage-like, neon, tactical black/red, or aggressively orange.
-
-## Texture and graphic direction
+## Graphic language
 
 Good references:
 
@@ -102,10 +168,12 @@ Good references:
 - boot-print or tread motifs used sparingly
 - wildflower silhouettes or botanical linework
 - lantern-glow warmth used as an accent rather than literal skeuomorphism
+- simple route/path shapes
+- modest mountain or tree forms when used as part of the system rather than generic stock imagery
 
 Avoid:
 
-- generic mountain + pine + tent logo combinations
+- generic mountain + pine + tent combinations as the entire identity
 - faux-vintage distress on primary UI controls
 - heavy wood textures
 - camouflage
@@ -116,413 +184,11 @@ Avoid:
 
 ---
 
-# 3. Stage 2 — Brand name
+# 5. Core color system — FIELD GUIDE — APPROVED
 
-## Selected working name
+The approved palette is **Field Guide**.
 
-# **Over Yonder**
-
-Status: **SELECTED BY USER — PROVISIONAL UNTIL CLEARED**
-
-## Why it fits
-
-**Over Yonder** matches the approved brand because it is:
-
-- conversational rather than corporate
-- timeless without sounding artificially vintage
-- lightly literary and idiomatic without depending on a famous quotation
-- associated with looking toward a place just beyond the immediate view
-- naturally connected to maps, routes, campsites, discovery, travel, and curiosity
-- warm enough for family camping while still working for solo trips and backcountry planning
-- broad enough to cover Maps, Trips, Gear, Weather, Safety, Sites, GPS, and Offline Packs
-
-It carries some of the spirit that originally made **The Road Less Traveled**, **As the Crow Flies**, and **Not All Who Wander** appealing, but sounds more conversational and less like a borrowed quotation.
-
-## Name-use rule
-
-**Over Yonder should stand on its own.**
-
-Do not repeatedly build marketing copy around phrases such as “what’s over yonder?” or force the word “yonder” into slogans, onboarding, feature labels, or UI copy. The name provides personality; the surrounding copy should remain clear, useful, and natural.
-
-## Spoken-use test
-
-- “I planned the trip in Over Yonder.”
-- “Check Over Yonder before we leave.”
-- “I saved the campsite in Over Yonder.”
-- “Download it in Over Yonder before we lose service.”
-
-## Visual opportunities created by the name
-
-Do **not** force a literal horizon logo. The name gives room to use the already-approved visual language:
-
-- topo lines moving beyond an edge or frame
-- a route disappearing around a contour
-- a small lantern-glow point beyond a map line
-- field-guide margin marks
-- distant wildflower or botanical details
-- abstract “OY” letterform work
-- directional marks that suggest “there” without becoming a generic navigation arrow
-- horizon or distant-land geometry only if it remains distinctive at app-icon size
-
-Avoid turning **Over Yonder** into faux-Western, cowboy, hillbilly, or rustic-country branding. Its age should come from field-guide materials and classic camping graphics, not caricature.
-
----
-
-# 4. Name clearance warning
-
-The user has selected **Over Yonder** as the working brand, but the preliminary screen found meaningful existing use.
-
-## Known early collisions
-
-### Existing iPhone app — significant
-
-An iPhone app is already listed as **over yonder**. Its feature set includes pointing toward distant locations, straight-line distance, marking the user’s current location, and navigation back to that location.
-
-This is a meaningful overlap because the camping project is expected to include maps, GPS, waypoints, navigation-adjacent tools, and saved locations.
-
-### Existing outdoor/bikepacking brand — significant
-
-An Australian bikepacking/adventure group already uses **Over Yonder** as an outdoor identity, including adventure publishing, branding, apparel, and collaborations.
-
-This creates additional outdoor-category crowding even though it is not the same product.
-
-## Decision rule
-
-For now:
-
-- use **Over Yonder** as the internal and creative working brand name
-- continue Stage 3–6 brand development around it
-- do **not** treat the name as legally cleared
-- do **not** make irreversible package/store/domain/legal-entity changes based on the name yet
-- perform a dedicated trademark, Google Play, Apple App Store, domain, GitHub/social-handle, and outdoor-industry clearance before public release
-
-If exact-name clearance proves poor, preserve the **Over Yonder** brand direction and test a qualified title such as **Over Yonder + descriptor** rather than immediately discarding the identity.
-
-This workshop is not legal advice.
-
----
-
-# 5. Naming exploration archive
-
-The naming process established a preference for three families:
-
-1. **Literary journey** — old travel-book, poem, essay, and road-story language
-2. **Old field language** — lantern, canvas, field book, almanac, range, ground, botanical vocabulary
-3. **Map/navigation idioms** — bearing, contour, line, fold, crow-flight, wayfinding, and route language
-
-## Strong prior candidates retained for historical context
-
-- Lanternline
-- Crow’s Measure
-- Less Worn
-- The Field Beyond
-- Gumbo Lily
-- Miles Unfold
-- Yonderward
-- Contour & Canvas
-- Roadside Almanac
-- Not All Who Wander
-
-Do not reopen the naming stage unless **Over Yonder** fails clearance or the user explicitly requests it.
-
----
-
-# 6. Stage 3 — Mission, tagline, and positioning — APPROVED
-
-## Approved Stage 3 direction
-
-The brand emphasizes **planning and preparation first**. Discovery and exploration remain part of the emotional appeal, but the core value is helping people get ready before the trip.
-
-Tagline tone mixes:
-
-- practical clarity
-- warmth
-- restrained literary character
-
-The brand name should stand on its own rather than being repeatedly worked into slogans or UI copy.
-
-## Approved mission statement
-
-> **Make preparing for the outdoors simple, calm, and dependable, so people can spend less time managing a trip and more time taking it.**
-
-## Approved core product promise
-
-> **Bring the important parts of trip planning together before you head out.**
-
-The product promise should remain concrete. It should not imply that Over Yonder can eliminate uncertainty, guarantee safety, or replace judgment in the field.
-
-## Approved positioning statement
-
-> **Over Yonder is a local-first camping planner that brings trip plans, packing, places, maps, weather, and practical field information together so campers can prepare before leaving reliable service behind.**
-
-## Approved primary tagline
-
-> **Less guesswork before you leave. More outside when you get there.**
-
-### Short-form supporting line
-
-When space is too limited for the full tagline, **Less guesswork. More outside.** may be used as a secondary campaign or graphic line, but it is not the canonical primary tagline.
-
-## 50-word app-store introduction
-
-> **Over Yonder helps you plan camping trips before you leave home. Build packing lists, organize gear, save campsites and waypoints, check useful weather and trip context, and prepare maps and information for offline use. Everything stays focused on making the trip easier to prepare for and simpler to manage.**
-
----
-
-# 7. Stage 4 — Brand voice — APPROVED
-
-## Voice character
-
-**Over Yonder sounds like a calm field guide written by a knowledgeable camping friend.**
-
-The field-guide side provides clarity, restraint, useful detail, and trust. The knowledgeable-friend side adds warmth and humanity without turning the interface into a conversation.
-
-A useful working balance is:
-
-- **70% calm field guide**
-- **30% knowledgeable camping friend**
-
-The voice should feel experienced, never superior. It helps the user prepare and make decisions; it does not perform expertise.
-
-## Five voice principles
-
-### 1. Useful first
-Lead with the thing the user needs to know or do. Personality comes after clarity.
-
-Prefer:
-- **6 things left to pack.**
-
-Over:
-- **Looks like your adventure kit still needs a little love!**
-
-### 2. Calm confidence
-State conditions and next steps plainly. Do not create urgency unless the situation actually warrants it.
-
-Prefer:
-- **Rain is likely after 4 PM. Consider setting camp before then.**
-
-Over:
-- **Stormy weather could ruin your evening — hurry and get set up!**
-
-### 3. Warm, not chatty
-Write like someone helpful sitting across the table while the trip is being planned. Avoid filler, banter, excessive exclamation points, or conversational UI that slows the user down.
-
-### 4. Plain language over outdoor jargon
-Use familiar words unless a technical term is genuinely useful. When a specialized map, weather, or safety term is necessary, explain it briefly rather than showing off vocabulary.
-
-### 5. Light character, used sparingly
-Literary texture and dry outdoor humor are allowed in low-stakes moments, completion states, and occasional supporting copy. They must never obscure instructions or become a gimmick.
-
-## Safety and weather override
-
-For weather alerts, hazards, navigation problems, fire restrictions, closures, emergency information, or other consequential situations:
-
-**clarity > warmth > personality > humor**
-
-Safety tone is **calm but firm**.
-
-Use:
-- the condition
-- when or where it applies
-- the practical consequence
-- the clearest useful action available
-
-Do not dramatize and do not soften a real risk to preserve the friendly voice.
-
-Example:
-
-> **High wind warning from 2–8 PM. Exposed campsites may be difficult to secure. Check conditions before setting up and secure loose gear.**
-
-Not:
-
-> **It’s going to get pretty wild out there, so hang onto your hat!**
-
-## Humor rule
-
-Humor is **very light** and optional.
-
-Good places for it:
-
-- low-stakes packing reminders
-- successful trip setup
-- trip completion
-- harmless empty states
-- occasional secondary labels or illustrations
-
-Never use humor for:
-
-- safety warnings
-- severe weather
-- wildfire or evacuation information
-- getting lost or navigation failures
-- medical information
-- failed offline downloads when the user may depend on them
-- privacy/security warnings
-
-Humor should sound dry and natural, not branded or scripted.
-
-Example acceptable secondary copy:
-
-> **Tent packed. Stakes too, hopefully.**
-
-Use rarely enough that it remains pleasant when it appears.
-
-## Preferred vocabulary
-
-Favor words such as:
-
-- plan
-- prepare
-- pack
-- ready
-- trip
-- campsite
-- site
-- route
-- map
-- waypoint
-- save
-- download
-- offline
-- conditions
-- weather
-- check
-- before you go
-- before you leave
-- nearby
-- notes
-- gear
-- field
-- ahead
-- home
-
-Use outdoors-specific terms when they add precision, not atmosphere.
-
-## Words and styles to avoid
-
-Avoid generic adventure marketing such as:
-
-- adventure awaits
-- epic
-- conquer
-- crush it
-- dominate
-- unleash
-- escape the ordinary
-- answer the call of the wild
-- rugged lifestyle
-- wilderness warrior
-- survival mode
-- ultimate adventure
-- all-in-one
-- explore like never before
-
-Also avoid faux-rustic language such as:
-
-- reckon
-- howdy
-- partner
-- mosey
-- out yonder
-- neck of the woods
-
-unless those words appear naturally in user-created content or a specific editorial context.
-
-Do not repeatedly use **yonder** simply because it is in the brand name.
-
-## Punctuation and rhythm
-
-- Prefer short sentences.
-- Use sentence case in UI copy.
-- Use exclamation points rarely.
-- Avoid ellipses for personality.
-- Avoid unnecessary em dashes in controls and alerts.
-- Use contractions when they sound more natural: **You’re ready**, **We couldn’t save this map**.
-- Buttons should usually begin with a clear verb: **Save site**, **Download map**, **Check weather**, **Add gear**.
-
-## Example UI copy
-
-### Planning
-
-**Trip overview**
-> **Your trip is taking shape. Three items still need attention before you leave.**
-
-### Packing
-
-**Packing progress**
-> **6 things left to pack.**
-
-**Nothing left**
-> **Packed and ready.**
-
-### Weather
-
-**Normal forecast change**
-> **Rain is likely after 4 PM. Consider setting camp before then.**
-
-### Safety
-
-**Higher-consequence alert**
-> **High wind warning from 2–8 PM. Exposed campsites may be difficult to secure. Check conditions before setting up and secure loose gear.**
-
-### Offline preparation
-
-**Download complete**
-> **Offline pack ready. Maps and trip details are saved on this device.**
-
-**Download failed**
-> **Offline pack didn’t finish downloading. Connect to the internet and try again before you leave.**
-
-### Empty trips state
-
-> **No trips yet. Start with where you’re going and when.**
-
-### Empty saved sites state
-
-> **No saved sites yet. Save a campsite or waypoint when you find one worth keeping.**
-
-### Empty offline packs state
-
-> **Nothing saved offline yet. Download a trip before heading somewhere with limited service.**
-
-### Trip completion
-
-> **Trip wrapped. Keep your notes — they may make the next one easier.**
-
-## Voice test
-
-Before shipping copy, ask:
-
-1. Is the useful information obvious on the first read?
-2. Does it sound calm rather than robotic or excited?
-3. Would an experienced camper say this without sounding performative?
-4. Is any literary character helping the message rather than decorating it?
-5. If the situation matters for safety, did we remove humor and unnecessary softness?
-
-If the answer to any is no, simplify the copy.
-
----
-
-# 8. Stage 5 — Core color system — DRAFT READY FOR SELECTION
-
-The core color system must feel like **classic camping equipment and field guides translated into a modern interface**, not a vintage costume.
-
-All three directions keep the approved ingredients:
-
-- evergreen / field green
-- canvas tan
-- warm cream
-- lantern orange
-- dark earth
-- restrained wildflower accents
-
-The differences are emphasis and temperature.
-
-## Palette A — Field Guide — RECOMMENDED
-
-**Best overall fit with the approved 60% modern utility / 25% classic field-guide / 15% expressive outdoor balance.**
-
-This direction feels like an old topo map, canvas field notebook, green camp gear, and a warm lantern translated into a clean contemporary UI.
+It should feel like an old topo map, canvas field notebook, green camp gear, and warm lantern translated into a clean contemporary UI.
 
 | Role | Name | Hex | Primary use |
 | --- | --- | --- | --- |
@@ -539,9 +205,7 @@ This direction feels like an old topo map, canvas field notebook, green camp gea
 | Dark text | Parchment | `#F3EBD9` | Primary dark-mode text |
 | Dark accent | Lantern Glow | `#E47A3F` | Dark-mode brand accent and active states |
 
-### Field Guide usage
-
-**Light mode**
+## Light-mode usage
 
 - Warm Cream is the default canvas rather than pure white.
 - Mud Ink is the default text color.
@@ -551,203 +215,336 @@ This direction feels like an old topo map, canvas field notebook, green camp gea
 - Lantern Orange is an accent, not the dominant interface color.
 - Wildflower colors should usually occupy less than 5% of a screen.
 
-**Dark mode**
+## Dark-mode usage
 
 - Night Pine replaces black as the default background.
 - Camp Table provides subtle surface separation.
 - Parchment provides warm high-contrast text.
 - Lantern Glow may become slightly brighter than the light-mode orange.
-- Avoid turning dark mode into “black + orange”; greens and warm neutrals must remain visible parts of the system.
+- Do not turn dark mode into black + orange; greens and warm neutrals remain visible parts of the system.
 
-### Field Guide contrast checks
+## Representative contrast checks
 
-Representative WCAG contrast ratios:
-
-- Mud Ink `#242720` on Warm Cream `#F7F0DE`: **13.33:1** — excellent for normal text.
-- White on Evergreen `#24452F`: **10.67:1** — excellent for button text.
-- Parchment `#F3EBD9` on Night Pine `#182019`: **14.05:1** — excellent for dark-mode text.
-- Black on Lantern Orange `#C8612C`: **5.20:1** — acceptable for normal text.
-- White on Lantern Orange: **4.04:1** — do **not** use for ordinary small text; reserve for large/bold text or use dark text instead.
-
-## Palette B — Lantern Camp
-
-**Warmer, richer, and slightly more nostalgic.**
-
-This is the closest to classic lantern light, enamelware, camp signage, and mid-century camping ephemera. It has more personality but risks feeling themed if overused.
-
-| Role | Name | Hex | Primary use |
-| --- | --- | --- | --- |
-| Primary | Deep Camp Green | `#183D32` | Primary actions, navigation, strong brand blocks |
-| Secondary | Field Green | `#55705B` | Secondary controls and calm supporting surfaces |
-| Neutral | Worn Canvas | `#C7AA79` | Cards, field-note surfaces, dividers |
-| Background | Lantern Cream | `#FFF4D8` | Main light-mode background |
-| Accent | Camp Orange | `#D86B2A` | Highlights, progress, selected details |
-| Ink | Charcoal Green | `#202621` | Primary light-mode text |
-| Wildflower | Dusk Columbine | `#6C6FAE` | Rare botanical/data accent |
-| Wildflower | Prairie Bloom | `#D9A552` | Rare warm botanical accent |
-| Dark background | Deep Woods | `#111A17` | Main dark background |
-| Dark surface | Pine Table | `#1B2822` | Cards/panels in dark mode |
-| Dark text | Lantern Paper | `#F5EAD4` | Primary dark-mode text |
-| Dark accent | Firelight | `#F18442` | Active/brand accent in dark mode |
-
-### Lantern Camp contrast checks
-
-- Charcoal Green on Lantern Cream: **14.10:1**.
-- White on Deep Camp Green: **11.98:1**.
-- Lantern Paper on Deep Woods: **14.87:1**.
-- Black on Camp Orange: **6.06:1**.
-- White on Camp Orange: **3.47:1** — not suitable for normal text.
-
-### Lantern Camp risk
-
-Keep orange and cream restrained. If every card becomes cream and every active state becomes orange, the app will read like a themed retro campsite rather than a modern tool.
-
-## Palette C — High Desert
-
-**Earthier, botanical, and slightly more Western without becoming cowboy-themed.**
-
-This direction gives the wildflowers, mud, dust, canvas, and open-landscape references more weight. It is attractive, but less immediately “classic camping equipment” than Palette A.
-
-| Role | Name | Hex | Primary use |
-| --- | --- | --- | --- |
-| Primary | Juniper | `#35513A` | Primary actions and navigation |
-| Secondary | Desert Sage | `#7B8B6A` | Secondary controls, map accents, quiet fills |
-| Neutral | Dry Canvas | `#C9A877` | Cards, illustrations, secondary surfaces |
-| Background | Sand Cream | `#F4E8CF` | Main light background |
-| Accent | Burnt Orange | `#B9532D` | Highlights and important accents |
-| Ink | Dark Earth | `#302922` | Primary light-mode text |
-| Wildflower | Columbine Dusk | `#6D668F` | Rare cool botanical accent |
-| Wildflower | Desert Bloom | `#D89A52` | Rare warm botanical accent |
-| Dark background | Camp Earth | `#1E1B17` | Main dark background |
-| Dark surface | Dry Pine | `#2A2821` | Dark-mode cards and panels |
-| Dark text | Warm Paper | `#F1E5CF` | Primary dark text |
-| Dark accent | Ember | `#E47A49` | Dark-mode accent |
-
-### High Desert contrast checks
-
-- Dark Earth on Sand Cream: **11.79:1**.
-- White on Juniper: **8.79:1**.
-- Warm Paper on Camp Earth: **13.76:1**.
-- White on Burnt Orange: **4.84:1** — passes AA for normal text, but use cautiously.
-
-### High Desert risk
-
-This palette can drift toward lifestyle/outdoor-retail branding. The UI should keep generous clean surfaces and modern typography so the earthy palette does not become rustic.
-
-## Recommended palette decision
-
-**Recommend Palette A — Field Guide.**
-
-Why:
-
-- strongest match for the approved aesthetic references
-- best balance between modern software and golden-age camping character
-- evergreen and cream provide excellent readability in bright conditions
-- orange feels like lantern light without dominating the interface
-- canvas and sage support topo maps and field-guide treatments naturally
-- wildflower colors can add identity without becoming decorative clutter
-- dark mode remains recognizably Over Yonder rather than generic black UI
-
-## Global color rules
-
-Regardless of the palette selected:
-
-1. **Brand colors never replace semantic safety colors.** Fire danger, severe weather, closures, destructive actions, and other consequential states need dedicated semantic colors and labels.
-2. **Never communicate status by color alone.** Pair color with text, icons, shape, or pattern.
-3. **Orange is an accent, not a universal action color.** Primary actions should usually use the main green.
-4. **Wildflower colors are seasoning.** Use for charts, illustrations, small badges, route differentiation, or occasional brand moments.
-5. **Topo lines should be low contrast.** They are texture/supporting information, not visual noise behind text.
-6. **Map colors must prioritize cartographic legibility over brand purity.** Roads, water, terrain, closures, routes, and hazards must remain distinguishable.
-7. **Bright-sunlight usability matters.** Important controls need strong contrast and clear boundaries; subtle low-contrast “designer” UI should be avoided.
-8. **Dark mode is designed, not inverted.** Use the dedicated dark tokens rather than mechanically reversing the light palette.
-
-## Stage 5 approval rule
-
-Choose **Field Guide**, **Lantern Camp**, **High Desert**, or request a hybrid. Once selected, convert that direction into the canonical token set and mark Stage 5 approved.
+- Mud Ink `#242720` on Warm Cream `#F7F0DE`: **13.33:1**
+- White on Evergreen `#24452F`: **10.67:1**
+- Parchment `#F3EBD9` on Night Pine `#182019`: **14.05:1**
+- Black on Lantern Orange `#C8612C`: **5.20:1**
+- White on Lantern Orange: **4.04:1** — do not use for ordinary small text
 
 ---
 
-# 9. Stage 6 — Logo and app-icon direction
+# 6. Checklist visual-status system — LOCKED
 
-Create three distinct identity families, then propose six logo/icon concepts for the chosen family.
+The checklist must always retain the **green / red / yellow / gray** visual-status option.
 
-Explore these sources before literal camping imagery:
+This is a functional semantic system, not decoration, and must not be removed when the brand palette or UI is refreshed.
 
-- field-guide marks
-- topo/map geometry
-- botanical forms
-- boot/tread geometry
-- lantern-light geometry
-- abstract path/wayfinding symbols
-- **OY** letterforms
-- negative-space marks
-- the concept of something just beyond the visible edge
+## Canonical statuses
 
-Every concept must still read at 48 px.
+| Status | Color | Recommended token | Visual treatment | Meaning |
+| --- | --- | --- | --- | --- |
+| Complete | Green | `#2F7D4A` | Filled green circle + check | Packed / complete / confirmed |
+| Missing | Red | `#C94A3A` | Red ring or red state icon + clear label | Needed / missing / unresolved |
+| Partial / Maybe | Yellow | `#D9A321` | Yellow ring or partial-state icon + label | Partially complete / undecided / maybe |
+| Not needed | Gray | `#8A8D85` | Gray ring or neutral state icon + label | Not needed / not applicable / skipped intentionally |
 
-Once a direction is selected, produce an asset brief covering:
+## Checklist rules
 
-- 1024 × 1024 master icon
-- Android adaptive-icon foreground and background layers
-- monochrome version
-- wordmark lockup
-- favicon/app-shortcut version
-- safe areas
-- minimum sizes
+1. **Never communicate status by color alone.** Always pair the color with an icon, shape, label, or accessible text state.
+2. **Green is reserved for completion/confirmation inside the checklist system.** Do not confuse it with ordinary selected-navigation green when a checklist state is being shown.
+3. **Red means missing or requires attention in a checklist.** It does not automatically mean emergency danger.
+4. **Yellow means incomplete, uncertain, partial, or optional decision pending.** It must not be used as a vague decorative highlight inside checklist rows.
+5. **Gray means intentionally inactive/not needed**, not an error or disabled control unless the surrounding UI makes that distinction explicit.
+6. Preserve these four states in list view, visual checklist view, trip summary, group packing, print/export views, and offline mode.
+7. The user should be able to understand the same item state in light mode and dark mode.
+8. Semantic safety colors for wildfire, severe weather, closures, destructive actions, and emergency states remain separate from checklist status colors.
 
-Do not create final artwork until a concept is selected.
+This system is a permanent UI requirement unless the user explicitly reopens the decision.
 
 ---
 
-# Workshop rules
+# 7. Brand voice — APPROVED
 
-- Approved decisions are constraints unless explicitly reopened.
-- Ask only one small set of brand questions at a time.
-- Be specific, original, and practical.
-- Do not assume the brand needs a mountain, pine tree, compass, tent, campfire, or badge logo.
-- Favor usability over decorative nostalgia.
-- Treat trademark, domain, app-store-name, and logo-rights availability as verification tasks, not assumptions.
+## Voice character
+
+**Path A Logic sounds like a calm field guide written by a knowledgeable camping friend.**
+
+Working balance:
+
+- **70% calm field guide**
+- **30% knowledgeable camping friend**
+
+The voice feels experienced, never superior. It helps the user prepare and make decisions; it does not perform expertise.
+
+## Five principles
+
+1. **Useful first.** Lead with what the user needs to know or do.
+2. **Calm confidence.** State conditions and next steps plainly.
+3. **Warm, not chatty.** Human without filler or banter.
+4. **Plain language over outdoor jargon.** Use specialist terms only when they add precision.
+5. **Light character, used sparingly.** Literary texture and dry humor are for low-stakes moments only.
+
+## Safety and weather override
+
+For hazards, severe weather, fire restrictions, closures, navigation problems, emergency information, and other consequential situations:
+
+**clarity > warmth > personality > humor**
+
+Safety tone is **calm but firm**.
+
+## Humor rule
+
+Very light humor is allowed only in low-stakes moments such as packing reminders, harmless empty states, and trip completion.
+
+Never use humor for:
+
+- safety warnings
+- severe weather
+- wildfire or evacuation information
+- getting lost or navigation failures
+- medical information
+- failed offline downloads when the user may depend on them
+- privacy/security warnings
+
+## UI-writing rhythm
+
+- Prefer short sentences.
+- Use sentence case.
+- Use exclamation points rarely.
+- Avoid ellipses for personality.
+- Use contractions when natural.
+- Buttons usually begin with a clear verb: **Save site**, **Download map**, **Check weather**, **Add gear**.
+
+---
+
+# 8. Logo and app-icon system — APPROVED DIRECTION
+
+## Brand presentation rule
+
+**Path A Logic is the full brand presentation. PAL is the compact/app identity.**
+
+This is the approved hierarchy.
+
+## Primary wordmark
+
+The primary lockup should present:
+
+- **Path A Logic** as the dominant readable name
+- optional **PAL** as a small supporting shorthand when space allows
+- an understated path/field-guide mark beside or above the wordmark
+
+The full lockup should feel like a modern interpretation of a classic field-guide or park-reference title, not a faux-vintage patch.
+
+## Compact PAL mark
+
+The PAL mark is the core compact identity.
+
+Recommended construction:
+
+- large, highly legible **PAL** letterform
+- Evergreen or Night Pine field
+- Warm Cream / Parchment lettering
+- subtle topo/path line or route geometry
+- optional Lantern Orange directional/star/marker accent
+- enough negative space to remain clear at small sizes
+
+Do not rely on tiny botanical, mountain, or topo details for recognition.
+
+## App icon
+
+Preferred app-icon direction:
+
+- **PAL** is the primary readable element
+- rounded-square Android/iOS-friendly composition
+- Evergreen base
+- Warm Cream PAL lettering
+- restrained path/topo geometry
+- Lantern Orange accent used sparingly
+
+The app icon should still read clearly at **48 px**.
+
+### Android adaptive icon
+
+- Foreground: PAL monogram / compact mark
+- Background: Evergreen `#24452F` or approved dedicated adaptive-icon green
+- Keep critical foreground geometry inside the Android adaptive safe zone
+- Avoid putting essential details near crop-prone edges
+- Do not make thin topo lines essential to recognition
+
+## Small-size system
+
+- **48 px and above:** PAL monogram + restrained secondary path/topo detail is acceptable
+- **24–47 px:** simplify to PAL with minimal geometry
+- **16–23 px favicon:** use the simplest recognizable PAL/P-path mark; remove texture and thin lines
+- Never shrink the full Path A Logic wordmark into unreadable sizes
+
+## Monochrome mark
+
+Create a one-color version of the PAL mark that works in:
+
+- black
+- white
+- Evergreen
+- system monochrome/themed-icon contexts
+
+It must remain identifiable without Lantern Orange, topo texture, gradients, or photography.
+
+## Logo do-not rules
+
+Do not:
+
+- create separate unrelated logos for Path A Logic and PAL
+- make PAL look like a sports-team acronym
+- make the identity tactical or military
+- make a generic mountain/pine/tent badge the entire logo
+- use detailed scenic illustrations inside the production app icon
+- use faux-distressed lettering in the UI
+- make Lantern Orange the dominant logo color
+
+## Asset checklist
+
+Final production assets should include:
+
+- 1024 × 1024 master PAL icon
+- Android adaptive foreground asset
+- Android adaptive background asset
+- iOS/app-store icon export as needed
+- full Path A Logic horizontal wordmark
+- stacked wordmark
+- PAL compact mark
+- one-color/monochrome versions
+- light-background versions
+- dark-background versions
+- favicon / browser shortcut version
+- 48 px verification render
+- 24 px verification render
+- safe-area specification
+- minimum-size specification
+
+The approved mockup direction is a visual reference, not a substitute for final vector production assets.
+
+---
+
+# 9. Global visual rules
+
+1. **Brand colors never replace semantic safety colors.**
+2. **Never communicate state by color alone.**
+3. **Orange is an accent, not the universal action color.** Primary actions usually use Evergreen.
+4. **Wildflower colors are seasoning.** Use for charts, illustrations, route differentiation, or occasional brand moments.
+5. **Topo lines stay low contrast** unless they are actual map data.
+6. **Map legibility outranks brand purity.** Roads, water, routes, closures, hazards, and terrain must remain distinguishable.
+7. **Bright-sunlight usability matters.** Important controls need strong contrast and clear boundaries.
+8. **Dark mode is designed, not inverted.** Use dedicated dark tokens.
+9. **Checklist status colors remain available at all times:** green / red / yellow / gray.
+10. **Clean modern usability wins over decorative nostalgia.**
+
+---
+
+# 10. Name and rights verification — REQUIRED BEFORE RELEASE
+
+**Path A Logic / PAL is selected creatively but is not yet legally or commercially cleared.**
+
+Before public release, verify:
+
+- U.S. trademark conflicts for **Path A Logic**, **PAL**, and confusingly similar software/outdoor marks
+- Google Play name conflicts
+- Apple App Store name conflicts
+- relevant domains
+- GitHub/social handles if needed
+- logo similarity / logo-rights concerns
+- outdoor-industry brand conflicts
+
+Do not make irreversible legal-entity, package-name, store, or domain decisions until this check is complete.
+
+This workshop is not legal advice.
+
+---
+
+# 11. Core brand kit — current canonical summary
+
+## Brand name
+
+**Path A Logic**
+
+Compact identity: **PAL**
+
+## Mission
+
+Make preparing for the outdoors simple, calm, and dependable, so people can spend less time managing a trip and more time taking it.
+
+## Tagline
+
+**Less guesswork before you leave. More outside when you get there.**
+
+## Positioning
+
+A local-first camping planner that brings trip plans, packing, places, maps, weather, and practical field information together before campers leave reliable service behind.
+
+## Personality
+
+Calm field notebook + quiet wild + prepared adventure, expressed as clean modern utility with a restrained golden-age camping influence.
+
+## Colors
+
+**Field Guide** palette: Evergreen, Field Sage, Canvas, Warm Cream, Lantern Orange, Mud Ink, restrained Columbine and Gumbo Lily accents, plus dedicated dark-mode tokens.
+
+## Checklist visual system
+
+**Green = complete; red = missing; yellow = partial/maybe; gray = not needed.**
+
+Always pair color with icon/shape/text.
+
+## Type direction
+
+Brand/display typography may use a warm field-guide-inspired serif; UI typography should remain highly readable, modern, and restrained. Final font selection remains a later implementation decision.
+
+## Logo/icon brief
+
+Full branding uses **Path A Logic**. Compact/app branding uses **PAL**. The PAL mark should combine strong lettering with restrained path/topo geometry and the approved Field Guide palette.
+
+## Voice
+
+Calm field guide + knowledgeable camping friend. Useful first, warm but concise, calm but firm for consequential information.
+
+## Store copy
+
+Use the approved planning-first app-store introduction in Section 3 as the current baseline; full launch copy comes in the later full-brand pass.
+
+## Asset checklist
+
+See Section 8.
+
+## Decisions still requiring verification
+
+- trademark
+- app-store-name availability
+- domain availability
+- handle availability if needed
+- logo similarity/rights
+- final typography license and selection
+- final production vector assets
 
 ---
 
 # Later full-brand workshop
 
-After the core brand is approved, extend into:
+After the core brand, extend into:
 
-- audience
-- positioning depth
+- audience and personas
+- deeper positioning
 - brand architecture
-- typography
+- final typography
 - iconography
 - imagery system
 - illustration rules
 - motion
-- UX writing
+- UX writing expansion
 - onboarding
-- store copy
+- full store copy
 - screenshot captions
 - web presentation
+- accessibility specifications
+- detailed do/don’t examples
 - merchandise/physical-print considerations if ever needed
-- accessibility standards
-- do/don’t examples
 
----
-
-# Final handoff format
-
-After choices are approved, maintain a concise brand kit with these exact headings:
-
-1. Brand name
-2. Mission
-3. Tagline
-4. Positioning
-5. Personality
-6. Colors
-7. Type
-8. Logo/icon brief
-9. Voice
-10. Store copy
-11. Asset checklist
-12. Decisions still requiring verification
-
-The final section must explicitly flag trademark, domain, app-store-name, and logo-rights checks before release.
+Core visual and verbal decisions above remain constraints unless explicitly reopened.
