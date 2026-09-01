@@ -67,6 +67,8 @@ Deployment housekeeping remains:
 - pack estimates, stale-component update controls, and safe pack deletion that preserves the source trip and local records
 - Android Capacitor package with bundled offline assets, native approximate-location handling, disabled device backup, and cleartext-network blocking
 - signed/reduced Android release pipeline that fails closed without an untracked signing key, plus GitHub debug-APK and Android-lint verification
+- **Path A Logical / PAL core brand system locked:** Field Guide palette, Lora + Inter + Caveat typography, PAL logo/icon sources, semantic checklist colors, canonical CSS/JSON tokens, and Codex implementation handoff under `brand/`
+- web/PWA manifest and favicon wired to PAL SVG assets and canonical Field Guide theme/background colors
 
 ## Verification
 
@@ -81,6 +83,8 @@ Last recorded verification:
 - signed release verification — passed with R8/resource shrinking and APK v2/v3 signatures using a discarded test key
 
 Sprint 09 through Sprint 19 application changes on 2026-08-31 passed all gates.
+
+Brand asset/token changes were added after the last recorded verification; rerun lint/typecheck/tests/build and Android icon verification when Codex applies the binary launcher exports.
 
 ## Ordered next work
 
