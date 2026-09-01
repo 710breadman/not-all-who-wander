@@ -1,0 +1,36 @@
+{
+  "brand": {
+    "name": "Path A Logical",
+    "shortName": "PAL",
+    "tagline": "Less guesswork before you leave. More outside when you get there."
+  },
+  "colors": {
+    "evergreen": "#24452F",
+    "field_sage": "#6F8064",
+    "canvas": "#D2B98D",
+    "warm_cream": "#F7F0DE",
+    "lantern_orange": "#C8612C",
+    "mud_ink": "#242720",
+    "columbine": "#5E6FA3",
+    "gumbo_lily": "#E7C95C",
+    "night_pine": "#182019",
+    "camp_table": "#222C23",
+    "parchment": "#F3EBD9",
+    "lantern_glow": "#E47A3F",
+    "check_complete": "#2F7D4A",
+    "check_missing": "#C94A3A",
+    "check_partial": "#D9A321",
+    "check_not_needed": "#8A8D85"
+  },
+  "typography": {
+    "display": {"family": "Lora", "fallback": "Georgia, serif", "weight": 600},
+    "ui": {"family": "Inter", "fallback": "system-ui, -apple-system, Segoe UI, sans-serif"},
+    "scriptAccent": {"family": "Caveat", "fallback": "Segoe Print, cursive", "weight": 400}
+  },
+  "checklistStatuses": {
+    "complete": {"color": "#2F7D4A", "label": "Complete"},
+    "missing": {"color": "#C94A3A", "label": "Missing"},
+    "partial": {"color": "#D9A321", "label": "Partial / Maybe"},
+    "notNeeded": {"color": "#8A8D85", "label": "Not needed"}
+  }
+}
