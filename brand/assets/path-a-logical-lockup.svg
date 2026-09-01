@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" role="img" aria-label="Path A Logical logo">
+  <g transform="translate(50,40) scale(.60)">
+    <path d="M110 595V270C110 120 205 50 320 50s210 70 210 220v325Z" fill="#F7F0DE" stroke="#24452F" stroke-width="22"/>
+    <path d="M125 515 248 300l74 111 82-138 124 242Z" fill="#24452F"/>
+    <path d="M290 483c-89 49-126 103-110 164 12 45 65 71 151 83-65-37-88-69-67-99 21-29 67-50 140-67-62-19-101-46-114-81Z" fill="#D2B98D"/>
+    <path d="M165 518 229 406l39 57-36 55Z" fill="#F7F0DE" opacity=".82"/>
+  </g>
+  <text x="500" y="205" fill="#24452F" font-size="118" font-weight="700" font-family="Lora, Georgia, serif">Path A Logical</text>
+  <line x1="505" y1="270" x2="650" y2="270" stroke="#D2B98D" stroke-width="8"/>
+  <text x="690" y="292" fill="#D2B98D" font-size="70" font-family="Inter, Arial, sans-serif" font-weight="600" letter-spacing="22">PAL</text>
+  <line x1="930" y1="270" x2="1075" y2="270" stroke="#D2B98D" stroke-width="8"/>
+  <text x="505" y="395" fill="#242720" font-size="45" font-family="Caveat, Segoe Print, cursive" font-style="italic">Less guesswork before you leave. More outside when you get there.</text>
+</svg>
