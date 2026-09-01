@@ -76,3 +76,6 @@ Optional accounts, cloud sync, and live shared trips will use Firebase Authentic
 
 ### D-020 — Path A Logical is the confirmed customer-facing brand
 The app’s customer-facing name is **Path A Logical**. Public web, PWA, and Android display metadata use this name. The existing Android application ID, IndexedDB database name, backup formats, and repository identifiers remain unchanged so existing local data and future app updates remain compatible.
+
+### D-021 — PAL brand system is canonical
+The approved brand system uses **Path A Logical** as the full name and **PAL** as the compact/app identity. The **Field Guide** palette is canonical. Typography is Lora SemiBold for display/headings, Inter for UI/body, and Caveat Regular as a sparse script accent. The green/red/yellow/gray checklist status system is permanent semantic UI and must not be removed or replaced by decorative brand colors. Canonical implementation sources live under `brand/` and are referenced by `CODEX_START_HERE.md`.
