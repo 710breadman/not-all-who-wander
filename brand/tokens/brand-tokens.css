@@ -1,0 +1,23 @@
+:root {
+  --pal-evergreen: #24452F;
+  --pal-field-sage: #6F8064;
+  --pal-canvas: #D2B98D;
+  --pal-warm-cream: #F7F0DE;
+  --pal-lantern-orange: #C8612C;
+  --pal-mud-ink: #242720;
+  --pal-columbine: #5E6FA3;
+  --pal-gumbo-lily: #E7C95C;
+  --pal-night-pine: #182019;
+  --pal-camp-table: #222C23;
+  --pal-parchment: #F3EBD9;
+  --pal-lantern-glow: #E47A3F;
+
+  --pal-check-complete: #2F7D4A;
+  --pal-check-missing: #C94A3A;
+  --pal-check-partial: #D9A321;
+  --pal-check-not-needed: #8A8D85;
+
+  --pal-font-display: "Lora", Georgia, serif;
+  --pal-font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pal-font-script: "Caveat", "Segoe Print", cursive;
+}
