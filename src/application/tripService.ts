@@ -166,18 +166,39 @@ export async function saveProfile(
 ): Promise<UserProfile> {
   const database = await openCampingDatabase();
   try {
+    const email = normalizeProfileEmail(input.email);
+    const repository = new UserProfileRepository(database);
+    const existingProfiles = await repository.list();
+    if (
+      email &&
+      existingProfiles.some(
+        (profile) => profile.id !== input.id && normalizeProfileEmail(profile.email) === email,
+      )
+    ) {
+      throw new Error("A profile with that email address already exists on this device.");
+    }
     const now = new Date().toISOString();
     const profile: UserProfile = {
       ...input,
+      ...(email ? { email } : {}),
       id: input.id ?? id("profile"),
       createdAt: input.createdAt ?? now,
       updatedAt: now,
     };
-    await new UserProfileRepository(database).save(profile);
+    await repository.save(profile);
     return profile;
   } finally {
     database.close();
   }
+}
+
+function normalizeProfileEmail(email: string | undefined): string | undefined {
+  const normalized = email?.trim().toLowerCase();
+  if (!normalized) return undefined;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) {
+    throw new Error("Enter a valid email or Gmail address.");
+  }
+  return normalized;
 }
 
 export async function importSharedTrip(
@@ -356,20 +377,24 @@ export async function promoteTripItem(item: TripItem): Promise<MasterItem> {
     const duplicate = existing.find(
       (entry) => entry.name.trim().toLocaleLowerCase() === normalized,
     );
-    if (duplicate) return duplicate;
-    const master: MasterItem = {
-      id: id("user"),
-      name: item.name,
-      category: item.category,
-      section: item.section,
-      defaultQuantity: item.quantity,
-      unit: item.unit,
-      tripStyles: ["car", "light-backpacking", "custom"],
-      tags: item.tags,
-      archived: false,
-      source: "user",
-    };
-    await masters.save(master);
+    const master: MasterItem = duplicate ?? {
+        id: id("user"),
+        name: item.name,
+        category: item.category,
+        section: item.section,
+        defaultQuantity: item.quantity,
+        unit: item.unit,
+        tripStyles: ["car", "light-backpacking", "custom"],
+        tags: item.tags,
+        archived: false,
+        source: "user",
+      };
+    if (!duplicate) await masters.save(master);
+    await new TripItemRepository(database).save({
+      ...item,
+      masterItemId: master.id,
+      custom: false,
+    });
     return master;
   } finally {
     database.close();

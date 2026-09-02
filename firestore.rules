@@ -1,0 +1,66 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owns(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validMasterItem(itemId) {
+      let item = request.resource.data.data;
+      return item is map
+        && item.keys().hasAll([
+          'id', 'name', 'category', 'section', 'defaultQuantity', 'unit',
+          'tripStyles', 'tags', 'archived', 'source'
+        ])
+        && item.keys().hasOnly([
+          'id', 'name', 'category', 'section', 'defaultQuantity',
+          'quantityRule', 'unit', 'tripStyles', 'tags', 'aliases', 'notes',
+          'archived', 'source'
+        ])
+        && item.id == itemId
+        && item.name is string
+        && item.name.size() > 0
+        && item.name.size() <= 200
+        && item.category in ['food', 'gear', 'clothes', 'hygiene-first-aid', 'extras']
+        && item.section is string
+        && item.defaultQuantity is number
+        && item.defaultQuantity >= 0
+        && item.unit is string
+        && item.tripStyles is list
+        && item.tags is list
+        && item.archived is bool
+        && item.source in ['seed', 'user', 'research']
+        && (!('aliases' in item) || item.aliases is list)
+        && (!('notes' in item) || item.notes is string)
+        && (!('quantityRule' in item) || item.quantityRule is map);
+    }
+
+    function validMasterItemEnvelope(itemId) {
+      return request.resource.data.keys().hasAll([
+          'id', 'revision', 'updatedAt', 'data', 'serverUpdatedAt'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'id', 'revision', 'updatedAt', 'data', 'serverUpdatedAt'
+        ])
+        && request.resource.data.id == itemId
+        && request.resource.data.revision is int
+        && request.resource.data.revision > 0
+        && request.resource.data.updatedAt is string
+        && request.resource.data.serverUpdatedAt is timestamp
+        && validMasterItem(itemId);
+    }
+
+    // The foundation permits only the first reviewed, non-sensitive payload.
+    // Every other collection stays deny-by-default until its privacy contract,
+    // serializer, and emulator tests have been added.
+    match /users/{userId}/masterItems/{itemId} {
+      allow read: if owns(userId);
+      allow create, update: if owns(userId) && validMasterItemEnvelope(itemId);
+      allow delete: if owns(userId);
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

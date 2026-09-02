@@ -17,7 +17,7 @@ export interface DiscoveryProvider { source: DiscoveredSite["source"]; search: (
 type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 
 export class ArcGisDiscoveryProvider implements DiscoveryProvider {
-  constructor(public readonly source: DiscoveredSite["source"], private readonly endpoint: string, private readonly request: FetchLike = fetch) {}
+  constructor(public readonly source: DiscoveredSite["source"], private readonly endpoint: string, private readonly request: FetchLike = (input, init) => fetch(input, init)) {}
   async search(coordinates: { latitude: number; longitude: number }, radiusMiles: number): Promise<DiscoveredSite[]> {
     const url = new URL(`${this.endpoint}/query`);
     url.search = new URLSearchParams({ where: "1=1", geometry: `${coordinates.longitude},${coordinates.latitude}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", distance: String(radiusMiles * 1609.34), units: "esriSRUnit_Meter", outFields: "*", returnGeometry: "true", f: "geojson" }).toString();

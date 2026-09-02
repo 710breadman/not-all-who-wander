@@ -19,6 +19,9 @@
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:firebase-rules": "node scripts/run-firebase-rules.mjs",
+    "test:firebase-integration": "node scripts/run-firebase-integration.mjs",
+    "test:firebase-live": "node scripts/run-firebase-live-smoke.mjs",
     "pretest:e2e": "npm run build",
     "test:e2e": "playwright test"
   },
@@ -26,6 +29,7 @@
     "@capacitor/android": "^8.5.0",
     "@capacitor/core": "^8.5.0",
     "@capacitor/geolocation": "^8.2.2",
+    "firebase": "^12.18.0",
     "idb": "^8.0.3",
     "maplibre-gl": "^6.6.0",
     "pmtiles": "^4.5.0",
@@ -35,6 +39,7 @@
   "devDependencies": {
     "@capacitor/cli": "^8.5.0",
     "@eslint/js": "^10.0.1",
+    "@firebase/rules-unit-testing": "^5.0.2",
     "@playwright/test": "^1.62.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
@@ -46,6 +51,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.5",
     "fake-indexeddb": "^6.2.5",
+    "firebase-tools": "^15.28.2",
     "globals": "^17.11.0",
     "jsdom": "^30.0.1",
     "typescript": "^6.0.3",

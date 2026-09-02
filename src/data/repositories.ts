@@ -10,9 +10,15 @@ import type {
   Trip,
   TripItem,
   TripItemStatus,
+  SavedMeal,
+  MealPlanEntry,
+  TripGroceryItem,
+  GroceryStatus,
+  MealCategory,
   UserProfile,
 } from "../domain/models";
 import type { CampingDatabase } from "./database";
+import { saveSyncableRecord, saveSyncableRecords } from "./syncRepository";
 
 export class MasterItemRepository {
   constructor(private readonly database: CampingDatabase) {}
@@ -43,14 +49,12 @@ export class MasterItemRepository {
   }
 
   async save(item: MasterItem): Promise<void> {
-    await this.database.put("masterItems", item);
+    await saveSyncableRecord(this.database, "masterItems", "masterItems", item);
   }
 
   async archive(id: string): Promise<void> {
-    const transaction = this.database.transaction("masterItems", "readwrite");
-    const item = await transaction.store.get(id);
-    if (item) await transaction.store.put({ ...item, archived: true });
-    await transaction.done;
+    const item = await this.database.get("masterItems", id);
+    if (item) await saveSyncableRecord(this.database, "masterItems", "masterItems", { ...item, archived: true });
   }
 }
 
@@ -67,20 +71,18 @@ export class TripRepository {
   }
 
   async save(trip: Trip): Promise<void> {
-    await this.database.put("trips", trip);
+    await saveSyncableRecord(this.database, "trips", "trips", trip);
   }
 
   async archive(id: string): Promise<void> {
-    const transaction = this.database.transaction("trips", "readwrite");
-    const trip = await transaction.store.get(id);
+    const trip = await this.database.get("trips", id);
     if (trip) {
-      await transaction.store.put({
+      await saveSyncableRecord(this.database, "trips", "trips", {
         ...trip,
         archived: true,
         updatedAt: new Date().toISOString(),
       });
     }
-    await transaction.done;
   }
 }
 
@@ -97,19 +99,17 @@ export class SiteRepository {
   }
 
   async save(site: Site): Promise<void> {
-    await this.database.put("sites", site);
+    await saveSyncableRecord(this.database, "sites", "sites", site);
   }
 
   async archive(id: string): Promise<void> {
-    const transaction = this.database.transaction("sites", "readwrite");
-    const site = await transaction.store.get(id);
+    const site = await this.database.get("sites", id);
     if (site)
-      await transaction.store.put({
+      await saveSyncableRecord(this.database, "sites", "sites", {
         ...site,
         archived: true,
         updatedAt: new Date().toISOString(),
       });
-    await transaction.done;
   }
 }
 
@@ -126,7 +126,7 @@ export class WaypointRepository {
   }
 
   async save(waypoint: Waypoint): Promise<void> {
-    await this.database.put("waypoints", waypoint);
+    await saveSyncableRecord(this.database, "waypoints", "waypoints", waypoint);
   }
 
   delete(id: string): Promise<void> {
@@ -151,7 +151,7 @@ export class RouteTrackRepository {
   async listByTrip(tripId: string): Promise<RouteTrack[]> {
     return await this.database.getAllFromIndex("routeTracks", "by-trip-id", tripId);
   }
-  async save(route: RouteTrack): Promise<void> { await this.database.put("routeTracks", route); }
+  async save(route: RouteTrack): Promise<void> { await saveSyncableRecord(this.database, "routeTracks", "routeTracks", route); }
   async delete(id: string): Promise<void> { await this.database.delete("routeTracks", id); }
 }
 
@@ -214,15 +214,11 @@ export class TripItemRepository {
   }
 
   async save(item: TripItem): Promise<void> {
-    await this.database.put("tripItems", item);
+    await saveSyncableRecord(this.database, "tripItems", "tripItems", item);
   }
 
   async saveMany(items: TripItem[]): Promise<void> {
-    const transaction = this.database.transaction("tripItems", "readwrite");
-    await Promise.all([
-      ...items.map((item) => transaction.store.put(item)),
-      transaction.done,
-    ]);
+    await saveSyncableRecords(this.database, "tripItems", "tripItems", items);
   }
 
   async delete(id: string): Promise<void> {
@@ -231,29 +227,86 @@ export class TripItemRepository {
 }
 
 export class UserProfileRepository {
-  private static readonly key = "userProfiles";
-
   constructor(private readonly database: CampingDatabase) {}
 
   async list(): Promise<UserProfile[]> {
-    return (
-      ((await this.database.get("meta", UserProfileRepository.key)) as
-        UserProfile[] | undefined) ?? []
-    ).sort((left, right) => left.name.localeCompare(right.name));
+    return (await this.database.getAllFromIndex("profiles", "by-updated-at"))
+      .sort((left, right) => left.name.localeCompare(right.name));
   }
 
   async save(profile: UserProfile): Promise<void> {
-    const profiles = await this.list();
-    const index = profiles.findIndex((entry) => entry.id === profile.id);
-    if (index === -1) profiles.push(profile);
-    else profiles[index] = profile;
-    await this.database.put("meta", profiles, UserProfileRepository.key);
+    await saveSyncableRecord(this.database, "profiles", "userProfiles", profile);
   }
+}
+
+export class SavedMealRepository {
+  constructor(private readonly database: CampingDatabase) {}
+
+  get(id: string): Promise<SavedMeal | undefined> { return this.database.get("savedMeals", id); }
+  async list(includeArchived = false): Promise<SavedMeal[]> {
+    const meals = includeArchived
+      ? await this.database.getAll("savedMeals")
+      : await this.database.getAllFromIndex("savedMeals", "by-archived", "0");
+    return sortMeals(meals);
+  }
+  async listByCategory(category: MealCategory): Promise<SavedMeal[]> {
+    return sortMeals((await this.database.getAllFromIndex("savedMeals", "by-category", category)).filter((meal) => !meal.archived));
+  }
+  async listFavorites(): Promise<SavedMeal[]> {
+    return sortMeals((await this.database.getAllFromIndex("savedMeals", "by-favorite", "1")).filter((meal) => !meal.archived));
+  }
+  async save(meal: SavedMeal): Promise<void> { await this.database.put("savedMeals", meal); }
+  async archive(id: string): Promise<void> {
+    const meal = await this.get(id);
+    if (meal) await this.save({ ...meal, archived: true, archivedIndex: "1", updatedAt: new Date().toISOString() });
+  }
+}
+
+export class MealPlanEntryRepository {
+  constructor(private readonly database: CampingDatabase) {}
+
+  get(id: string): Promise<MealPlanEntry | undefined> { return this.database.get("mealPlanEntries", id); }
+  async listByTrip(tripId: string): Promise<MealPlanEntry[]> {
+    return (await this.database.getAllFromIndex("mealPlanEntries", "by-trip-id", tripId))
+      .sort((left, right) => left.dayIndex - right.dayIndex || left.slot.localeCompare(right.slot));
+  }
+  async listByTripDay(tripId: string, dayIndex: number): Promise<MealPlanEntry[]> {
+    return await this.database.getAllFromIndex("mealPlanEntries", "by-trip-day", IDBKeyRange.only([tripId, dayIndex]));
+  }
+  async save(entry: MealPlanEntry): Promise<void> { await this.database.put("mealPlanEntries", entry); }
+  async delete(id: string): Promise<void> { await this.database.delete("mealPlanEntries", id); }
+}
+
+export class TripGroceryItemRepository {
+  constructor(private readonly database: CampingDatabase) {}
+
+  get(id: string): Promise<TripGroceryItem | undefined> { return this.database.get("tripGroceryItems", id); }
+  async listByTrip(tripId: string): Promise<TripGroceryItem[]> {
+    return (await this.database.getAllFromIndex("tripGroceryItems", "by-trip-id", tripId))
+      .sort((left, right) => (left.grocerySection ?? "Other").localeCompare(right.grocerySection ?? "Other") || left.name.localeCompare(right.name) || (left.unit ?? "").localeCompare(right.unit ?? ""));
+  }
+  async listByStatus(tripId: string, status: GroceryStatus): Promise<TripGroceryItem[]> {
+    return await this.database.getAllFromIndex("tripGroceryItems", "by-trip-status", IDBKeyRange.only([tripId, status]));
+  }
+  async save(item: TripGroceryItem): Promise<void> { await this.database.put("tripGroceryItems", item); }
+  async saveMany(items: TripGroceryItem[]): Promise<void> {
+    const transaction = this.database.transaction("tripGroceryItems", "readwrite");
+    await Promise.all(items.map((item) => transaction.store.put(item)));
+    await transaction.done;
+  }
+  async delete(id: string): Promise<void> { await this.database.delete("tripGroceryItems", id); }
 }
 
 function sortTripItems(items: TripItem[]): TripItem[] {
   return items.sort(
     (left, right) =>
       left.sortOrder - right.sortOrder || left.name.localeCompare(right.name),
+  );
+}
+
+function sortMeals(meals: SavedMeal[]): SavedMeal[] {
+  return meals.sort((left, right) =>
+    (right.lastUsedAt ?? "").localeCompare(left.lastUsedAt ?? "") ||
+    left.name.localeCompare(right.name),
   );
 }

@@ -1,12 +1,21 @@
 # Implementation Status
 
-Last updated: 2026-08-31
+Last updated: 2026-09-01
 
 ## Current sprint
 
-**SPRINT-20 — Cloud Sync & Live Shared Trips**
+**SPRINT-20 — Cloud Sync & Live Shared Trips (foundation in progress)**
 
-Sprint 19 is complete. Sprint 20 will use Firebase Authentication and Cloud Firestore for optional sync and live shared trips. Product decisions still needed before implementation: sign-in methods, shared-trip roles/invites, conflict behavior, and the exact private-data sync boundary.
+Sprint 19 is complete. Sprint 20 uses Firebase Authentication and Cloud Firestore for optional sync and live shared trips. The account shell supports Firebase email/password and Google popup sign-in when the app owner supplies the Firebase web configuration; it creates or matches a local profile by email. The v8 foundation now provides profile normalization, durable queue/metadata/conflict stores, Firestore memory-cache transport with delta pull/batched push, master-inventory-only explicit backup controls, deterministic conflict retention, optional App Check initialization, and deny-by-default Firestore rules with a strict inventory payload allowlist. In-flight local edits remain queued until their exact revision is acknowledged, and invalid/missing queue records are retained for recovery. Portable backup v7 includes profiles and meal-planner data and resets stale sync bookkeeping on restore. Firebase code is lazy-loaded so users of the local-only app do not pay its initial bundle cost. The local Firebase Emulator proves Auth sign-up, a queued IndexedDB inventory edit, the actual Firestore adapter, and protected readback end to end. Google sign-in now launches from the PC shortcut's authorized `localhost` origin instead of the rejected `127.0.0.1` origin, common auth failures have clear messages, and the Pages workflow accepts Firebase repository variables. A completed real-account sign-in and the deployed Pages domain still require owner-side account selection and Firebase/GitHub configuration. Broader data scopes, Android sign-in/App Check validation, and shared-trip roles/invites remain separate Sprint 20 work.
+
+The separate MP-01 through MP-05 meal-planner track is complete. Trips now have
+a local-first Meals workspace with day/slot Quick Add, saved-meal snapshots,
+Favorites/Recent/search, optional details and confirmed scaling, deterministic
+groceries with three durable states and manual overrides, prep-at-home notes,
+explicit undoable cooking-gear suggestions, Extra days, print/mobile layouts,
+and portable backup/restore. IndexedDB schema version 9 adds only forward
+migrations for `savedMeals`, `mealPlanEntries`, and `tripGroceryItems`; the
+database name and existing compatibility IDs are unchanged.
 
 Deployment housekeeping remains:
 - Enable GitHub Pages: Settings -> Pages -> Source -> GitHub Actions.
@@ -39,6 +48,7 @@ Deployment housekeeping remains:
 - direct four-state checklist markers: green packed, red buy, yellow pack, gray skip
 - collapsible item sections, stable checklist heading, editable sections, and quick custom-item creation
 - no-password people profiles with reusable personal item lists and per-person item ownership
+- local profiles accept a normalized, unique email or Gmail address; the home profile switcher opens profile creation when no profile exists
 - editable trip name, destination, address, dates, notes, people, and camper count
 - local trip sorting and portable share/import files for sending a trip to another app user
 - GitHub Pages workflow for a free, installable web distribution
@@ -69,13 +79,47 @@ Deployment housekeeping remains:
 - signed/reduced Android release pipeline that fails closed without an untracked signing key, plus GitHub debug-APK and Android-lint verification
 - **Path A Logical / PAL core brand system locked:** Field Guide palette, Lora + Inter + Caveat typography, PAL logo/icon sources, semantic checklist colors, canonical CSS/JSON tokens, and Codex implementation handoff under `brand/`
 - web/PWA manifest and favicon wired to PAL SVG assets and canonical Field Guide theme/background colors
+- phone trip actions consolidated into a grouped, viewport-safe burger menu, with outside-tap/Escape dismissal and direct access to every checklist, planning, navigation, offline, sharing, and export tool
+- MP-01 through MP-05 local-first meal planning, saved meals, consolidated groceries, prep tasks, and explicit cooking-gear integration
 
 ## Verification
+
+Google profile sign-in fix on 2026-09-01:
+- browser reproduction confirmed `auth/unauthorized-domain` on `127.0.0.1`
+- browser verification confirmed the Google flow launches from `localhost`
+- `Open PAL PC Site.cmd --check` — passed
+- `npm run lint` — passed
+- `npm run typecheck` — passed
+- `npm test` — 70 passed, 2 guarded Firebase tests skipped
+- `npm run test:firebase-integration` — passed
+- `npm run build` — passed
+- `npx playwright test` — 18 passed; 4 intentional desktop skips
+
+Meal planner MP-01 through MP-05 audit on 2026-09-01:
+- `npm run lint` — passed
+- `npm run typecheck` — passed
+- `npm test` — 67 passed, 2 guarded Firebase tests skipped
+- `npm run build` — passed; PWA manifest and service worker generated
+- `npm run test:e2e` — 18 passed across desktop Chromium and Pixel 5; 4 intentional desktop skips cover the phone-only exhaustive audit
+- `npm run android:debug` — passed
+- `:app:lintDebug` — passed
+
+Sprint 20 foundation audit on 2026-09-01:
+- `npm run lint` — passed
+- `npm run typecheck` — passed
+- `npm test` — 56 passed, 2 Firebase live/emulator tests skipped outside their guarded runs
+- `npm run test:firebase-rules` — 4 passed
+- `npm run test:firebase-integration` — passed
+- `npm run build` — passed; initial app JavaScript reduced from about 953 kB to 386 kB before gzip by lazy-loading cloud features
+- `npm run test:e2e` — 12 passed across desktop Chromium and Pixel 5 profiles, including every trip-menu action and every local home-management flow
+- `npm run android:debug` — passed after restoring the ignored local Android SDK path
+- `:app:lintDebug` — passed
+- `npm audit --omit=dev` — no production dependency vulnerabilities
 
 Last recorded verification:
 - `npm run lint` — passed
 - `npm run typecheck` — passed
-- `npm test` — 44 passed
+- `npm test` — 46 passed
 - `npm run build` — passed; manifest and service worker generated
 - `npm run test:e2e` — 8 passed across desktop Chromium and Pixel 5 profiles
 - `npm run android:debug` — passed against Android API 36 with JDK 21
@@ -87,11 +131,12 @@ Sprint 09 through Sprint 19 application changes on 2026-08-31 passed all gates.
 PAL binary PWA, favicon, and Android launcher exports were applied and verified on 2026-08-31:
 - `npm run lint` — passed
 - `npm run typecheck` — passed
-- `npm test` — 44 passed
+- `npm test` — 46 passed
 - `npm run build` — passed; PWA manifest and service worker generated
 - `npm run test:e2e` — 8 passed across desktop Chromium and Pixel 5 profiles
 - `npm run android:debug` — passed with the installed Android SDK and JDK 21
 - `:app:lintDebug` — passed
+- TCL T609DL physical device — debug APK installed; cold launch completed in 1.5s, home/menu and new-trip dialog rendered correctly, with no app crash in Logcat
 
 ## Ordered next work
 

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="PAL app icon">
+  <rect width="1024" height="1024" rx="210" fill="#24452F"/>
+  <path d="M270 605V355c0-153 108-247 242-247s242 94 242 247v250" fill="none" stroke="#F7F0DE" stroke-width="34" stroke-linecap="round"/>
+  <path d="M315 563 438 355l75 112 76-126 124 222Z" fill="#F7F0DE" opacity=".96"/>
+  <path d="M482 574c-87 47-126 104-108 172 14 52 76 84 180 97-75-41-100-76-74-112 22-31 70-54 145-72-75-18-123-42-143-85Z" fill="#D2B98D"/>
+  <path d="M335 565 410 433l44 66-42 66Z" fill="#24452F"/>
+  <path d="M602 565 659 462l58 103Z" fill="#24452F"/>
+  <text x="512" y="930" text-anchor="middle" fill="#F7F0DE" font-size="155" font-weight="700" font-family="Lora, Georgia, serif" letter-spacing="8">PAL</text>
+</svg>

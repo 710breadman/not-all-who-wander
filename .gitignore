@@ -3,6 +3,7 @@ dist/
 coverage/
 playwright-report/
 test-results/
+firestore-debug.log
 *.local
 android/keystore.properties
 android/local.properties

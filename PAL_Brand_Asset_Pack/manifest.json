@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "brand": "Path A Logical",
+  "shorthand": "PAL",
+  "created": "2026-08-31",
+  "canonical_files": [
+    "svg/pal-app-icon.svg",
+    "svg/pal-mark.svg",
+    "svg/pal-mark-monochrome.svg",
+    "svg/path-a-logical-lockup.svg",
+    "svg/pal-favicon.svg",
+    "tokens/brand-tokens.json",
+    "tokens/brand-tokens.css"
+  ],
+  "notes": [
+    "Field Guide palette is canonical.",
+    "Green/red/yellow/gray checklist visual statuses are locked.",
+    "Caveat is accent-only.",
+    "Name remains subject to release clearance."
+  ]
+}

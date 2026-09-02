@@ -21,6 +21,8 @@ The app currently supports:
 - local JSON backup/restore
 - CSV checklist export
 - portable trip share/import snapshots
+- fast trip meal planning with Quick Add and reusable saved meals
+- consolidated offline grocery states, prep notes, and explicit cooking-gear suggestions
 - installable/offline PWA shell
 - desktop and phone automated coverage
 
@@ -58,18 +60,63 @@ npm run dev
 
 Vite prints the local development URL. Open it in a modern browser.
 
+## Optional Firebase sign-in and cloud backup
+
+Path A Logical works without an account. To enable the optional Google popup and
+email/password accounts, create a Firebase web app, enable **Google** and
+**Email/Password** in Firebase Authentication, create a Firestore database on
+the Spark plan, and add the development and deployed domains to Firebase's
+Authorized domains list. Copy `.env.example` to
+`.env.local` and fill in the four Firebase web configuration values.
+Use `http://localhost:...` for local Google sign-in; Firebase treats
+`127.0.0.1` as a different domain and rejects it unless it is separately
+authorized. The included **Open PAL PC Site** launcher uses `localhost`.
+
+For GitHub Pages, add the same four values as repository variables named
+`VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`,
+`VITE_FIREBASE_PROJECT_ID`, and `VITE_FIREBASE_APP_ID`. Also add
+`710breadman.github.io` to Firebase Authentication's Authorized domains. The
+Pages workflow injects those public client identifiers during its build.
+
+The Firebase configuration values identify the public web app; do not put a
+service-account key or any admin credential in the browser. Sign-in creates or
+matches a local profile by email. In **Backup & restore**, the user can
+explicitly enable the currently approved cloud scope: master inventory only.
+Trips, sites, coordinates, tracks, medical/emergency notes, maps, caches, and
+profile credentials remain local. Run `npm run test:firebase-rules` to test the
+Firestore rules contract against the emulator. Add the optional App Check site
+key only after monitoring device traffic; enforcement is a Firebase-console
+release step.
+
+JSON backups include inventory, trips, checklist items, meal plans, saved meals,
+groceries, profiles, sites, waypoints, weather snapshots, and routes. Downloaded PMTiles archives and
+prepared offline packs are intentionally device-local and are not included.
+Restoring a backup clears old cloud queue metadata and leaves cloud backup off
+until the user explicitly enables it again.
+
 ## Verify
 
 ```powershell
 npm run lint
 npm run typecheck
 npm test
+npm run test:firebase-rules
+npm run test:firebase-integration
 npm run build
 npx playwright install chromium
 npm run test:e2e
 ```
 
 `npm run preview` serves the production build locally.
+
+After publishing the Firestore rules, run the guarded live Firebase check from
+PowerShell. It creates a temporary account and inventory record, confirms an
+owner can read and write it, confirms signed-out access is denied, then removes
+the temporary data.
+
+```powershell
+$env:FIREBASE_LIVE_SMOKE = "confirm"; npm run test:firebase-live
+```
 
 ## Architecture
 

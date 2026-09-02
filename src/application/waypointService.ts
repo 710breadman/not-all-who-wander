@@ -15,14 +15,14 @@ function coordinatesFromBrowser(provider: LocationProvider): Promise<Coordinates
   return new Promise((resolve, reject) => provider.getCurrentPosition(
     (position) => resolve({ latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy, capturedAt: new Date(position.timestamp).toISOString() }),
     (error) => reject(new Error(error.code === error.PERMISSION_DENIED ? "Location permission was not granted." : "Current location is unavailable.")),
-    { enableHighAccuracy: false, maximumAge: 60_000, timeout: 12_000 },
+    { enableHighAccuracy: false, maximumAge: 0, timeout: 12_000 },
   ));
 }
 
 async function coordinatesFromNative(): Promise<Coordinates> {
   const permissions = await Geolocation.requestPermissions({ permissions: ["coarseLocation"] });
   if (permissions.coarseLocation !== "granted") throw new Error("Location permission was not granted.");
-  const position = await Geolocation.getCurrentPosition({ enableHighAccuracy: false, maximumAge: 60_000, timeout: 12_000 });
+  const position = await Geolocation.getCurrentPosition({ enableHighAccuracy: false, maximumAge: 0, timeout: 12_000 });
   return {
     latitude: position.coords.latitude,
     longitude: position.coords.longitude,

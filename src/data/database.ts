@@ -13,11 +13,18 @@ import type {
   Trip,
   TripItem,
   TripItemStatus,
+  SyncConflict,
+  SyncMetadata,
+  SyncQueueEntry,
+  SavedMeal,
+  MealPlanEntry,
+  TripGroceryItem,
+  UserProfile,
 } from "../domain/models";
 import { loadChecklistSeed } from "./seedLoader";
 
 export const DATABASE_NAME = "camping-checklist";
-export const DATABASE_VERSION = 7;
+export const DATABASE_VERSION = 9;
 
 interface CampingDatabaseSchema extends DBSchema {
   meta: {
@@ -64,6 +71,26 @@ interface CampingDatabaseSchema extends DBSchema {
     value: OfflineTripPack;
     indexes: { "by-trip-id": string; "by-updated-at": string };
   };
+  profiles: {
+    key: string;
+    value: UserProfile;
+    indexes: { "by-updated-at": string };
+  };
+  syncMetadata: {
+    key: string;
+    value: SyncMetadata;
+    indexes: { "by-entity": [string, string]; "by-user-state": [string, string] };
+  };
+  syncQueue: {
+    key: string;
+    value: SyncQueueEntry;
+    indexes: { "by-entity": [string, string]; "by-user-created-at": [string, string] };
+  };
+  syncConflicts: {
+    key: string;
+    value: SyncConflict;
+    indexes: { "by-entity": [string, string] };
+  };
   tripItems: {
     key: string;
     value: TripItem;
@@ -73,12 +100,32 @@ interface CampingDatabaseSchema extends DBSchema {
       "by-trip-status": [string, TripItemStatus];
     };
   };
+  savedMeals: {
+    key: string;
+    value: SavedMeal;
+    indexes: {
+      "by-category": SavedMeal["category"];
+      "by-favorite": SavedMeal["favoriteIndex"];
+      "by-archived": SavedMeal["archivedIndex"];
+      "by-last-used": string;
+    };
+  };
+  mealPlanEntries: {
+    key: string;
+    value: MealPlanEntry;
+    indexes: { "by-trip-id": string; "by-trip-day": [string, number] };
+  };
+  tripGroceryItems: {
+    key: string;
+    value: TripGroceryItem;
+    indexes: { "by-trip-id": string; "by-trip-status": [string, TripGroceryItem["status"]] };
+  };
 }
 
 export type CampingDatabase = IDBPDatabase<CampingDatabaseSchema>;
 type UpgradeTransaction = IDBPTransaction<
   CampingDatabaseSchema,
-  ["meta", "masterItems", "trips", "sites", "waypoints", "weatherSnapshots", "routeTracks", "offlineMapRegions", "offlineTripPacks", "tripItems"],
+  ["meta", "masterItems", "trips", "sites", "waypoints", "weatherSnapshots", "routeTracks", "offlineMapRegions", "offlineTripPacks", "profiles", "syncMetadata", "syncQueue", "syncConflicts", "tripItems", "savedMeals", "mealPlanEntries", "tripGroceryItems"],
   "versionchange"
 >;
 
@@ -153,6 +200,39 @@ export const databaseMigrations: readonly DatabaseMigration[] = [
       packs.createIndex("by-updated-at", "updatedAt");
     },
   },
+  {
+    version: 8,
+    migrate(database) {
+      const profiles = database.createObjectStore("profiles", { keyPath: "id" });
+      profiles.createIndex("by-updated-at", "updatedAt");
+      const metadata = database.createObjectStore("syncMetadata", { keyPath: "key" });
+      metadata.createIndex("by-entity", ["entityType", "entityId"]);
+      metadata.createIndex("by-user-state", ["userId", "syncState"]);
+      const queue = database.createObjectStore("syncQueue", { keyPath: "id" });
+      queue.createIndex("by-entity", ["entityType", "entityId"]);
+      queue.createIndex("by-user-created-at", ["userId", "createdAt"]);
+      const conflicts = database.createObjectStore("syncConflicts", { keyPath: "id" });
+      conflicts.createIndex("by-entity", ["entityType", "entityId"]);
+    },
+  },
+  {
+    version: 9,
+    migrate(database) {
+      const meals = database.createObjectStore("savedMeals", { keyPath: "id" });
+      meals.createIndex("by-category", "category");
+      meals.createIndex("by-favorite", "favoriteIndex");
+      meals.createIndex("by-archived", "archivedIndex");
+      meals.createIndex("by-last-used", "lastUsedAt");
+
+      const plans = database.createObjectStore("mealPlanEntries", { keyPath: "id" });
+      plans.createIndex("by-trip-id", "tripId");
+      plans.createIndex("by-trip-day", ["tripId", "dayIndex"]);
+
+      const groceries = database.createObjectStore("tripGroceryItems", { keyPath: "id" });
+      groceries.createIndex("by-trip-id", "tripId");
+      groceries.createIndex("by-trip-status", ["tripId", "status"]);
+    },
+  },
 ];
 
 function runMigrations(
@@ -194,6 +274,26 @@ async function ensureSeedData(database: CampingDatabase, seed: ChecklistSeed): P
   await transaction.done;
 }
 
+async function migrateProfilesFromMeta(database: CampingDatabase): Promise<void> {
+  const transaction = database.transaction(["meta", "profiles"], "readwrite");
+  const meta = transaction.objectStore("meta");
+  const profiles = transaction.objectStore("profiles");
+  if ((await meta.get("profilesStoreMigrated")) !== true) {
+    const legacy = await meta.get("userProfiles");
+    if (Array.isArray(legacy)) {
+      for (const profile of legacy) {
+        if (isUserProfile(profile)) await profiles.put(profile);
+      }
+    }
+    await meta.put(true, "profilesStoreMigrated");
+  }
+  await transaction.done;
+}
+
+function isUserProfile(value: unknown): value is UserProfile {
+  return typeof value === "object" && value !== null && "id" in value && typeof value.id === "string";
+}
+
 interface OpenDatabaseOptions {
   databaseName?: string;
   seed?: ChecklistSeed;
@@ -210,6 +310,7 @@ export async function openCampingDatabase(options: OpenDatabaseOptions = {}): Pr
 
   try {
     await ensureSeedData(database, seed);
+    await migrateProfilesFromMeta(database);
     return database;
   } catch (error) {
     database.close();

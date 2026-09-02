@@ -10,7 +10,7 @@ export interface WeatherProvider {
 }
 
 export class NwsWeatherProvider implements WeatherProvider {
-  constructor(private readonly request: FetchLike = fetch) {}
+  constructor(private readonly request: FetchLike = (input, init) => fetch(input, init)) {}
 
   async fetchSnapshot(tripId: string, coordinates: ForecastCoordinates): Promise<WeatherSnapshot> {
     const headers = { Accept: "application/geo+json" };

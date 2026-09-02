@@ -97,3 +97,40 @@ then car-only comfort/electronics items tagged as car-only are excluded by defau
 
 ## A-017 — Data integrity
 No physical seed item appears as duplicate active MasterItems solely because it could conceptually belong to two categories.
+
+## A-018 — Fast meal planning
+
+Given a three-day trip and no saved meals, a camper can fill any Breakfast,
+Lunch, Dinner, Snacks, or Treats slot with non-empty plain text. Replacing,
+clearing, moving, or undoing one slot does not change another slot.
+
+## A-019 — Saved meal snapshots
+
+When a saved meal is put on a trip, the plan stores a complete snapshot.
+Editing or archiving the reusable meal later does not change trip history.
+
+## A-020 — Groceries
+
+Structured ingredients consolidate only when normalized names and units match.
+Need to Buy, Already Have, Packed, manual rows, notes, and overrides persist
+offline and survive rebuilds when their matching ingredient remains.
+
+## A-021 — Meal gear
+
+Prep-at-home notes appear in Before Trip. Missing cooking equipment is only
+suggested; checklist items are added after an explicit action and that action is
+undoable without changing the meal plan.
+
+## A-022 — Meal portability and layout
+
+Saved meals, plan snapshots, groceries, overrides, and statuses survive JSON
+backup/restore. The Plan and Groceries views fit a narrow phone without
+horizontal scrolling and print without editing controls.
+
+## A-023 — Google profile sign-in
+
+Given Firebase web configuration and an authorized app hostname, choosing
+Continue with Google opens Firebase's Google account flow. After a successful
+sign-in, PAL creates or reuses the one local profile with the same normalized
+email and makes it active. An unauthorized hostname, disabled provider, blocked
+popup, or network failure leaves local data unchanged and shows a useful error.

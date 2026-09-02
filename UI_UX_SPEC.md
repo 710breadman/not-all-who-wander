@@ -41,6 +41,22 @@ A clear entry point, not buried in Settings.
 - trip name
 - overall progress
 - search
+- one trip-actions burger menu for secondary tools
+
+The burger menu groups checklist actions, planning and conditions, offline and
+navigation tools, and sharing/export. Packing mode, weather, maps, waypoints,
+safety, GPX, offline tools, and other secondary actions belong here so the
+checklist remains the visual focus on a phone. The menu must fit the viewport,
+scroll when needed, and close after a selection, an outside tap, or Escape.
+
+### Meals
+
+The trip menu opens a focused `Plan | Groceries | Meals` workspace. Plan leads
+with trip day and meal slot, and always offers plain-text Quick Add. Saved-meal
+details stay behind More details. Shortened trips keep out-of-range meals under
+Extra days. Grocery rebuilds preserve user states and overrides. Missing cooking
+gear is advisory and enters the checklist only after the user taps Add missing
+gear. Plan and grocery views use a clean print layout with controls hidden.
 
 ### Tab bar
 Scrollable if necessary:
@@ -75,7 +91,7 @@ Status must be visually obvious.
 - All
 
 ### Add
-Floating or persistent Add Item action.
+Add Item is the first action in the trip burger menu.
 
 ## Packing mode
 

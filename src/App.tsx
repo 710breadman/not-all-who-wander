@@ -1,4 +1,4 @@
-import { FormEvent, lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import { FormEvent, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   downloadText,
   readSharedTripFile,
@@ -20,10 +20,11 @@ import {
   updateTrip,
   updateTripItem,
 } from "./application/tripService";
+import type { CloudAccount } from "./application/authService";
+import { isFirebaseConfigured } from "./infrastructure/firebaseConfig";
 import { listSites, saveTripDestinationAsSite } from "./application/siteService";
 import { getDependencyWarnings, itineraryText } from "./application/preflightService";
 import { preflightChecks } from "./domain/models";
-import { DataTools } from "./components/DataTools";
 import { InventoryScreen } from "./components/InventoryScreen";
 import { SitesScreen } from "./components/SitesScreen";
 import { WaypointsDialog } from "./components/WaypointsDialog";
@@ -34,6 +35,7 @@ import { GpxDialog } from "./components/GpxDialog";
 import { AutomaticTrackRecordingDialog as TrackRecordingDialog } from "./components/AutomaticTrackRecordingDialog";
 import { OfflineMapRegionsDialog } from "./components/OfflineMapRegionsDialog";
 import { OfflineTripPacksDialog } from "./components/OfflineTripPacksDialog";
+import { MealPlannerDialog } from "./components/MealPlannerDialog";
 import { loadChecklistSeed } from "./data/seedLoader";
 import type {
   CampingLevel,
@@ -89,6 +91,9 @@ const levelDetails: Record<
 const MapDialog = lazy(() =>
   import("./components/MapDialog").then(({ MapDialog: Component }) => ({ default: Component })),
 );
+const DataTools = lazy(() =>
+  import("./components/DataTools").then(({ DataTools: Component }) => ({ default: Component })),
+);
 type Filter = "all" | TripItemStatus | "remaining";
 type Screen = "home" | "inventory" | "data" | "profiles" | "sites";
 type ChecklistTab = ChecklistCategory | "personal";
@@ -102,8 +107,10 @@ export default function App() {
   const [items, setItems] = useState<TripItem[]>([]);
   const [activeCategory, setActiveCategory] = useState<ChecklistTab>("food");
   const [activeProfileId, setActiveProfileId] = useState<string>();
+  const [cloudAccount, setCloudAccount] = useState<CloudAccount>();
   const [showProfileSwitch, setShowProfileSwitch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showTripMenu, setShowTripMenu] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [showPreflight, setShowPreflight] = useState(false);
   const [showWaypoints, setShowWaypoints] = useState(false);
@@ -115,6 +122,7 @@ export default function App() {
   const [showTrackRecording, setShowTrackRecording] = useState(false);
   const [showOfflineMaps, setShowOfflineMaps] = useState(false);
   const [showOfflinePacks, setShowOfflinePacks] = useState(false);
+  const [showMeals, setShowMeals] = useState(false);
   const [visibleStatuses, setVisibleStatuses] = useState<
     Record<TripItemStatus, boolean>
   >({
@@ -141,6 +149,24 @@ export default function App() {
     [],
   );
   const refreshSites = useCallback(async () => setSites(await listSites(true)), []);
+  const activateCloudAccount = useCallback(
+    async (account: CloudAccount) => {
+      const existing = (await listProfiles()).find(
+        (profile) => profile.email?.toLowerCase() === account.email,
+      );
+      const profile =
+        existing ??
+        (await saveProfile({
+          name: account.name,
+          email: account.email,
+          personalItems: [],
+        }));
+      await refreshProfiles();
+      setCloudAccount(account);
+      setActiveProfileId(profile.id);
+    },
+    [refreshProfiles],
+  );
   const openTrip = useCallback(async (next: Trip) => {
     setBusy(true);
     setError("");
@@ -171,6 +197,83 @@ export default function App() {
       });
     return () => {
       alive = false;
+    };
+  }, []);
+  useEffect(() => {
+    let isInitialAuthState = true;
+    let aliveCloudSubscription = true;
+    let unsubscribe: () => void = () => undefined;
+    if (isFirebaseConfigured()) {
+      void import("./application/authService").then(({ subscribeToCloudAccount }) => {
+        if (!aliveCloudSubscription) return;
+        unsubscribe = subscribeToCloudAccount((account) => {
+          if (isInitialAuthState) {
+            isInitialAuthState = false;
+            if (account) {
+              void activateCloudAccount(account).catch(() => {
+                if (aliveCloudSubscription) {
+                  setError("Cloud sign-in succeeded, but the local profile could not be opened.");
+                }
+              });
+            }
+            return;
+          }
+          setCloudAccount(account);
+        });
+      });
+    }
+    return () => {
+      aliveCloudSubscription = false;
+      unsubscribe();
+    };
+  }, [activateCloudAccount]);
+
+  useEffect(() => {
+    if (!cloudAccount) return;
+    const retry = () => {
+      void import("./application/cloudBackupService")
+        .then(({ retryEnabledInventoryCloudBackup }) =>
+          retryEnabledInventoryCloudBackup(cloudAccount.id),
+        )
+        .catch(() => undefined);
+    };
+    retry();
+    window.addEventListener("online", retry);
+    return () => window.removeEventListener("online", retry);
+  }, [cloudAccount]);
+  useEffect(() => {
+    if (!showMenu && !showTripMenu) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowMenu(false);
+        setShowTripMenu(false);
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [showMenu, showTripMenu]);
+  useEffect(() => {
+    const dismiss = (backdrop: Element | undefined) => {
+      backdrop
+        ?.querySelector<HTMLButtonElement>('button[aria-label="Close dialog"]')
+        ?.click();
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      const backdrops = document.querySelectorAll(".dialog-backdrop");
+      dismiss(backdrops.item(backdrops.length - 1) ?? undefined);
+    };
+    const closeOnBackdrop = (event: PointerEvent) => {
+      const target = event.target;
+      if (target instanceof Element && target.classList.contains("dialog-backdrop")) {
+        dismiss(target);
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    window.addEventListener("pointerdown", closeOnBackdrop);
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("pointerdown", closeOnBackdrop);
     };
   }, []);
 
@@ -274,6 +377,17 @@ export default function App() {
     setActiveCategory(item.category);
     setShowCustom(false);
   }
+  async function promoteItem(item: TripItem) {
+    const master = await promoteTripItem(item);
+    setItems((current) =>
+      current.map((entry) =>
+        entry.id === item.id
+          ? { ...entry, masterItemId: master.id, custom: false }
+          : entry,
+      ),
+    );
+    setMessage(`${master.name} added to the master inventory.`);
+  }
   async function shareTrip() {
     if (!trip) return;
     const filename = `${slug(trip.name)}.camptrip.json`;
@@ -338,14 +452,17 @@ export default function App() {
     return <InventoryScreen onBack={() => setScreen("home")} />;
   if (screen === "data")
     return (
-      <DataTools
-        onBack={() => setScreen("home")}
-        onRestored={() => {
-          setTrip(undefined);
-          setScreen("home");
-          void refreshTrips();
-        }}
-      />
+      <Suspense fallback={<p className="empty-state">Loading data tools…</p>}>
+        <DataTools
+          onBack={() => setScreen("home")}
+          cloudAccount={cloudAccount}
+          onRestored={() => {
+            setTrip(undefined);
+            setScreen("home");
+            void Promise.all([refreshTrips(), refreshProfiles(), refreshSites()]);
+          }}
+        />
+      </Suspense>
     );
   if (screen === "profiles")
     return (
@@ -365,30 +482,73 @@ export default function App() {
     );
   if (!trip)
     return (
-      <Home
-        seedCount={seed.items.length}
-        trips={trips}
-        busy={busy}
-        error={error}
-        onNew={() => setShowNewTrip(true)}
-        onOpen={openTrip}
-        onInventory={() => setScreen("inventory")}
-        onSites={() => setScreen("sites")}
-        onDataTools={() => setScreen("data")}
-        onProfiles={() => setScreen("profiles")}
-        onImport={importTrip}
-        profiles={profiles}
-        sites={sites}
-        activeProfile={profiles.find(
-          (profile) => profile.id === activeProfileId,
+      <>
+        <Home
+          seedCount={seed.items.length}
+          trips={trips}
+          busy={busy}
+          error={error}
+          onNew={() => {
+            setShowMenu(false);
+            setShowNewTrip(true);
+          }}
+          onOpen={openTrip}
+          onInventory={() => {
+            setShowMenu(false);
+            setScreen("inventory");
+          }}
+          onSites={() => {
+            setShowMenu(false);
+            setScreen("sites");
+          }}
+          onDataTools={() => {
+            setShowMenu(false);
+            setScreen("data");
+          }}
+          onProfiles={() => {
+            setShowMenu(false);
+            setScreen("profiles");
+          }}
+          onImport={async (file) => {
+            setShowMenu(false);
+            await importTrip(file);
+          }}
+          profiles={profiles}
+          sites={sites}
+          activeProfile={profiles.find(
+            (profile) => profile.id === activeProfileId,
+          )}
+          onSwitchProfile={() => {
+            setShowMenu(false);
+            setShowProfileSwitch(true);
+          }}
+          menuOpen={showMenu}
+          onToggleMenu={() => setShowMenu((value) => !value)}
+          showNew={showNewTrip}
+          onCreate={create}
+          onDismiss={() => setShowNewTrip(false)}
+        />
+        {showProfileSwitch && (
+          <ProfileSwitchDialog
+            profiles={profiles}
+            activeProfileId={activeProfileId}
+            cloudAccount={cloudAccount}
+            onClose={() => setShowProfileSwitch(false)}
+            onSelect={setActiveProfileId}
+            onCloudAccount={activateCloudAccount}
+            onCloudSignOut={async () => {
+              const { signOutOfCloudAccount } = await import("./application/authService");
+              await signOutOfCloudAccount();
+              setCloudAccount(undefined);
+              setActiveProfileId(undefined);
+            }}
+            onCreateProfile={() => {
+              setShowProfileSwitch(false);
+              setScreen("profiles");
+            }}
+          />
         )}
-        onSwitchProfile={() => setShowProfileSwitch(true)}
-        menuOpen={showMenu}
-        onToggleMenu={() => setShowMenu((value) => !value)}
-        showNew={showNewTrip}
-        onCreate={create}
-        onDismiss={() => setShowNewTrip(false)}
-      />
+      </>
     );
 
   const effectiveFilter = packingMode ? "remaining" : filter;
@@ -421,26 +581,131 @@ export default function App() {
   return (
     <main className={`app-shell ${packingMode ? "packing-mode" : ""}`}>
       <header className="trip-header">
-        <button
-          className="text-button"
-          type="button"
-          onClick={() => setTrip(undefined)}
-        >
-          ← All trips
-        </button>
+        <div className="trip-header-top">
+          <button
+            className="text-button"
+            type="button"
+            onClick={() => {
+              setShowTripMenu(false);
+              setTrip(undefined);
+            }}
+          >
+            ← All trips
+          </button>
+          <div className="trip-menu-wrap">
+            <button
+              className="trip-menu-button"
+              type="button"
+              aria-label="Open trip menu"
+              aria-expanded={showTripMenu}
+              aria-controls="trip-actions-menu"
+              onClick={() => setShowTripMenu((open) => !open)}
+            >
+              ☰
+            </button>
+            {showTripMenu && (
+              <>
+                <button
+                  className="trip-menu-scrim"
+                  type="button"
+                  aria-label="Close trip menu"
+                  onClick={() => setShowTripMenu(false)}
+                />
+                <nav id="trip-actions-menu" className="trip-action-menu" aria-label="Trip actions">
+                  <div role="group" aria-label="Checklist actions">
+                  <span className="trip-menu-label">CHECKLIST</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowTripMenu(false);
+                      setShowCustom(true);
+                    }}
+                  >
+                    + Add item
+                  </button>
+                  <button
+                    type="button"
+                    aria-label={packingMode ? "Exit packing mode" : "Packing mode"}
+                    aria-pressed={packingMode}
+                    onClick={() => {
+                      setShowTripMenu(false);
+                      setPackingMode((current) => !current);
+                    }}
+                  >
+                    {packingMode ? "Exit packing mode" : "Packing mode"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowTripMenu(false);
+                      setEditingTrip(true);
+                    }}
+                  >
+                    Edit trip
+                  </button>
+                  </div>
+                  <div role="group" aria-label="Planning actions">
+                  <span className="trip-menu-label">PLAN & CONDITIONS</span>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowPreflight(true); }}>Trip safety</button>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowMeals(true); }}>Meals</button>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowWeather(true); }}>Weather</button>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowMap(true); }}>Map</button>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowWaypoints(true); }}>Waypoints</button>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowDiscovery(true); }}>Discover sites</button>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowContextLayers(true); }}>Safety layers</button>
+                  </div>
+                  <div role="group" aria-label="Offline and navigation actions">
+                  <span className="trip-menu-label">OFFLINE & NAVIGATION</span>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowTrackRecording(true); }}>Record track</button>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowGpx(true); }}>GPX routes & tracks</button>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowOfflineMaps(true); }}>Offline maps</button>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowOfflinePacks(true); }}>Offline trip pack</button>
+                  </div>
+                  <div role="group" aria-label="Share and export actions">
+                  <span className="trip-menu-label">SHARE & EXPORT</span>
+                  <button type="button" onClick={() => { setShowTripMenu(false); setShowShare(true); }}>Share trip</button>
+                  {trip.destination && !trip.siteId && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowTripMenu(false);
+                        void saveTripDestinationAsSite(trip).then(async (site) => {
+                          if (!site) return;
+                          await updateTrip(trip.id, { siteId: site.id });
+                          setTrip((current) => current ? { ...current, siteId: site.id } : current);
+                          await refreshSites();
+                          setMessage(`Saved ${site.name} as a site idea.`);
+                        });
+                      }}
+                    >
+                      Save site idea
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowTripMenu(false);
+                      downloadText(
+                        `${slug(trip.name)}-checklist.csv`,
+                        tripItemsToCsv(trip, items),
+                        "text/csv",
+                      );
+                    }}
+                  >
+                    Export checklist CSV
+                  </button>
+                  </div>
+                </nav>
+              </>
+            )}
+          </div>
+        </div>
         <p className="eyebrow">
           {trip.setupLevel ? levelDetails[trip.setupLevel].label : trip.style} ·{" "}
           {trip.camperCount} camper{trip.camperCount === 1 ? "" : "s"}
         </p>
         <div className="trip-title-row">
           <h1>{trip.name}</h1>
-          <button
-            className="text-button"
-            type="button"
-            onClick={() => setEditingTrip(true)}
-          >
-            Edit trip
-          </button>
         </div>
         {trip.destination && (
           <p className="trip-destination">
@@ -467,86 +732,6 @@ export default function App() {
           <div>
             <p className="eyebrow">TRIP CHECKLIST</p>
             <h2 id="checklist-heading">Checklist</h2>
-          </div>
-          <div className="header-actions">
-            <button
-              className={
-                packingMode ? "secondary-action selected" : "secondary-action"
-              }
-              type="button"
-              aria-pressed={packingMode}
-              onClick={() => setPackingMode((current) => !current)}
-            >
-              {packingMode ? "Exit packing" : "Packing mode"}
-            </button>
-            <button
-              className="secondary-action"
-              type="button"
-              onClick={() => setShowPreflight(true)}
-            >
-              Trip safety
-            </button>
-            <button className="secondary-action" type="button" onClick={() => setShowWaypoints(true)}>
-              Waypoints
-            </button>
-            <button className="secondary-action" type="button" onClick={() => setShowWeather(true)}>
-              Weather
-            </button>
-            <button className="secondary-action" type="button" onClick={() => setShowMap(true)}>
-              Map
-            </button>
-            <button className="secondary-action" type="button" onClick={() => setShowDiscovery(true)}>
-              Discover sites
-            </button>
-            <button className="secondary-action" type="button" onClick={() => setShowContextLayers(true)}>Safety layers</button>
-            <button className="secondary-action" type="button" onClick={() => setShowGpx(true)}>GPX</button>
-            <button className="secondary-action" type="button" onClick={() => setShowTrackRecording(true)}>Record track</button>
-            <button className="secondary-action" type="button" onClick={() => setShowOfflineMaps(true)}>Offline maps</button>
-            <button className="secondary-action" type="button" onClick={() => setShowOfflinePacks(true)}>Offline pack</button>
-            <button
-              className="secondary-action"
-              type="button"
-              onClick={() => setShowShare(true)}
-            >
-              Share trip
-            </button>
-            {trip.destination && !trip.siteId && (
-              <button
-                className="secondary-action"
-                type="button"
-                onClick={() =>
-                  void saveTripDestinationAsSite(trip).then(async (site) => {
-                    if (!site) return;
-                    await updateTrip(trip.id, { siteId: site.id });
-                    setTrip((current) => current ? { ...current, siteId: site.id } : current);
-                    await refreshSites();
-                    setMessage(`Saved ${site.name} as a site idea.`);
-                  })
-                }
-              >
-                Save site idea
-              </button>
-            )}
-            <button
-              className="secondary-action"
-              type="button"
-              onClick={() =>
-                downloadText(
-                  `${slug(trip.name)}-checklist.csv`,
-                  tripItemsToCsv(trip, items),
-                  "text/csv",
-                )
-              }
-            >
-              Export CSV
-            </button>
-            <button
-              className="primary-action"
-              type="button"
-              onClick={() => setShowCustom(true)}
-            >
-              + Add item
-            </button>
           </div>
         </div>
         <nav className="category-tabs" aria-label="Checklist categories">
@@ -630,7 +815,7 @@ export default function App() {
                 profiles={profiles}
                 onSave={saveItem}
                 onEdit={setEditingItem}
-                onPromote={promoteTripItem}
+                onPromote={promoteItem}
               />
             ))}
           </div>
@@ -721,8 +906,20 @@ export default function App() {
         <ProfileSwitchDialog
           profiles={profiles}
           activeProfileId={activeProfileId}
+          cloudAccount={cloudAccount}
           onClose={() => setShowProfileSwitch(false)}
           onSelect={setActiveProfileId}
+          onCloudAccount={activateCloudAccount}
+          onCloudSignOut={async () => {
+            const { signOutOfCloudAccount } = await import("./application/authService");
+            await signOutOfCloudAccount();
+            setCloudAccount(undefined);
+            setActiveProfileId(undefined);
+          }}
+          onCreateProfile={() => {
+            setShowProfileSwitch(false);
+            setScreen("profiles");
+          }}
         />
       )}
       {showShare && (
@@ -762,6 +959,7 @@ export default function App() {
       {showTrackRecording && <TrackRecordingDialog tripId={trip.id} onClose={() => setShowTrackRecording(false)} />}
       {showOfflineMaps && <OfflineMapRegionsDialog trip={trip} onClose={() => setShowOfflineMaps(false)} />}
       {showOfflinePacks && <OfflineTripPacksDialog trip={trip} onClose={() => setShowOfflinePacks(false)} />}
+      {showMeals && <MealPlannerDialog trip={trip} onClose={() => setShowMeals(false)} onChecklistChanged={async () => setItems(await listTripItems(trip.id))} />}
     </main>
   );
 }
@@ -1082,6 +1280,15 @@ function Home({
   onDismiss: () => void;
 }) {
   const [sort, setSort] = useState<"recent" | "name" | "date">("recent");
+  const menuRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOutside = (event: PointerEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) onToggleMenu();
+    };
+    window.addEventListener("pointerdown", closeOutside);
+    return () => window.removeEventListener("pointerdown", closeOutside);
+  }, [menuOpen, onToggleMenu]);
   const shown = trips
     .filter(
       (trip) =>
@@ -1099,15 +1306,48 @@ function Home({
   return (
     <main className="app-shell">
       <header className="hero">
-        <button
-          className="hero-menu"
-          type="button"
-          title="Open settings, inventory, backup, and shared-trip tools"
-          aria-label="Open menu"
-          onClick={onToggleMenu}
-        >
-          ☰
-        </button>
+        <div className="home-menu-wrap" ref={menuRef}>
+          <button
+            className="hero-menu"
+            type="button"
+            title="Open settings, inventory, backup, and shared-trip tools"
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            aria-controls="app-menu"
+            onClick={onToggleMenu}
+          >
+            ☰
+          </button>
+          {menuOpen && (
+            <nav id="app-menu" className="burger-menu" aria-label="App menu">
+              <button type="button" title="Sign in, switch profiles, and view that person's trips and personal list" onClick={onSwitchProfile}>
+                {activeProfile ? `Switch profile (${activeProfile.name})` : "Sign in / switch profile"}
+              </button>
+              <button type="button" onClick={onProfiles}>
+                Profile settings
+              </button>
+              <button type="button" onClick={onInventory}>
+                Manage master inventory
+              </button>
+              <button type="button" onClick={onSites}>
+                Saved site ideas
+              </button>
+              <button type="button" onClick={onDataTools}>
+                Backup & restore
+              </button>
+              <label>
+                Import shared trip
+                <input
+                  type="file"
+                  accept="application/json,.json"
+                  onChange={(event) =>
+                    void onImport(event.currentTarget.files?.[0])
+                  }
+                />
+              </label>
+            </nav>
+          )}
+        </div>
         <div className="brand-row">
           <div className="brand-lockup">
             <p className="eyebrow">FOR THE PATH AHEAD</p>
@@ -1129,35 +1369,6 @@ function Home({
             Start a new trip
           </button>
         </div>
-        {menuOpen && (
-          <nav className="burger-menu" aria-label="App menu">
-            <button type="button" title="Sign in, switch profiles, and view that person's trips and personal list" onClick={onSwitchProfile}>
-              {activeProfile ? `Switch profile (${activeProfile.name})` : "Sign in / switch profile"}
-            </button>
-            <button type="button" onClick={onProfiles}>
-              Profile settings
-            </button>
-            <button type="button" onClick={onInventory}>
-              Manage master inventory
-            </button>
-            <button type="button" onClick={onSites}>
-              Saved site ideas
-            </button>
-            <button type="button" onClick={onDataTools}>
-              Backup & restore
-            </button>
-            <label>
-              Import shared trip
-              <input
-                type="file"
-                accept="application/json,.json"
-                onChange={(event) =>
-                  void onImport(event.currentTarget.files?.[0])
-                }
-              />
-            </label>
-          </nav>
-        )}
       </header>
       <section className="inventory-card" aria-labelledby="trips-heading">
         <div className="section-heading">
@@ -1237,26 +1448,32 @@ function ProfilesScreen({
 }) {
   const [editor, setEditor] = useState<UserProfile>();
   const [personalItem, setPersonalItem] = useState<PersonalItemTemplate>();
+  const [error, setError] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const name = String(form.get("name") ?? "").trim();
     if (!name) return;
-    await saveProfile({
-      ...(editor?.id ? { id: editor.id, createdAt: editor.createdAt } : {}),
-      name,
-      ...(String(form.get("email") ?? "").trim()
-        ? { email: String(form.get("email")).trim() }
-        : {}),
-      ...(String(form.get("password") ?? "")
-        ? { passwordHash: await hashText(String(form.get("password"))) }
-        : editor?.passwordHash
-          ? { passwordHash: editor.passwordHash }
+    try {
+      await saveProfile({
+        ...(editor?.id ? { id: editor.id, createdAt: editor.createdAt } : {}),
+        name,
+        ...(String(form.get("email") ?? "").trim()
+          ? { email: String(form.get("email")).trim() }
           : {}),
-      personalItems: editor?.personalItems ?? [],
-    });
-    await onSaved();
-    setEditor(undefined);
+        ...(String(form.get("password") ?? "")
+          ? { passwordHash: await hashText(String(form.get("password"))) }
+          : editor?.passwordHash
+            ? { passwordHash: editor.passwordHash }
+            : {}),
+        personalItems: editor?.personalItems ?? [],
+      });
+      setError("");
+      await onSaved();
+      setEditor(undefined);
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : "Could not save this profile.");
+    }
   }
   return (
     <main className="app-shell">
@@ -1322,7 +1539,7 @@ function ProfilesScreen({
         >
           <form onSubmit={(event) => void submit(event)}>
             <label>
-              Username
+              Profile name
               <input
                 name="name"
                 defaultValue={editor.name}
@@ -1331,22 +1548,28 @@ function ProfilesScreen({
               />
             </label>
             <label>
-              Email <small>(optional)</small>
+              Email or Gmail address <small>(optional)</small>
               <input
                 name="email"
                 type="email"
                 defaultValue={editor.email}
-                placeholder="you@example.com"
+                autoComplete="email"
+                inputMode="email"
+                placeholder="you@example.com or you@gmail.com"
               />
+              <small>
+                Gmail works as an email address. Profiles remain on this device;
+                Google sign-in is optional and does not enable data sync.
+              </small>
             </label>
             <label>
-              Password{" "}
+              Local passcode{" "}
               <small>
                 {editor.passwordHash
-                  ? "Leave blank to keep the current password."
-                  : "Optional local password for switching profiles."}
+                  ? "Leave blank to keep the current passcode. It does not encrypt local trip data."
+                  : "Optional: require a passcode before someone can switch to this profile on this device. It does not encrypt local trip data."}
               </small>
-              <input name="password" type="password" minLength={4} />
+              <input name="password" type="password" minLength={8} autoComplete="new-password" />
             </label>
             <div className="section-heading">
               <strong>Personal checklist</strong>
@@ -1405,6 +1628,7 @@ function ProfilesScreen({
             <button className="primary-action" type="submit">
               Save profile
             </button>
+            {error ? <p className="error-message" role="alert">{error}</p> : null}
           </form>
         </Dialog>
       )}
@@ -1683,17 +1907,29 @@ function Dialog({
 function ProfileSwitchDialog({
   profiles,
   activeProfileId,
+  cloudAccount,
   onClose,
   onSelect,
+  onCloudAccount,
+  onCloudSignOut,
+  onCreateProfile,
 }: {
   profiles: UserProfile[];
   activeProfileId?: string | undefined;
+  cloudAccount?: CloudAccount | undefined;
   onClose: () => void;
   onSelect: (id: string | undefined) => void;
+  onCloudAccount: (account: CloudAccount) => Promise<void>;
+  onCloudSignOut: () => Promise<void>;
+  onCreateProfile: () => void;
 }) {
   const [selected, setSelected] = useState<UserProfile>();
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [showEmailSignIn, setShowEmailSignIn] = useState(false);
+  const [creatingAccount, setCreatingAccount] = useState(false);
+  const [cloudBusy, setCloudBusy] = useState(false);
+  const cloudAuthenticationConfigured = isFirebaseConfigured();
   async function signIn() {
     if (!selected) return;
     if (
@@ -1706,12 +1942,100 @@ function ProfileSwitchDialog({
     onSelect(selected.id);
     onClose();
   }
+  async function continueWithCloud(
+    task: (service: typeof import("./application/authService")) => Promise<CloudAccount>,
+  ) {
+    setCloudBusy(true);
+    setMessage("");
+    try {
+      const service = await import("./application/authService");
+      await onCloudAccount(await task(service));
+      onClose();
+    } catch (reason) {
+      const { readableAuthError } = await import("./application/authService");
+      setMessage(readableAuthError(reason));
+    } finally {
+      setCloudBusy(false);
+    }
+  }
+  async function submitCloudEmail(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("cloud-email") ?? "");
+    const cloudPassword = String(form.get("cloud-password") ?? "");
+    await continueWithCloud(({ createCloudAccount, signInWithEmail }) =>
+      creatingAccount
+        ? createCloudAccount(email, cloudPassword)
+        : signInWithEmail(email, cloudPassword),
+    );
+  }
   return (
     <Dialog title="Sign in or switch profile" onClose={onClose}>
       <p className="empty-state">
-        Profiles stay on this device. Choose one to show their trips and
-        personal checklist.
+        Your trips and personal checklist stay on this device unless you later
+        choose to sync them.
       </p>
+      {cloudAuthenticationConfigured && !cloudAccount && (
+        <section className="cloud-sign-in" aria-label="Cloud sign-in">
+          <button
+            className="google-sign-in"
+            type="button"
+            disabled={cloudBusy}
+            onClick={() => void continueWithCloud(({ signInWithGoogle }) => signInWithGoogle())}
+          >
+            <span aria-hidden="true">G</span>
+            Continue with Google
+          </button>
+          <button
+            className="text-button"
+            type="button"
+            disabled={cloudBusy}
+            onClick={() => {
+              setShowEmailSignIn((visible) => !visible);
+              setMessage("");
+            }}
+          >
+            {showEmailSignIn ? "Hide email sign-in" : "Use email and password"}
+          </button>
+          {showEmailSignIn && (
+            <form className="cloud-email-form" onSubmit={(event) => void submitCloudEmail(event)}>
+              <label>
+                Email address
+                <input name="cloud-email" type="email" autoComplete="email" required />
+              </label>
+              <label>
+                Password
+                <input
+                  name="cloud-password"
+                  type="password"
+                  autoComplete={creatingAccount ? "new-password" : "current-password"}
+                  minLength={8}
+                  required
+                />
+              </label>
+              <button className="primary-action" type="submit" disabled={cloudBusy}>
+                {creatingAccount ? "Create account" : "Sign in"}
+              </button>
+              <button
+                className="text-button"
+                type="button"
+                disabled={cloudBusy}
+                onClick={() => setCreatingAccount((creating) => !creating)}
+              >
+                {creatingAccount ? "I already have an account" : "Create an account"}
+              </button>
+            </form>
+          )}
+        </section>
+      )}
+      {cloudAccount && (
+        <section className="cloud-session">
+          <strong>Signed in as {cloudAccount.email}</strong>
+          <button className="text-button" type="button" onClick={() => void onCloudSignOut()}>
+            Sign out of cloud account
+          </button>
+        </section>
+      )}
       <div className="profile-switcher">
         {profiles.map((profile) => (
           <button
@@ -1728,19 +2052,31 @@ function ProfileSwitchDialog({
           </button>
         ))}
       </div>
+      {!profiles.length && (
+        <>
+          <p className="empty-state">
+            No local profiles yet. Create one to save a personal checklist and
+            use an email or Gmail address if you want one associated with it.
+          </p>
+          <button className="primary-action" type="button" onClick={onCreateProfile}>
+            Create a profile
+          </button>
+        </>
+      )}
       {selected && (
         <>
           <label>
-            Password{" "}
+            Local passcode{" "}
             {selected.passwordHash ? (
               <input
                 type="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
+                autoComplete="current-password"
                 autoFocus
               />
             ) : (
-              <small>This profile has no password yet.</small>
+              <small>This profile has no local passcode.</small>
             )}
           </label>
           <button
@@ -1764,7 +2100,7 @@ function ProfileSwitchDialog({
           View shared trips
         </button>
       )}
-      {message && <p className="error-message">{message}</p>}
+      {message && <p className="error-message" role="alert">{message}</p>}
     </Dialog>
   );
 }

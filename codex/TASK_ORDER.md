@@ -28,6 +28,14 @@ Use this as the implementation queue.
 - [ ] SPRINT-21 — Community Campsite Intelligence & Moderation
 - [ ] SPRINT-22 — Advanced Integrations & Smart Trip Review
 
+## Completed feature tracks
+
+- [x] MP-01 — Meal planner domain and local persistence
+- [x] MP-02 — Simple meal plan board and Quick Add
+- [x] MP-03 — Saved meals and optional details
+- [x] MP-04 — Consolidated groceries
+- [x] MP-05 — Camping integrations and release polish
+
 ## Required verification after every sprint
 
 - [x] format/lint

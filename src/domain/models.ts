@@ -261,6 +261,73 @@ export interface TripItem {
   sortOrder: number;
 }
 
+export const mealSlots = ["breakfast", "lunch", "dinner", "snacks", "treats"] as const;
+export type MealSlot = (typeof mealSlots)[number];
+export type MealCategory = MealSlot | "other";
+export type GroceryStatus = "need-to-buy" | "already-have" | "packed";
+
+export interface MealIngredient {
+  id: string;
+  name: string;
+  quantity?: number;
+  unit?: string;
+  grocerySection?: string;
+  scalable: boolean;
+}
+
+export interface SavedMeal {
+  id: string;
+  name: string;
+  category: MealCategory;
+  favorite: boolean;
+  /** IndexedDB cannot index booleans, so these stable string keys back its indexes. */
+  favoriteIndex: "0" | "1";
+  archivedIndex: "0" | "1";
+  defaultServings?: number;
+  ingredients: MealIngredient[];
+  complexity?: "easy" | "moderate" | "involved";
+  cookingMethods: Array<"no-cook" | "stove" | "campfire" | "grill" | "dutch-oven" | "other">;
+  storageNeeds: Array<"shelf-stable" | "cooler" | "frozen">;
+  equipment: Array<{ name: string; masterItemId?: string }>;
+  prepAtHome?: string;
+  campDirections?: string;
+  notes?: string;
+  lastUsedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+  archived: boolean;
+}
+
+export interface MealPlanEntry {
+  id: string;
+  tripId: string;
+  dayIndex: number;
+  slot: MealSlot;
+  title: string;
+  savedMealId?: string;
+  mealSnapshot?: SavedMeal;
+  servings?: number;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TripGroceryItem {
+  id: string;
+  tripId: string;
+  matchKey: string;
+  name: string;
+  unit?: string;
+  derivedQuantity?: number;
+  quantityOverride?: number;
+  sourceMealEntryIds: string[];
+  manual: boolean;
+  status: GroceryStatus;
+  grocerySection?: string;
+  notes?: string;
+  updatedAt: string;
+}
+
 export interface PersonalItemTemplate {
   name: string;
   category: ChecklistCategory;
@@ -277,4 +344,69 @@ export interface UserProfile {
   personalItems: PersonalItemTemplate[];
   createdAt: string;
   updatedAt: string;
+}
+
+/** Local-only bookkeeping for the optional cloud-sync layer. It intentionally
+ * lives beside records rather than changing the user-visible data shape. */
+export const syncEntityTypes = [
+  "masterItems",
+  "trips",
+  "tripItems",
+  "sites",
+  "waypoints",
+  "routeTracks",
+  "userProfiles",
+] as const;
+export type SyncEntityType = (typeof syncEntityTypes)[number];
+export type SyncState = "clean" | "dirty" | "pending_delete" | "conflict";
+export type SyncOperation = "UPSERT" | "DELETE";
+
+export interface SyncMetadata {
+  key: string;
+  entityType: SyncEntityType;
+  entityId: string;
+  revision: number;
+  deviceId: string;
+  syncState: SyncState;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+  userId?: string;
+}
+
+export interface SyncQueueEntry {
+  id: string;
+  entityType: SyncEntityType;
+  entityId: string;
+  operation: SyncOperation;
+  createdAt: string;
+  attemptCount: number;
+  lastAttemptAt?: string;
+  error?: string;
+  userId: string;
+}
+
+export interface SyncSettings {
+  userId: string;
+  deviceId: string;
+  enabled: boolean;
+  allowedEntityTypes: SyncEntityType[];
+  lastSuccessfulSync?: string;
+  lastError?: string;
+  lastRemoteCursor?: SyncCursor;
+}
+
+export interface SyncCursor {
+  updatedAtMs: number;
+  id: string;
+}
+
+export interface SyncConflict {
+  id: string;
+  entityType: SyncEntityType;
+  entityId: string;
+  detectedAt: string;
+  local: unknown;
+  remote: unknown;
+  reason: string;
 }

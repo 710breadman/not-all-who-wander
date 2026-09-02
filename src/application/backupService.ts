@@ -5,13 +5,16 @@ import type {
   Waypoint,
   WeatherSnapshot,
   RouteTrack,
+  SavedMeal,
+  MealPlanEntry,
+  TripGroceryItem,
   Trip,
   TripItem,
   UserProfile,
 } from "../domain/models";
 import { openCampingDatabase } from "../data/database";
 
-export const BACKUP_VERSION = 5;
+export const BACKUP_VERSION = 7;
 export interface CampingBackup {
   backupVersion: number;
   exportedAt: string;
@@ -23,6 +26,10 @@ export interface CampingBackup {
   waypoints: Waypoint[];
   weatherSnapshots: WeatherSnapshot[];
   routeTracks: RouteTrack[];
+  profiles: UserProfile[];
+  savedMeals: SavedMeal[];
+  mealPlanEntries: MealPlanEntry[];
+  tripGroceryItems: TripGroceryItem[];
 }
 
 export async function createBackup(
@@ -45,6 +52,10 @@ export async function createBackup(
       waypoints: await database.getAll("waypoints"),
       weatherSnapshots: await database.getAll("weatherSnapshots"),
       routeTracks: await database.getAll("routeTracks"),
+      profiles: await database.getAll("profiles"),
+      savedMeals: await database.getAll("savedMeals"),
+      mealPlanEntries: await database.getAll("mealPlanEntries"),
+      tripGroceryItems: await database.getAll("tripGroceryItems"),
     };
   } finally {
     database.close();
@@ -60,7 +71,7 @@ export function parseBackup(text: string): CampingBackup {
   }
   if (
     !isRecord(value) ||
-    (value.backupVersion !== 1 && value.backupVersion !== 2 && value.backupVersion !== 3 && value.backupVersion !== 4 && value.backupVersion !== BACKUP_VERSION) ||
+    (typeof value.backupVersion !== "number" || !Number.isInteger(value.backupVersion) || value.backupVersion < 1 || value.backupVersion > BACKUP_VERSION) ||
     !isString(value.exportedAt) ||
     !Array.isArray(value.masterItems) ||
     !Array.isArray(value.trips) ||
@@ -68,7 +79,9 @@ export function parseBackup(text: string): CampingBackup {
     (value.backupVersion >= 2 && !Array.isArray(value.sites)) ||
     (value.backupVersion >= 3 && !Array.isArray(value.waypoints)) ||
     (value.backupVersion >= 4 && !Array.isArray(value.weatherSnapshots)) ||
-    (value.backupVersion === BACKUP_VERSION && !Array.isArray(value.routeTracks))
+    (value.backupVersion >= 5 && !Array.isArray(value.routeTracks)) ||
+    (value.backupVersion >= 6 && !Array.isArray(value.profiles)) ||
+    (value.backupVersion >= 7 && (!Array.isArray(value.savedMeals) || !Array.isArray(value.mealPlanEntries) || !Array.isArray(value.tripGroceryItems)))
   )
     throw new Error("That file is not a compatible camping checklist backup.");
   if (
@@ -78,12 +91,16 @@ export function parseBackup(text: string): CampingBackup {
     (value.sites !== undefined && (!Array.isArray(value.sites) || !value.sites.every(isSite))) ||
     (value.waypoints !== undefined && (!Array.isArray(value.waypoints) || !value.waypoints.every(isWaypoint))) ||
     (value.weatherSnapshots !== undefined && (!Array.isArray(value.weatherSnapshots) || !value.weatherSnapshots.every(isWeatherSnapshot))) ||
-    (value.routeTracks !== undefined && (!Array.isArray(value.routeTracks) || !value.routeTracks.every(isRouteTrack)))
+    (value.routeTracks !== undefined && (!Array.isArray(value.routeTracks) || !value.routeTracks.every(isRouteTrack))) ||
+    (value.profiles !== undefined && (!Array.isArray(value.profiles) || !value.profiles.every(isUserProfile))) ||
+    (value.savedMeals !== undefined && (!Array.isArray(value.savedMeals) || !value.savedMeals.every(isSavedMeal))) ||
+    (value.mealPlanEntries !== undefined && (!Array.isArray(value.mealPlanEntries) || !value.mealPlanEntries.every(isMealPlanEntry))) ||
+    (value.tripGroceryItems !== undefined && (!Array.isArray(value.tripGroceryItems) || !value.tripGroceryItems.every(isTripGroceryItem)))
   )
     throw new Error("That backup contains invalid checklist data.");
   if (value.appSettings !== undefined && !isSettings(value.appSettings))
     throw new Error("That backup contains invalid settings.");
-  return { ...value, backupVersion: BACKUP_VERSION, sites: value.sites ?? [], waypoints: value.waypoints ?? [], weatherSnapshots: value.weatherSnapshots ?? [], routeTracks: value.routeTracks ?? [] } as unknown as CampingBackup;
+  return { ...value, backupVersion: BACKUP_VERSION, sites: value.sites ?? [], waypoints: value.waypoints ?? [], weatherSnapshots: value.weatherSnapshots ?? [], routeTracks: value.routeTracks ?? [], profiles: value.profiles ?? [], savedMeals: value.savedMeals ?? [], mealPlanEntries: value.mealPlanEntries ?? [], tripGroceryItems: value.tripGroceryItems ?? [] } as unknown as CampingBackup;
 }
 
 export async function restoreBackup(
@@ -95,7 +112,7 @@ export async function restoreBackup(
   );
   try {
     const transaction = database.transaction(
-      ["meta", "masterItems", "trips", "sites", "waypoints", "weatherSnapshots", "routeTracks", "tripItems"],
+      ["meta", "masterItems", "trips", "sites", "waypoints", "weatherSnapshots", "routeTracks", "profiles", "syncMetadata", "syncQueue", "syncConflicts", "tripItems", "savedMeals", "mealPlanEntries", "tripGroceryItems"],
       "readwrite",
     );
     await Promise.all([
@@ -105,7 +122,16 @@ export async function restoreBackup(
       transaction.objectStore("waypoints").clear(),
       transaction.objectStore("weatherSnapshots").clear(),
       transaction.objectStore("routeTracks").clear(),
+      transaction.objectStore("profiles").clear(),
+      transaction.objectStore("syncMetadata").clear(),
+      transaction.objectStore("syncQueue").clear(),
+      transaction.objectStore("syncConflicts").clear(),
       transaction.objectStore("tripItems").clear(),
+      transaction.objectStore("savedMeals").clear(),
+      transaction.objectStore("mealPlanEntries").clear(),
+      transaction.objectStore("tripGroceryItems").clear(),
+      transaction.objectStore("meta").delete("syncSettings"),
+      transaction.objectStore("meta").put(true, "profilesStoreMigrated"),
       ...(backup.appSettings === undefined
         ? []
         : [
@@ -121,9 +147,13 @@ export async function restoreBackup(
       ...backup.waypoints.map((waypoint) => transaction.objectStore("waypoints").put(waypoint)),
       ...backup.weatherSnapshots.map((snapshot) => transaction.objectStore("weatherSnapshots").put(snapshot)),
       ...backup.routeTracks.map((route) => transaction.objectStore("routeTracks").put(route)),
+      ...backup.profiles.map((profile) => transaction.objectStore("profiles").put(profile)),
       ...backup.tripItems.map((item) =>
         transaction.objectStore("tripItems").put(item),
       ),
+      ...backup.savedMeals.map((meal) => transaction.objectStore("savedMeals").put(meal)),
+      ...backup.mealPlanEntries.map((entry) => transaction.objectStore("mealPlanEntries").put(entry)),
+      ...backup.tripGroceryItems.map((item) => transaction.objectStore("tripGroceryItems").put(item)),
     ]);
     await transaction.done;
   } finally {
@@ -310,6 +340,18 @@ function isUserProfile(value: unknown): value is UserProfile {
     isString(value.createdAt) &&
     isString(value.updatedAt)
   );
+}
+function isMealIngredient(value: unknown): boolean {
+  return isRecord(value) && isString(value.id) && isString(value.name) && typeof value.scalable === "boolean" && (value.quantity === undefined || typeof value.quantity === "number") && (value.unit === undefined || isString(value.unit));
+}
+function isSavedMeal(value: unknown): value is SavedMeal {
+  return isRecord(value) && isString(value.id) && isString(value.name) && isString(value.category) && typeof value.favorite === "boolean" && (value.favoriteIndex === "0" || value.favoriteIndex === "1") && (value.archivedIndex === "0" || value.archivedIndex === "1") && Array.isArray(value.ingredients) && value.ingredients.every(isMealIngredient) && Array.isArray(value.cookingMethods) && Array.isArray(value.storageNeeds) && Array.isArray(value.equipment) && value.equipment.every((item) => isRecord(item) && isString(item.name)) && isString(value.createdAt) && isString(value.updatedAt) && typeof value.archived === "boolean";
+}
+function isMealPlanEntry(value: unknown): value is MealPlanEntry {
+  return isRecord(value) && isString(value.id) && isString(value.tripId) && Number.isInteger(value.dayIndex) && typeof value.dayIndex === "number" && value.dayIndex >= 0 && isString(value.slot) && isString(value.title) && isString(value.createdAt) && isString(value.updatedAt) && (value.mealSnapshot === undefined || isSavedMeal(value.mealSnapshot));
+}
+function isTripGroceryItem(value: unknown): value is TripGroceryItem {
+  return isRecord(value) && isString(value.id) && isString(value.tripId) && isString(value.matchKey) && isString(value.name) && Array.isArray(value.sourceMealEntryIds) && value.sourceMealEntryIds.every(isString) && typeof value.manual === "boolean" && (value.status === "need-to-buy" || value.status === "already-have" || value.status === "packed") && isString(value.updatedAt);
 }
 function isSettings(value: unknown): value is AppSettings {
   return (

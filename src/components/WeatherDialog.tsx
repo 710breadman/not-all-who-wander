@@ -19,8 +19,9 @@ export function WeatherDialog({ tripId, coordinates, onClose }: { tripId: string
       const result = await refreshWeatherSnapshot(tripId, coordinates);
       setSnapshot(result.snapshot);
       if (result.fromCache) setMessage("Could not refresh. Showing the last saved forecast.");
-    } catch {
-      setMessage("Weather could not be reached. Your trip and checklist are still available offline.");
+    } catch (error) {
+      const detail = error instanceof Error ? ` (${error.message})` : "";
+      setMessage(`Weather could not be reached${detail}. Your trip and checklist are still available offline.`);
     } finally {
       setRefreshing(false);
     }

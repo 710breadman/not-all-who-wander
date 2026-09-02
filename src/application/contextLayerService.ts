@@ -7,7 +7,7 @@ export interface ContextLayerProvider { id: ContextLayer["id"]; fetch: (coordina
 
 export class FirmsFireProvider implements ContextLayerProvider {
   readonly id = "active-fire" as const;
-  constructor(private readonly mapKey?: string, private readonly request: typeof fetch = fetch) {}
+  constructor(private readonly mapKey?: string, private readonly request: typeof fetch = (input, init) => fetch(input, init)) {}
   async fetch(coordinates: { latitude: number; longitude: number }): Promise<ContextLayer> {
     if (!this.mapKey) throw new Error("NASA FIRMS requires a configured MAP_KEY.");
     const box = `${coordinates.longitude - .25},${coordinates.latitude - .25},${coordinates.longitude + .25},${coordinates.latitude + .25}`;
@@ -19,7 +19,7 @@ export class FirmsFireProvider implements ContextLayerProvider {
 }
 
 export class ArcGisContextProvider implements ContextLayerProvider {
-  constructor(public readonly id: ContextLayer["id"], private readonly title: string, private readonly legend: string, private readonly endpoint: string, private readonly request: typeof fetch = fetch) {}
+  constructor(public readonly id: ContextLayer["id"], private readonly title: string, private readonly legend: string, private readonly endpoint: string, private readonly request: typeof fetch = (input, init) => fetch(input, init)) {}
   async fetch(coordinates: { latitude: number; longitude: number }): Promise<ContextLayer> {
     const url = new URL(`${this.endpoint}/query`); url.search = new URLSearchParams({ where: "1=1", geometry: `${coordinates.longitude},${coordinates.latitude}`, geometryType: "esriGeometryPoint", inSR: "4326", spatialRel: "esriSpatialRelIntersects", distance: "50000", units: "esriSRUnit_Meter", outFields: "*", returnGeometry: "true", f: "geojson" }).toString();
     const response = await this.request(url); if (!response.ok) throw new Error(`${this.title} is unavailable.`);
